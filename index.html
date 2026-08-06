@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قطعات خورشیدی — انرژی فردا</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== هدر / منو ===== -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                <span class="logo-icon">☀️</span>
+                <span>انرژی فردا</span>
+            </div>
+            <nav>
+                <a href="#">خانه</a>
+                <a href="#products">محصولات</a>
+                <a href="#">درباره ما</a>
+                <a href="#">تماس</a>
+            </nav>
+            <button class="cart-btn" id="cartToggle">
+                🛒 سبد خرید <span id="cartCount">۰</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== بنر اصلی ===== -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>آینده‌ات را با انرژی خورشیدی بساز</h1>
+            <p>پنل‌های خورشیدی، اینورتر، باتری و لوازم جانبی — همه در یک جا</p>
+            <a href="#products" class="btn-primary">مشاهده محصولات</a>
+        </div>
+    </section>
+
+    <!-- ===== محصولات ===== -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2>محصولات ما</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- محصولات توسط جاوااسکریپت نمایش داده می‌شن -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== سبد خرید (کناری) ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 سبد خرید</h2>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">سبد خرید خالی است.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>جمع کل:</span>
+                <span id="cartTotal">$۰.۰۰</span>
+            </div>
+            <button class="btn-primary checkout-btn">پرداخت و ثبت سفارش</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
