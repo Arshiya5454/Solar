@@ -1,70 +1,179 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>قطعات خورشیدی —  برق آوران هوراد</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی</title>
+  <meta name="description" content="طراحی، تأمین تجهیزات و اجرای نیروگاه‌های خورشیدی کوچک‌مقیاس توسط برق‌آوران هوراد" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- ===== هدر / منو ===== -->
-    <header>
-        <div class="container nav-wrapper">
-            <div class="logo">
-                <span class="logo-icon">☀️</span>
-                <span> برق آوران هوراد</span>
-            </div>
-            <nav>
-                <a href="#">خانه</a>
-                <a href="#products">محصولات</a>
-                <a href="#">درباره ما</a>
-                <a href="#">تماس</a>
-            </nav>
-            <button class="cart-btn" id="cartToggle">
-                 سبد خرید <span id="cartCount">۰</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- ===== بنر اصلی ===== -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h1>آینده‌ات را با  برق آوران هوراد بساز</h1>
-            <p>پنل‌های خورشیدی، اینورتر، باتری و لوازم جانبی — همه در یک جا</p>
-            <a href="#products" class="btn-primary">مشاهده محصولات</a>
-        </div>
-    </section>
-
-    <!-- ===== محصولات ===== -->
-    <section class="products" id="products">
-        <div class="container">
-            <h2>محصولات ما</h2>
-            <div class="product-grid" id="productGrid">
-                <!-- محصولات توسط جاوااسکریپت نمایش داده می‌شن -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== سبد خرید (کناری) ===== -->
-    <div class="cart-overlay" id="cartOverlay"></div>
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h2> سبد خرید</h2>
-            <button class="cart-close" id="cartClose">&times;</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <p class="empty-cart">سبد خرید خالی است.</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>جمع کل:</span>
-                <span id="cartTotal">$۰.۰۰</span>
-            </div>
-            <button class="btn-primary checkout-btn">پرداخت و ثبت سفارش</button>
-        </div>
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="index.html" class="navbar__logo">
+      <span class="logo-icon">☀️</span>
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="index.html" class="active">صفحه اصلی</a>
+      <a href="pages/services.html">خدمات</a>
+      <a href="pages/projects.html">پروژه‌ها</a>
+      <a href="pages/shop.html">فروشگاه</a>
+      <a href="pages/blog.html">مقالات</a>
+      <a href="pages/about.html">درباره ما</a>
+      <a href="pages/contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="pages/consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+</header>
 
-    <script src="script.js"></script>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <span class="hero__badge">☀️ انرژی پاک برای آینده</span>
+      <h1 class="hero__title">
+        برق‌آوران هوراد<br />
+        <span>مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</span>
+      </h1>
+      <p class="hero__subtitle">
+        طراحی، تأمین تجهیزات و اجرای سیستم‌های خورشیدی متصل به شبکه، مستقل از شبکه و هیبریدی برای منازل، کارگاه‌ها و صنایع کوچک.
+      </p>
+      <div class="hero__actions">
+        <a href="pages/consultation.html" class="btn btn-primary">درخواست مشاوره رایگان</a>
+        <a href="pages/projects.html" class="btn btn-outline">مشاهده پروژه‌ها</a>
+      </div>
+    </div>
+    <div class="hero__image">
+      <div class="hero__image-placeholder">☀️</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>خدمات تخصصی ما</h2>
+      <p>از طراحی تا اجرا و پشتیبانی، همراه شما در مسیر انرژی سبز</p>
+    </div>
+    <div class="services__grid">
+      <div class="service-card">
+        <div class="service-card__icon">📐</div>
+        <h3>طراحی نیروگاه خورشیدی</h3>
+        <p>طراحی فنی و اقتصادی متناسب با نیاز و بودجه شما</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">🔧</div>
+        <h3>تأمین تجهیزات</h3>
+        <p>پنل، اینورتر، باتری و کلیه تجهیزات از برندهای معتبر</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">⚡</div>
+        <h3>اجرا و نصب</h3>
+        <p>نصب حرفه‌ای سیستم‌های On-Grid، Off-Grid و هیبریدی</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">🛠️</div>
+        <h3>پشتیبانی و نگهداری</h3>
+        <p>خدمات پس از فروش و پشتیبانی فنی مستمر</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS PREVIEW ===== -->
+<section class="projects">
+  <div class="container">
+    <div class="section-header">
+      <h2>پروژه‌های اجراشده</h2>
+      <p>نمونه‌هایی از نیروگاه‌های خورشیدی اجرا شده توسط تیم برق‌آوران هوراد</p>
+    </div>
+    <div class="projects__grid">
+      <div class="project-card">
+        <div class="project-card__image">🏠</div>
+        <div class="project-card__body">
+          <h3>نیروگاه خورشیدی ویلایی</h3>
+          <p>مشهد – ۵ کیلووات – On-Grid</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card__image">🏭</div>
+        <div class="project-card__body">
+          <h3>نیروگاه خورشیدی کارگاهی</h3>
+          <p>تهران – ۲۰ کیلووات – هیبریدی</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card__image">🌾</div>
+        <div class="project-card__body">
+          <h3>نیروگاه خورشیدی کشاورزی</h3>
+          <p>اصفهان – ۱۰ کیلووات – Off-Grid</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+      <a href="pages/projects.html" class="btn btn-outline">مشاهده همه پروژه‌ها</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRENGTHS ===== -->
+<section class="strengths">
+  <div class="container">
+    <div class="section-header">
+      <h2>چرا برق‌آوران هوراد؟</h2>
+      <p>تخصص، کیفیت و تعهد در اجرای نیروگاه‌های خورشیدی</p>
+    </div>
+    <div class="strengths__grid">
+      <div class="strength-item">
+        <h3>۱۰+</h3>
+        <p>سال تجربه در انرژی خورشیدی</p>
+      </div>
+      <div class="strength-item">
+        <h3>۵۰+</h3>
+        <p>پروژه موفق اجراشده</p>
+      </div>
+      <div class="strength-item">
+        <h3>۱۰۰٪</h3>
+        <p>تضمین کیفیت تجهیزات</p>
+      </div>
+      <div class="strength-item">
+        <h3>۲۴/۷</h3>
+        <p>پشتیبانی فنی و خدمات پس از فروش</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="container">
+    <h2>آماده شروع پروژه خورشیدی خود هستید؟</h2>
+    <p>همین امروز با ما تماس بگیرید و از مشاوره رایگان بهره‌مند شوید.</p>
+    <a href="pages/consultation.html" class="btn btn-primary">درخواست مشاوره رایگان</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>☀️ برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © 2026 تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="script.js"></script>
+
 </body>
 </html>
