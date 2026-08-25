@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نیروگاه خورشیدی سایه‌بان | برق‌آوران هوراد</title>
+  <meta name="description" content="پروژه طراحی، ساخت سایه‌بان و نصب نیروگاه خورشیدی در یزد – ۱۳ پنل Jinko، ۲ باتری Marsriva، اینورتر Growatt" />
+  <link rel="stylesheet" href="../../../style.css" />
+  <style>
+    .project-detail-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+    }
+    .project-detail-header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--secondary);
+      max-width: 800px;
+      line-height: 1.3;
+    }
+    .project-detail-header .meta {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .project-detail-header .meta span {
+      background: var(--white);
+      padding: 4px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+    .project-detail-body {
+      padding: 48px 0 80px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .project-detail-body h2 {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+    .project-detail-body h3 {
+      font-size: 1.3rem;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      color: var(--secondary);
+    }
+    .project-detail-body p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .project-detail-body ul {
+      margin: 16px 0 24px 0;
+      padding-right: 24px;
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+    .project-detail-body ul li {
+      margin-bottom: 6px;
+    }
+    .project-detail-body strong {
+      color: var(--secondary);
+    }
+    .project-back {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .project-back:hover {
+      text-decoration: underline;
+    }
+    .highlight-box {
+      background: var(--primary-light);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border-right: 4px solid var(--primary);
+      margin: 24px 0;
+    }
+    .highlight-box strong {
+      color: var(--primary-dark);
+    }
+
+    .project-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .project-gallery.single {
+      display: flex;
+      justify-content: center;
+      margin: 24px 0;
+    }
+    .project-gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+    }
+    .project-gallery img.wide {
+      height: auto;
+      grid-column: 1 / -1;
+    }
+    .project-gallery img.vertical-scaled {
+      max-width: 45%;
+      height: auto;
+      border-radius: var(--radius);
+      display: block;
+    }
+    .project-gallery .placeholder {
+      background: var(--gray-200);
+      border-radius: var(--radius);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      padding: 8px;
+    }
+    .project-gallery .placeholder.primary {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .related-projects {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .related-projects h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+    .related-projects ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .related-projects ul li {
+      margin-bottom: 8px;
+    }
+    .related-projects ul li a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .related-projects ul li a:hover {
+      text-decoration: underline;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+      background: var(--gray-100);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      margin: 20px 0;
+    }
+    .specs-grid .item {
+      font-size: 0.95rem;
+    }
+    .specs-grid .item .label {
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+    .specs-grid .item .value {
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    .timeline {
+      position: relative;
+      padding-right: 24px;
+      border-right: 3px solid var(--primary);
+      margin: 20px 0;
+    }
+    .timeline-item {
+      margin-bottom: 20px;
+      padding-right: 16px;
+    }
+    .timeline-item .phase {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+    .timeline-item p {
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .project-detail-header h1 {
+        font-size: 1.8rem;
+      }
+      .project-detail-body {
+        padding: 24px 16px 60px;
+      }
+      .project-detail-body h2 {
+        font-size: 1.4rem;
+      }
+      .project-detail-body h3 {
+        font-size: 1.1rem;
+      }
+      .project-detail-body p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+      .project-detail-body ul {
+        font-size: 0.95rem;
+        padding-right: 16px;
+      }
+      .specs-grid {
+        grid-template-columns: 1fr;
+        padding: 16px 18px;
+      }
+      .project-gallery {
+        grid-template-columns: 1fr !important;
+      }
+      .project-gallery img {
+        height: 180px;
+      }
+      .project-gallery img.wide {
+        height: auto;
+      }
+      .project-gallery img.vertical-scaled {
+        max-width: 70%;
+      }
+      .timeline {
+        padding-right: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-detail-header h1 {
+        font-size: 1.4rem;
+      }
+      .project-detail-body {
+        padding: 16px 12px 40px;
+      }
+      .project-gallery img {
+        height: 140px;
+      }
+      .project-gallery img.vertical-scaled {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../../../index.html" class="navbar__logo">
+      <img src="../../../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../../../index.html">صفحه اصلی</a>
+      <a href="../../services.html">خدمات</a>
+      <a href="../../projects.html" class="active">پروژه‌ها</a>
+      <a href="../../shop.html">فروشگاه</a>
+      <a href="../../blog.html">مقالات</a>
+      <a href="../../about.html">درباره ما</a>
+      <a href="../../contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="../../consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HEADER ===== -->
+<section class="project-detail-header">
+  <div class="container">
+    <a href="../../projects.html" class="project-back">← بازگشت به پروژه‌ها</a>
+    <h1>نیروگاه خورشیدی سایه‌بان</h1>
+    <div class="meta">
+      <span>یزد، بلوار جمهوری</span>
+      <span>Off-Grid</span>
+      <span>۱۴۰۵</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<article class="project-detail-body container">
+
+  <h2>معرفی پروژه</h2>
+
+  <p>
+    این پروژه در شهر یزد، بلوار جمهوری، برای یک واحد مسکونی اجرا شده است. مالک ساختمان به دنبال راه‌حلی بود تا هم از خودروی خود در برابر تابش مستقیم و شدید نور خورشید در کویر یزد محافظت کند و هم بتواند از این سازه برای تولید برق مورد نیاز ساختمان استفاده کند. به همین دلیل، تیم برق‌آوران هوراد طراحی و ساخت یک سایه‌بان فلزی مقاوم را به همراه نصب پنل‌های خورشیدی بر روی آن انجام داد.
+  </p>
+
+  <p>
+    هدف از اجرای این پروژه، تأمین برق مورد نیاز ساختمان به صورت مستقل از شبکه سراسری بود. با توجه به موقعیت جغرافیایی یزد و میانگین بالای ساعات آفتابی در این شهر (به طور متوسط بیش از ۳۰۰ روز آفتابی در سال)، استفاده از انرژی خورشیدی به عنوان یک راهکار عملی و اقتصادی برای تأمین برق پایدار در نظر گرفته شد. همچنین با توجه به قطعی‌های مکرر برق در منطقه و افزایش هزینه‌های مصرف انرژی، اجرای این سیستم می‌توانست در بلندمدت به کاهش قابل توجه هزینه‌های انرژی منجر شود.
+  </p>
+
+  <p>
+    یکی از نیازهای ویژه مالک ساختمان، شارژ خودروی پلاگین هیبرید خود در خانه بود. با توجه به اینکه خودروهای برقی و هیبریدی نیاز به شارژ منظم دارند، وجود یک سیستم خورشیدی با ذخیره‌سازی باتری می‌توانست این نیاز را به صورت رایگان و مستقل از شبکه تأمین کند.
+  </p>
+
+  <div class="project-gallery">
+    <img src="theFullProdo.jpg" alt="نمای کلی سایه‌بان و حیاط - یزد" class="wide" />
+  </div>
+
+  <h2>مشخصات فنی پروژه</h2>
+
+  <p>
+    سیستم طراحی شده برای این پروژه از نوع Off-Grid است. این سیستم شامل ۱۳ عدد پنل خورشیدی ۶۲۰ وات از برند Jinko می‌شود که بر روی سقف سایه‌بان ساخته‌شده نصب شده‌اند. پنل‌های Jinko به دلیل کیفیت بالا، راندمان مناسب و گارانتی معتبر، یکی از گزینه‌های اصلی برای پروژه‌های خورشیدی در ایران هستند.
+  </p>
+
+  <p>
+    برای ذخیره‌سازی انرژی، دو عدد باتری لیتیومی ۵ کیلوواتی از برند Marsriva در کنار اینورتر Growatt قرار گرفته‌اند. باتری‌های Marsriva از نوع لیتیوم آهن فسفات (LiFePO4) هستند که به دلیل طول عمر بالا، ایمنی مناسب و عمق دشارژ قابل قبول، انتخاب مناسبی برای این پروژه محسوب می‌شوند.
+  </p>
+
+  <p>
+    اینورتر Growatt نیز با قابلیت مدیریت هوشمند انرژی، امکان شارژ و دشارژ باتری‌ها را بهینه‌سازی می‌کند و می‌تواند در صورت نیاز، برق شبکه را به عنوان منبع پشتیبان در نظر بگیرد.
+  </p>
+
+  <p>
+    برای شارژ خودروی پلاگین هیبرید مالک، یک پریز مخصوص شارژ خودرو در نزدیکی سایه‌بان نصب شده است که از طریق برق تولیدی پنل‌ها و ذخیره‌شده در باتری‌ها تغذیه می‌شود. این امکان باعث شده است تا مالک بتواند خودروی خود را به صورت کامل با انرژی خورشیدی شارژ کند.
+  </p>
+
+  <div class="project-gallery single">
+  <img src="AboveAngleOfThePanels.jpg" alt="نمای بالای پنل‌های نصب شده روی سایه‌بان" class="horizontal-scaled" />
+</div>
+
+  <div class="specs-grid">
+    <div class="item">
+      <div class="label">تعداد پنل</div>
+      <div class="value">۱۳ عدد</div>
+    </div>
+    <div class="item">
+      <div class="label">توان پنل</div>
+      <div class="value">۶۲۰ وات</div>
+    </div>
+    <div class="item">
+      <div class="label">برند پنل</div>
+      <div class="value">Jinko</div>
+    </div>
+    <div class="item">
+      <div class="label">مدل پنل</div>
+      <div class="value">JKM620M-72HL4</div>
+    </div>
+    <div class="item">
+      <div class="label">تعداد باتری</div>
+      <div class="value">۲ عدد</div>
+    </div>
+    <div class="item">
+      <div class="label">ظرفیت باتری</div>
+      <div class="value">۵ کیلووات ساعت</div>
+    </div>
+    <div class="item">
+      <div class="label">برند باتری</div>
+      <div class="value">Marsriva</div>
+    </div>
+    <div class="item">
+      <div class="label">مدل باتری</div>
+      <div class="value">ML5.0</div>
+    </div>
+    <div class="item">
+      <div class="label">برند اینورتر</div>
+      <div class="value">Growatt</div>
+    </div>
+    <div class="item">
+      <div class="label">مدل اینورتر</div>
+      <div class="value">SPF 5000 ES</div>
+    </div>
+    <div class="item">
+      <div class="label">نوع سیستم</div>
+      <div class="value">Off-Grid</div>
+    </div>
+    <div class="item">
+      <div class="label">ظرفیت کل</div>
+      <div class="value">۸.۰۶ کیلووات</div>
+    </div>
+  </div>
+
+  <!-- BAI IMAGE - SCALED DOWN, VERTICAL, CENTERED -->
+  <div class="project-gallery single">
+    <img src="BAI.jpg" alt="تصویر باتری‌ها و اینورتر" class="vertical-scaled" />
+  </div>
+
+  <h2>مراحل اجرا</h2>
+
+  <p>
+    اجرای این پروژه در مجموع دو هفته به طول انجامید. هر مرحله با برنامه‌ریزی دقیق و هماهنگی با مالک ساختمان پیش رفت.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="phase">هفته اول: بررسی، طراحی و ساخت سایه‌بان</div>
+      <p>
+        بازدید از محل، اندازه‌گیری ابعاد حیاط و تعیین بهترین موقعیت برای ساخت سایه‌بان. طراحی سازه فلزی متناسب با نیاز مالک و شرایط محل. محاسبه دقیق میزان تابش خورشید در منطقه با استفاده از داده‌های هواشناسی یزد. تعیین بهترین چیدمان برای پنل‌ها به منظور دریافت حداکثر تابش. بررسی نیازهای شارژ خودروی پلاگین هیبرید و تعیین ظرفیت اضافی مورد نیاز برای این منظور. طراحی کامل سیستم و انتخاب تجهیزات. ساخت سازه سایه‌بان در کارگاه و آماده‌سازی برای حمل به محل پروژه.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <div class="phase">چند روز: تأمین تجهیزات</div>
+      <p>
+        خرید و تأمین پنل‌های Jinko، باتری‌های Marsriva و اینورتر Growatt. انجام تست‌های اولیه بر روی تجهیزات پیش از حمل به محل پروژه. حمل تجهیزات و سازه سایه‌بان به یزد با هماهنگی تیم لجستیک.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <div class="phase">۲ روز: نصب و راه‌اندازی</div>
+      <p>
+        نصب سازه سایه‌بان در حیاط، نصب پنل‌ها بر روی سقف سایه‌بان، اتصال باتری‌ها و اینورتر، انجام سیم‌کشی‌های لازم و اجرای سیستم اتصال زمین. نصب پریز مخصوص شارژ خودرو در نزدیکی سایه‌بان و اتصال آن به سیستم. تست و راه‌اندازی نهایی سیستم.
+      </p>
+    </div>
+  </div>
+
+  <div class="project-gallery">
+    <img src="MakingProccess.jpg" alt="مراحل نصب – حمل پنل‌ها" />
+    <img src="MakingProccess2.jpg" alt="مراحل نصب – اتصال و تست" />
+  </div>
+
+  <h2>چالش‌های اجرایی</h2>
+
+  <p>
+    در طول اجرای این پروژه، چند چالش عمده وجود داشت که تیم اجرایی با برنامه‌ریزی مناسب توانست آنها را پشت سر بگذارد:
+  </p>
+
+  <ul>
+    <li><strong>ساخت و نصب سازه سایه‌بان:</strong> با توجه به وزن پنل‌ها و نیاز به مقاومت در برابر باد و شرایط آب‌وهوایی یزد، سازه سایه‌بان باید با استحکام کافی طراحی و ساخته می‌شد. تیم اجرایی با استفاده از پروفیل‌های فلزی مناسب و جوشکاری دقیق، سازه‌ای مقاوم و پایدار را در کارگاه ساخت و سپس در محل پروژه نصب کرد.</li>
+    <li><strong>وزن و حمل پنل‌ها:</strong> پنل‌های ۶۲۰ واتی Jinko وزن قابل توجهی (حدود ۳۰ کیلوگرم هر عدد) دارند و حمل ۱۳ عدد از آنها به بالای سایه‌بان که ارتفاع آن حدود ۳ متر بود، نیازمند نیروی انسانی کافی و تجهیزات ایمنی مناسب بود. تیم اجرایی برای جلوگیری از آسیب به پنل‌ها و حفظ سلامت کارگران، این کار را با سرعت پایین و با استفاده از تسمه‌های مخصوص حمل پنل انجام داد.</li>
+    <li><strong>سیم‌کشی و مسیریابی کابل‌ها:</strong> فضای موجود در محل نصب اینورتر و باتری‌ها محدود بود و عبور سیم‌ها از کنار سازه سایه‌بان و داخل کانال‌های موجود نیازمند برنامه‌ریزی دقیق و رعایت استانداردهای فنی بود. مسیریابی سیم‌ها چند بار اصلاح شد تا از ایجاد فشار و کشش اضافی روی کابل‌ها جلوگیری شود.</li>
+    <li><strong>سیستم اتصال زمین (ارت):</strong> برای اجرای سیستم ارت استاندارد، به مایع الکترولیت و الکترودهای مسی مناسب نیاز بود که تهیه آنها در یزد با تأخیر مواجه شد. با توجه به اینکه سیستم Off-Grid به اتصال زمین ایمن نیاز دارد، تیم اجرایی ناچار شد تا زمان بیشتری را برای تأمین تجهیزات ارت صرف کند.</li>
+  </ul>
+
+  <h2>نتیجه و دستاوردها</h2>
+
+  <p>
+    سیستم خورشیدی Off-Grid با موفقیت راه‌اندازی شد و هم‌اکنون تأمین برق ساختمان را به صورت کامل انجام می‌دهد. با اجرای این پروژه، ساختمان به طور کامل از شبکه برق سراسری مستقل شده است و مالک ساختمان از مزایای زیر بهره‌مند شده است:
+  </p>
+
+  <ul>
+    <li><strong>تأمین برق پایدار:</strong> ساختمان دیگر به شبکه سراسری وابسته نیست و قطعی‌های برق تأثیری بر عملکرد آن ندارد.</li>
+    <li><strong>حذف هزینه‌های قبض برق:</strong> با تولید برق مورد نیاز از طریق سیستم خورشیدی، مالک ساختمان دیگر قبض برق پرداخت نمی‌کند.</li>
+    <li><strong>شارژ رایگان خودرو:</strong> خودروی پلاگین هیبرید مالک به صورت کامل با انرژی خورشیدی شارژ می‌شود و هزینه سوخت آن به صفر رسیده است.</li>
+    <li><strong>استفاده از انرژی پاک و تجدیدپذیر:</strong> با تولید برق از انرژی خورشیدی، میزان انتشار کربن کاهش یافته و مصرف سوخت‌های فسیلی به حداقل رسیده است.</li>
+    <li><strong>استفاده بهینه از فضای موجود:</strong> سازه سایه‌بان که برای محافظت از خودرو ساخته شده بود، حالا به یک نیروگاه تولید برق تبدیل شده است و از فضای موجود به بهترین شکل استفاده شده است.</li>
+  </ul>
+
+  <!-- Car Charging Image - Scaled Down, Vertical, Centered -->
+  <div class="project-gallery single">
+    <img src="CarCharging.jpg" alt="خودروی پلاگین هیبرید در حال شارژ زیر سایه‌بان" class="vertical-scaled" />
+  </div>
+
+  <p>
+    با بهره‌برداری از این سیستم، مالک ساختمان توانسته است ضمن کاهش هزینه‌های انرژی، به استقلال انرژی دست یابد و از مزایای یک سیستم خورشیدی پایدار بهره‌مند شود. بر اساس محاسبات انجام شده، این سیستم قادر است بیش از ۹۰ درصد از نیاز برق سالانه ساختمان را تأمین کند و در سال‌های آینده نیز با کاهش راندمان جزئی پنل‌ها، همچنان عملکرد مناسبی خواهد داشت.
+  </p>
+
+  <div class="highlight-box">
+    <strong>جمع‌بندی:</strong> این پروژه نمونه‌ای از طراحی و اجرای یک سایه‌بان خورشیدی است که هم نیاز به سایه‌اندازی و هم نیاز به تولید برق پایدار را برآورده کرده است. با طراحی مناسب، ساخت سازه مقاوم و انتخاب تجهیزات با کیفیت، یک سایه‌بان ساده به یک نیروگاه خورشیدی کارآمد تبدیل شده است که نیازهای برق یک واحد مسکونی را تأمین می‌کند.
+  </div>
+
+  <!-- ===== RELATED PROJECTS ===== -->
+  <div class="related-projects">
+    <h3>پروژه‌های مرتبط</h3>
+    <ul>
+      <li><a href="project1.html">نیروگاه خورشیدی سایه‌بان – یزد</a></li>
+    </ul>
+  </div>
+
+  <p style="margin-top: 40px; text-align: center;">
+    <a href="../../consultation.html" class="btn btn-primary">درخواست مشاوره و برآورد پروژه</a>
+  </p>
+
+</article>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../script.js"></script>
+</body>
+</html>
