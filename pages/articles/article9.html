@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نیروگاه خورشیدی برای کارگاه‌ها و واحدهای صنعتی کوچک | برق‌آوران هوراد</title>
+  <meta name="description" content="طراحی و اجرای نیروگاه خورشیدی برای کارگاه‌ها و واحدهای صنعتی کوچک – راهنمای انتخاب سیستم تک‌فاز یا سه‌فاز، ظرفیت باتری و محاسبه توان" />
+  <link rel="stylesheet" href="../../style.css" />
+  <style>
+    .article-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+    }
+    .article-header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--secondary);
+      max-width: 800px;
+      line-height: 1.3;
+    }
+    .article-date {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    .article-body {
+      padding: 48px 0 80px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .article-body h2 {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+    .article-body h3 {
+      font-size: 1.3rem;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      color: var(--secondary);
+    }
+    .article-body p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .article-body ul {
+      margin: 16px 0 24px 0;
+      padding-right: 24px;
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+    .article-body ul li {
+      margin-bottom: 6px;
+    }
+    .article-body strong {
+      color: var(--secondary);
+    }
+    .article-back {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .article-back:hover {
+      text-decoration: underline;
+    }
+    .highlight-box {
+      background: var(--primary-light);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border-right: 4px solid var(--primary);
+      margin: 24px 0;
+    }
+    .highlight-box strong {
+      color: var(--primary-dark);
+    }
+    .related-articles {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .related-articles h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+    .related-articles ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .related-articles ul li {
+      margin-bottom: 8px;
+    }
+    .related-articles ul li a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .related-articles ul li a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .article-header {
+        padding: 120px 0 30px;
+      }
+      .article-header h1 {
+        font-size: 1.6rem !important;
+        word-wrap: break-word;
+      }
+      .article-body {
+        padding: 24px 16px 60px;
+      }
+      .article-body h2 {
+        font-size: 1.3rem !important;
+      }
+      .article-body h3 {
+        font-size: 1.1rem !important;
+      }
+      .article-body p {
+        font-size: 0.95rem !important;
+        line-height: 1.8;
+        word-wrap: break-word;
+      }
+      .article-body ul {
+        font-size: 0.95rem !important;
+        padding-right: 16px;
+      }
+      .article-body ul li {
+        word-wrap: break-word;
+      }
+      .highlight-box {
+        padding: 16px 18px;
+        margin: 16px 0;
+      }
+      .highlight-box strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+      .article-back {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+      }
+      .container {
+        padding: 0 16px;
+      }
+      .related-articles {
+        margin-top: 32px;
+        padding-top: 20px;
+      }
+      .related-articles h3 {
+        font-size: 1.2rem;
+      }
+      .related-articles ul li a {
+        font-size: 0.95rem;
+        word-wrap: break-word;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .article-header h1 {
+        font-size: 1.3rem !important;
+      }
+      .article-body {
+        padding: 16px 12px 40px;
+      }
+      .article-body h2 {
+        font-size: 1.1rem !important;
+      }
+      .article-body p {
+        font-size: 0.9rem !important;
+      }
+      .article-body ul {
+        font-size: 0.9rem !important;
+        padding-right: 12px;
+      }
+      .highlight-box {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../../index.html" class="navbar__logo">
+      <img src="../../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../../index.html">صفحه اصلی</a>
+      <a href="../services.html">خدمات</a>
+      <a href="../projects.html">پروژه‌ها</a>
+      <a href="../shop.html">فروشگاه</a>
+      <a href="../blog.html" class="active">مقالات</a>
+      <a href="../about.html">درباره ما</a>
+      <a href="../contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="../consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== ARTICLE HEADER ===== -->
+<section class="article-header">
+  <div class="container">
+    <a href="../blog.html" class="article-back">← بازگشت به مقالات</a>
+    <h1>نیروگاه خورشیدی برای کارگاه‌ها و واحدهای صنعتی کوچک</h1>
+    <div class="article-date">۱۴۰۵/۰۶/۰۴</div>
+  </div>
+</section>
+
+<!-- ===== ARTICLE BODY ===== -->
+<article class="article-body container">
+
+  <p>
+    کارگاه‌ها و واحدهای صنعتی کوچک معمولاً بخش قابل‌توجهی از مصرف برق خود را در ساعات کاری و طی روز دارند. استفاده از نیروگاه خورشیدی می‌تواند به کاهش وابستگی به شبکه و مدیریت بهتر هزینه انرژی کمک کند.
+  </p>
+
+  <h2>انتخاب سیستم تک‌فاز یا سه‌فاز</h2>
+
+  <p>
+    یکی از اولین موارد در طراحی نیروگاه، توجه به نوع برق مصرفی واحد است.
+  </p>
+
+  <p>
+    برای واحدهایی با مصرف پایین‌تر، سیستم‌های تک‌فاز تا محدوده حدود ۱۵ کیلووات می‌توانند گزینه مناسبی باشند. برای ظرفیت‌های بالاتر، استفاده از اینورترهای خورشیدی سه‌فاز امکان‌پذیر است و انتخاب نهایی باید بر اساس نوع تجهیزات، میزان مصرف و ساختار برق واحد صنعتی انجام شود.
+  </p>
+
+  <div class="highlight-box">
+    <strong>نکته مهم:</strong> ظرفیت نیروگاه و نوع اینورتر باید متناسب با شرایط واقعی هر کارگاه تعیین شود.
+  </div>
+
+  <h2>آیا استفاده از باتری ضروری است؟</h2>
+
+  <p>
+    میزان باتری را می‌توان بر اساس الگوی کاری واحد صنعتی تعیین کرد.
+  </p>
+
+  <p>
+    اگر یک کارگاه عمدتاً در ساعات روز فعالیت داشته باشد، می‌توان ظرفیت باتری را به حداقل مورد نیاز کاهش داد و بخش عمده انرژی تولیدشده توسط پنل‌ها را مستقیماً در همان زمان مصرف کرد.
+  </p>
+
+  <p>
+    اما اگر واحد صنعتی پس از پایان ساعات تولید نیز به برق نیاز داشته باشد، می‌توان ظرفیت بیشتری برای باتری در نظر گرفت تا انرژی تولیدشده در طول روز ذخیره شده و در ساعات بعدی مورد استفاده قرار گیرد.
+  </p>
+
+  <div class="highlight-box">
+    <strong>توجه:</strong> ظرفیت باتری یک عدد ثابت برای همه کارگاه‌ها نیست و باید بر اساس ساعات کاری، میزان مصرف و نیاز به برق پس از پایان تولید تعیین شود.
+  </div>
+
+  <h2>ظرفیت نیروگاه چگونه تعیین می‌شود؟</h2>
+
+  <p>
+    در طراحی باید مواردی مانند میزان مصرف، ساعات فعالیت، توان تجهیزات، فضای نصب پنل، شرایط تابش و نوع بارها بررسی شود.
+  </p>
+
+  <p>
+    در کارگاه‌هایی که از موتور، پمپ، کمپرسور یا ماشین‌آلات صنعتی استفاده می‌کنند، جریان راه‌اندازی این تجهیزات نیز باید هنگام انتخاب اینورتر در نظر گرفته شود.
+  </p>
+
+  <div class="highlight-box">
+    <strong>نکته فنی:</strong> ظرفیت پنل، اینورتر و باتری باید به‌صورت هماهنگ طراحی شوند.
+  </div>
+
+  <h2>قابلیت توسعه در آینده</h2>
+
+  <p>
+    نیروگاه خورشیدی را می‌توان متناسب با نیاز فعلی اجرا و در آینده توسعه داد. در صورت افزایش مصرف یا تغییر الگوی کاری، امکان افزایش ظرفیت تولید یا ذخیره‌سازی، در صورت پیش‌بینی زیرساخت مناسب در طراحی اولیه، وجود خواهد داشت.
+  </p>
+
+  <h2>جمع‌بندی</h2>
+
+  <p>
+    نیروگاه خورشیدی برای کارگاه‌ها و واحدهای صنعتی کوچک می‌تواند علاوه بر کاهش وابستگی به برق شبکه، به مدیریت بهتر مصرف و تأمین انرژی در ساعات مورد نیاز کمک کند.
+  </p>
+
+  <p>
+    از سیستم‌های تک‌فاز برای مصارف پایین‌تر و تا حدود ۱۵ کیلووات و از سیستم‌های سه‌فاز برای ظرفیت‌ها و نیازهای بالاتر می‌توان استفاده کرد؛ البته انتخاب نهایی به شرایط فنی هر پروژه بستگی دارد.
+  </p>
+
+  <p>
+    همچنین با توجه به ساعات کاری، می‌توان ظرفیت باتری را به حداقل مورد نیاز رساند یا در صورت نیاز به مصرف برق پس از پایان تولید، ظرفیت بیشتری برای ذخیره انرژی در نظر گرفت.
+  </p>
+
+  <p>
+    برق‌آوران هوراد با بررسی الگوی مصرف، نوع تجهیزات و شرایط هر واحد صنعتی، راهکار مناسب برای طراحی و اجرای نیروگاه خورشیدی را ارائه می‌دهد.
+  </p>
+
+  <!-- ===== RELATED ARTICLES ===== -->
+  <div class="related-articles">
+    <h3>مقالات مرتبط</h3>
+    <ul>
+      <li><a href="article1.html">برق خورشیدی چیست و چگونه کار می‌کند؟</a></li>
+      <li><a href="article2.html">انواع سیستم‌های خورشیدی</a></li>
+      <li><a href="article4.html">راهنمای انتخاب ظرفیت پنل خورشیدی برای ساختمان مسکونی</a></li>
+      <li><a href="article8.html">برق اضطراری برای واحدهای مسکونی و تجاری</a></li>
+    </ul>
+  </div>
+
+  <p style="margin-top: 40px; text-align: center;">
+    <a href="../consultation.html" class="btn btn-primary">درخواست مشاوره تخصصی رایگان</a>
+  </p>
+
+</article>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<script src="../../script.js"></script>
+</body>
+</html>
