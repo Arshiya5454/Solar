@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>درباره ما | برق‌آوران هوراد</title>
+  <meta name="description" content="برق‌آوران هوراد – طراحی، مهندسی و اجرای نیروگاه‌های خورشیدی خانگی، تجاری، صنعتی و کشاورزی در یزد، اصفهان و سراسر ایران" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .about-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+      text-align: center;
+    }
+    .about-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .about-header h1 span {
+      color: var(--primary);
+    }
+    .about-header .tagline {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 8px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .about-header p {
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 8px auto 0;
+    }
+
+    .about-body {
+      padding: 48px 0 80px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .about-body h2 {
+      font-size: 1.8rem;
+      margin-top: 48px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+    .about-body h2:first-of-type {
+      margin-top: 0;
+    }
+    .about-body h3 {
+      font-size: 1.3rem;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      color: var(--secondary);
+    }
+    .about-body p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .about-body ul {
+      margin: 16px 0 24px 0;
+      padding-right: 24px;
+      font-size: 1.05rem;
+      line-height: 2;
+      list-style: none;
+    }
+    .about-body ul li {
+      margin-bottom: 6px;
+      padding-right: 20px;
+      position: relative;
+    }
+    .about-body ul li::before {
+      content: "—";
+      position: absolute;
+      right: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .about-body strong {
+      color: var(--secondary);
+    }
+    .highlight-box {
+      background: var(--primary-light);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border-right: 4px solid var(--primary);
+      margin: 24px 0;
+    }
+    .highlight-box strong {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 768px) {
+      .about-header h1 {
+        font-size: 2rem;
+      }
+      .about-header .tagline {
+        font-size: 1.1rem;
+      }
+      .about-body {
+        padding: 24px 16px 60px;
+      }
+      .about-body h2 {
+        font-size: 1.4rem;
+      }
+      .about-body h3 {
+        font-size: 1.1rem;
+      }
+      .about-body p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+      .about-body ul {
+        font-size: 0.95rem;
+        padding-right: 16px;
+      }
+      .highlight-box {
+        padding: 16px 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-header h1 {
+        font-size: 1.6rem;
+      }
+      .about-header .tagline {
+        font-size: 1rem;
+      }
+      .about-body {
+        padding: 16px 12px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../index.html" class="navbar__logo">
+      <img src="../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../index.html">صفحه اصلی</a>
+      <a href="services.html">خدمات</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="shop.html">فروشگاه</a>
+      <a href="blog.html">مقالات</a>
+      <a href="about.html" class="active">درباره ما</a>
+      <a href="contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HEADER ===== -->
+<section class="about-header">
+  <div class="container">
+    <h1>درباره <span>ما</span></h1>
+    <div class="tagline">ما فقط نیروگاه خورشیدی نصب نمی‌کنیم؛ برای هر پروژه راهکار می‌سازیم.</div>
+  </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<article class="about-body container">
+
+  <p>
+    برق‌آوران هوراد فعالیت خود را از سال ۱۳۹۲ آغاز کرد. مجموعه‌ای که در ابتدا با نام «شرکت بازرگانی چالش کویر» در حوزه بازرگانی و تأمین کالا فعالیت می‌کرد و پس از تجربه در حوزه‌های مختلف صنعتی، وارد بازار تجهیزات انرژی خورشیدی شد.
+  </p>
+
+  <p>
+    با شکل‌گیری یک تیم متخصص و علاقه‌مند به انرژی‌های تجدیدپذیر، فعالیت مجموعه به‌تدریج از تأمین تجهیزات فراتر رفت و به طراحی، مهندسی، اجرا و راه‌اندازی سیستم‌های خورشیدی توسعه پیدا کرد.
+  </p>
+
+  <p>
+    امروز برق‌آوران هوراد در یزد، اصفهان و در پروژه‌های سراسر ایران فعالیت می‌کند.
+  </p>
+
+  <h2>نگاه ما به اجرای پروژه</h2>
+
+  <p>
+    ما معتقدیم اجرای یک نیروگاه خورشیدی با نصب چند پنل و اینورتر به پایان نمی‌رسد.
+  </p>
+
+  <p>
+    از همان مرحله طراحی، به این فکر می‌کنیم که سیستم چگونه باید اجرا شود تا ایمن، استاندارد، قابل سرویس و متناسب با نیاز واقعی کارفرما باشد.
+  </p>
+
+  <p>
+    گاهی بهترین راهکار، نصب پنل‌ها روی یک سایه‌بان خودرو است؛ گاهی باید برای دسترسی مناسب به پنل‌ها در ارتفاع، مسیر سرویس و نگهداری طراحی شود. در هر پروژه، راهکار را بر اساس شرایط واقعی همان محل انتخاب می‌کنیم.
+  </p>
+
+  <div class="highlight-box">
+    <strong>نگاه ما:</strong> برای ما مهم است که پروژه فقط در روز تحویل، خوب به نظر نرسد؛ بلکه سال‌ها بعد هم درست و قابل اتکا کار کند.
+  </div>
+
+  <h2>چه خدماتی ارائه می‌دهیم؟</h2>
+
+  <p>
+    برق‌آوران هوراد خدمات خود را از مرحله مشاوره و طراحی تا اجرا و پشتیبانی ارائه می‌دهد:
+  </p>
+
+  <ul>
+    <li>طراحی و مهندسی سیستم‌های خورشیدی</li>
+    <li>تأمین تجهیزات از برندهای معتبر و باکیفیت</li>
+    <li>اجرای نیروگاه‌های خورشیدی خانگی، تجاری، صنعتی و کشاورزی</li>
+    <li>سیستم‌های Off-Grid و Hybrid</li>
+    <li>نیروگاه‌های متصل به شبکه</li>
+    <li>طراحی و اجرای سیستم‌های ذخیره‌سازی انرژی</li>
+    <li>تأمین و نصب باتری‌های خورشیدی</li>
+    <li>نصب، راه‌اندازی و تست سیستم</li>
+    <li>خدمات نگهداری و پشتیبانی پس از اجرا</li>
+  </ul>
+
+  <h2>چرا برق‌آوران هوراد؟</h2>
+
+  <p>
+    تفاوت ما در این است که پروژه را فقط برای «تحویل دادن» اجرا نمی‌کنیم.
+  </p>
+
+  <p>
+    قبل از اجرا طراحی می‌کنیم، قبل از خرید نیاز واقعی را بررسی می‌کنیم و هنگام اجرا به جزئیاتی توجه می‌کنیم که ممکن است در نگاه اول دیده نشوند.
+  </p>
+
+  <p>
+    استانداردهای فنی، کیفیت اجرا، نظم و تمیزی کار، شفافیت، صداقت و احترام به کارفرما برای ما بخش جدایی‌ناپذیر یک پروژه موفق هستند.
+  </p>
+
+  <div class="highlight-box">
+    <strong>هدف ما:</strong> ارائه راهکارهای کاربردی، خلاقانه و متمایز؛ راهکارهایی که واقعاً مسئله پروژه را حل کنند، نه اینکه صرفاً یک سیستم خورشیدی روی ساختمان نصب شود.
+  </div>
+
+  <p>
+    ما برق می‌آوریم؛ از طراحی یک راهکار مناسب تا اجرای دقیق و پشتیبانی پس از آن، در کنار شما هستیم.
+  </p>
+
+  <p style="margin-top: 40px; text-align: center;">
+    <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+  </p>
+
+</article>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
