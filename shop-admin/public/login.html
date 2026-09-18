@@ -93,22 +93,35 @@
     </form>
   </div>
   <script>
-    // Hardcoded credentials (change these)
-    const VALID_USERNAME = 'admin';
-    const VALID_PASSWORD = 'hoorad123';
+  const API_BASE = 'http://213.176.121.227:5001/api/admin';
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const u = document.getElementById('username').value;
-      const p = document.getElementById('password').value;
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorEl = document.getElementById('loginError');
 
-      if (u === VALID_USERNAME && p === VALID_PASSWORD) {
-        localStorage.setItem('adminLoggedIn', 'true');
-        window.location.href = 'orders.html';
-      } else {
-        document.getElementById('loginError').style.display = 'block';
+    try {
+      const res = await fetch(`${API_BASE}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorEl.style.display = 'block';
+        return;
       }
-    });
-  </script>
+
+      localStorage.setItem('adminToken', data.token);
+      localStorage.setItem('adminUsername', data.username);
+      window.location.href = 'orders.html';
+    } catch (err) {
+      errorEl.style.display = 'block';
+    }
+  });
+</script>
 </body>
 </html>
