@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>محصولات | مدیریت</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f1f5f9;
+      direction: rtl;
+      padding: 24px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .header h1 {
+      font-size: 1.6rem;
+      color: #1e293b;
+    }
+    .btn {
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: #0f8b3a;
+      color: #fff;
+    }
+    .btn:hover {
+      background: #0a6b2c;
+    }
+    .btn-danger {
+      background: #ef4444;
+    }
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+    .btn-warning {
+      background: #f59e0b;
+      color: #fff;
+    }
+    .btn-warning:hover {
+      background: #b45309;
+    }
+    .btn-sm {
+      padding: 4px 12px;
+      font-size: 0.75rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      text-align: right;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge.active {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .badge.inactive {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .empty {
+      color: #94a3b8;
+      text-align: center;
+      padding: 40px 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-links a.active {
+      color: #0f8b3a;
+    }
+    .nav-links a:hover {
+      color: #0f8b3a;
+    }
+    .logout-btn {
+      color: #ef4444;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .logout-btn:hover {
+      text-decoration: underline;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #fff;
+      padding: 32px;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-box h2 {
+      margin-bottom: 16px;
+      color: #1e293b;
+    }
+    .modal-box label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    .modal-box input,
+    .modal-box textarea,
+    .modal-box select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+    .modal-box input:focus,
+    .modal-box textarea:focus,
+    .modal-box select:focus {
+      border-color: #0f8b3a;
+      outline: none;
+    }
+    .modal-box .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .modal-box .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .modal-box .actions .btn {
+      flex: 1;
+    }
+    .modal-box .btn-secondary {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+    .modal-box .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+    .product-img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px;
+      }
+      table {
+        font-size: 0.75rem;
+      }
+      th,
+      td {
+        padding: 6px 8px;
+      }
+      .modal-box {
+        padding: 20px;
+      }
+      .modal-box .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>📦 محصولات</h1>
+        <div class="nav-links" style="margin-top:8px;">
+          <a href="orders.html">سفارشات</a>
+          <a href="products.html" class="active">محصولات</a>
+          <a href="#" class="logout-btn" onclick="logout()">خروج</a>
+        </div>
+      </div>
+      <button class="btn" onclick="openAddModal()">+ افزودن محصول</button>
+    </div>
+
+    <div id="productsTable">
+      <div class="empty">در حال بارگذاری...</div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal" id="productModal">
+    <div class="modal-box">
+      <h2 id="modalTitle">افزودن محصول</h2>
+      <form id="productForm">
+        <input type="hidden" id="editId" />
+        <label>نام محصول</label>
+        <input type="text" id="pName" required />
+        <label>قیمت (تومان)</label>
+        <input type="number" id="pPrice" required />
+        <label>موجودی</label>
+        <input type="number" id="pStock" value="0" />
+        <label>توضیحات کوتاه</label>
+        <textarea id="pDescription" rows="2"></textarea>
+        <label>تصویر (آدرس)</label>
+        <input type="text" id="pImage" placeholder="/images/product.jpg" />
+        <div class="row">
+          <div>
+            <label>برند</label>
+            <input type="text" id="pBrand" />
+          </div>
+          <div>
+            <label>مدل</label>
+            <input type="text" id="pModel" />
+          </div>
+        </div>
+        <label>وضعیت</label>
+        <select id="pActive">
+          <option value="true">فعال</option>
+          <option value="false">غیرفعال</option>
+        </select>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">انصراف</button>
+          <button type="submit" class="btn">ذخیره</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:5001/api/admin';
+    const token = localStorage.getItem('adminToken');
+
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+
+    async function fetchWithAuth(url, options = {}) {
+      const res = await fetch(url, {
+        ...options,
+        headers: { 'Authorization': token, 'Content-Type': 'application/json' }
+      });
+      if (res.status === 401) {
+        localStorage.removeItem('adminToken');
+        window.location.href = 'login.html';
+      }
+      return res;
+    }
+
+    async function loadProducts() {
+      const res = await fetchWithAuth(`${API_BASE}/products`);
+      const products = await res.json();
+      const container = document.getElementById('productsTable');
+
+      if (products.length === 0) {
+        container.innerHTML = '<div class="empty">هیچ محصولی ثبت نشده است</div>';
+        return;
+      }
+
+      let html = `<table>
+        <tr>
+          <th>تصویر</th>
+          <th>نام</th>
+          <th>قیمت</th>
+          <th>موجودی</th>
+          <th>وضعیت</th>
+          <th>عملیات</th>
+        </tr>`;
+      products.forEach(p => {
+        html += `<tr>
+          <td>${p.main_image ? `<img src="${p.main_image}" class="product-img" />` : '—'}</td>
+          <td>${p.name}</td>
+          <td>${p.price.toLocaleString()} تومان</td>
+          <td>${p.stock}</td>
+          <td><span class="badge ${p.is_active ? 'active' : 'inactive'}">${p.is_active ? 'فعال' : 'غیرفعال'}</span></td>
+          <td>
+            <button class="btn btn-warning btn-sm" onclick="editProduct(${p.id})">✏️</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})">🗑️</button>
+          </td>
+        </tr>`;
+      });
+      html += '</table>';
+      container.innerHTML = html;
+    }
+
+    function openAddModal() {
+      document.getElementById('modalTitle').textContent = 'افزودن محصول';
+      document.getElementById('productForm').reset();
+      document.getElementById('editId').value = '';
+      document.getElementById('pActive').value = 'true';
+      document.getElementById('productModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('productModal').classList.remove('open');
+    }
+
+    async function editProduct(id) {
+      const res = await fetchWithAuth(`${API_BASE}/products`);
+      const products = await res.json();
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+
+      document.getElementById('modalTitle').textContent = 'ویرایش محصول';
+      document.getElementById('editId').value = id;
+      document.getElementById('pName').value = p.name || '';
+      document.getElementById('pPrice').value = p.price || '';
+      document.getElementById('pStock').value = p.stock || 0;
+      document.getElementById('pDescription').value = p.description || '';
+      document.getElementById('pImage').value = p.main_image || '';
+      document.getElementById('pBrand').value = p.brand || '';
+      document.getElementById('pModel').value = p.model || '';
+      document.getElementById('pActive').value = p.is_active ? 'true' : 'false';
+      document.getElementById('productModal').classList.add('open');
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm('آیا از حذف این محصول مطمئن هستید؟')) return;
+      await fetchWithAuth(`${API_BASE}/products/${id}`, { method: 'DELETE' });
+      loadProducts();
+    }
+
+    document.getElementById('productForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('pName').value,
+        price: parseInt(document.getElementById('pPrice').value),
+        stock: parseInt(document.getElementById('pStock').value) || 0,
+        description: document.getElementById('pDescription').value,
+        main_image: document.getElementById('pImage').value,
+        brand: document.getElementById('pBrand').value,
+        model: document.getElementById('pModel').value,
+        slug: document.getElementById('pName').value.replace(/\s+/g, '-').toLowerCase(),
+        is_active: document.getElementById('pActive').value === 'true',
+        discount_price: null,
+        full_review: '',
+        specs: null,
+        sku: '',
+        images: []
+      };
+
+      const id = document.getElementById('editId').value;
+      const url = id ? `${API_BASE}/products/${id}` : `${API_BASE}/products`;
+      const method = id ? 'PUT' : 'POST';
+
+      await fetchWithAuth(url, { method, body: JSON.stringify(data) });
+      closeModal();
+      loadProducts();
+    });
+
+    function logout() {
+      localStorage.removeItem('adminToken');
+      window.location.href = 'login.html';
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>
