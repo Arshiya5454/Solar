@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فروشگاه تجهیزات خورشیدی | برق‌آوران هوراد</title>
-  <meta name="description" content="فروشگاه تخصصی تجهیزات خورشیدی شامل پنل، اینورتر، باتری و تجهیزات نصب" />
+  <title>فروشگاه | برق‌آوران هوراد</title>
+  <meta name="description" content="فروشگاه تجهیزات خورشیدی برق‌آوران هوراد شامل پنل، اینورتر، باتری و تجهیزات نصب" />
   <link rel="stylesheet" href="../style.css" />
   <style>
     .shop-header {
@@ -26,87 +26,158 @@
       margin: 8px auto 0;
     }
 
-    .shop-content {
+    .shop-list {
       padding: 48px 0 80px;
       background: var(--white);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 50vh;
     }
-    .shop-card {
-      max-width: 640px;
-      width: 100%;
-      background: var(--gray-100);
-      padding: 48px 40px;
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--white);
       border-radius: var(--radius);
-      text-align: center;
+      overflow: hidden;
       border: 1px solid var(--gray-200);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
     }
-    .shop-card .icon {
-      font-size: 3rem;
-      margin-bottom: 16px;
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
     }
-    .shop-card h2 {
-      font-size: 1.8rem;
+    .product-card .image {
+      width: 100%;
+      height: 220px;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .product-card .image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-card .image .no-image {
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .product-card .body {
+      padding: 20px 20px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card .brand {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .product-card .title {
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--secondary);
       margin-bottom: 8px;
+      line-height: 1.5;
     }
-    .shop-card p {
-      color: var(--text-light);
-      font-size: 1.05rem;
-      line-height: 1.9;
-      margin-bottom: 16px;
+    .product-card .title a {
+      color: inherit;
+      text-decoration: none;
     }
-    .shop-card .highlight {
-      background: var(--white);
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      border-right: 4px solid var(--primary);
-      text-align: right;
-      font-size: 0.95rem;
-      color: var(--text-dark);
-      margin-bottom: 20px;
+    .product-card .title a:hover {
+      color: var(--primary);
     }
-    .shop-card .highlight strong {
-      color: var(--secondary);
-    }
-    .shop-card .note {
+    .product-card .description {
       font-size: 0.9rem;
       color: var(--text-light);
-      margin-top: 12px;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 16px;
     }
-    .shop-card .note a {
+    .product-card .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .product-card .price {
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--primary);
-      text-decoration: none;
+    }
+    .product-card .price .discount {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-decoration: line-through;
+      margin-right: 8px;
+      font-weight: 400;
+    }
+    .product-card .stock {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    .product-card .stock.out {
+      color: #e53e3e;
       font-weight: 600;
     }
-    .shop-card .note a:hover {
-      text-decoration: underline;
+
+    .shop-empty {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-light);
+    }
+    .shop-empty h3 {
+      font-size: 1.6rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
     }
 
     @media (max-width: 768px) {
       .shop-header h1 {
         font-size: 2rem;
       }
-      .shop-card {
-        padding: 32px 24px;
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
       }
-      .shop-card h2 {
-        font-size: 1.4rem;
+      .product-card .image {
+        height: 180px;
       }
     }
+
     @media (max-width: 480px) {
       .shop-header h1 {
         font-size: 1.6rem;
       }
-      .shop-card {
-        padding: 24px 16px;
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
-      .shop-card .highlight {
-        padding: 12px 14px;
-        font-size: 0.9rem;
+      .product-card .image {
+        height: 140px;
+      }
+      .product-card .body {
+        padding: 12px 14px 16px;
+      }
+      .product-card .title {
+        font-size: 0.95rem;
+      }
+      .product-card .description {
+        font-size: 0.8rem;
+      }
+      .product-card .price {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -146,32 +217,12 @@
   </div>
 </section>
 
-<!-- ===== SHOP CONTENT ===== -->
-<section class="shop-content">
+<!-- ===== PRODUCTS LIST ===== -->
+<section class="shop-list">
   <div class="container">
-    <div class="shop-card">
-      <div class="icon"> </div>
-      <h2>در حال راه‌اندازی</h2>
-      <p>
-        فروشگاه تخصصی تجهیزات خورشیدی برق‌آوران هوراد به زودی افتتاح می‌شود.
-      </p>
-
-      <div class="highlight">
-        <strong>توجه:</strong> در حال حاضر امکان خرید مستقیم از سایت وجود ندارد.
-        <br />
-        برای استعلام قیمت و خرید تجهیزات، لطفاً با کارشناسان ما تماس بگیرید.
-      </div>
-
-      <p style="font-size: 0.95rem; color: var(--text-light);">
-        محصولات قابل ارائه شامل پنل خورشیدی، اینورتر، باتری، سازه نصب،
-        کابل، تجهیزات حفاظتی و کلیه اقلام مورد نیاز نیروگاه‌های خورشیدی
-        کوچک‌مقیاس.
-      </p>
-
-      <div class="note">
-        برای مشاوره و خرید، از طریق صفحه
-        <a href="consultation.html">درخواست مشاوره</a>
-        با ما در ارتباط باشید.
+    <div class="products-grid" id="productsGrid">
+      <div class="shop-empty" style="grid-column: 1 / -1;">
+        <p>در حال بارگذاری محصولات...</p>
       </div>
     </div>
   </div>
@@ -188,5 +239,73 @@
 </footer>
 
 <script src="../script.js"></script>
+<script>
+  const API_BASE = 'http://213.176.121.227:5000/api';
+
+  async function loadProducts() {
+    const grid = document.getElementById('productsGrid');
+
+    try {
+      const res = await fetch(`${API_BASE}/products`);
+      const products = await res.json();
+
+      if (products.length === 0) {
+        grid.innerHTML = `
+          <div class="shop-empty" style="grid-column: 1 / -1;">
+            <h3>هنوز محصولی ثبت نشده است</h3>
+            <p>به زودی محصولات در این بخش قرار خواهند گرفت.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = '';
+
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        const price = p.discount_price
+          ? `<span class="discount">${p.price.toLocaleString()}</span>${p.discount_price.toLocaleString()} تومان`
+          : `${p.price.toLocaleString()} تومان`;
+
+        const stock = p.stock > 0
+          ? `<span class="stock">موجود: ${p.stock}</span>`
+          : `<span class="stock out">ناموجود</span>`;
+
+        const image = p.main_image
+          ? `<img src="${p.main_image}" alt="${p.name}" />`
+          : `<span class="no-image">بدون تصویر</span>`;
+
+        card.innerHTML = `
+          <div class="image">${image}</div>
+          <div class="body">
+            ${p.brand ? `<div class="brand">${p.brand}</div>` : ''}
+            <div class="title">
+              <a href="product.html?slug=${p.slug}">${p.name}</a>
+            </div>
+            <div class="description">${p.description || ''}</div>
+            <div class="footer">
+              <div class="price">${price}</div>
+              ${stock}
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    } catch (err) {
+      grid.innerHTML = `
+        <div class="shop-empty" style="grid-column: 1 / -1;">
+          <h3>خطا در بارگذاری محصولات</h3>
+          <p>لطفاً بعداً دوباره تلاش کنید.</p>
+        </div>
+      `;
+      console.error(err);
+    }
+  }
+
+  loadProducts();
+</script>
 </body>
 </html>
