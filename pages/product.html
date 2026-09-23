@@ -11,6 +11,13 @@
       padding: 140px 0 40px;
       background: linear-gradient(135deg, #f8fffb, #e6f5ec);
     }
+    .product-header .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
     .product-header .back {
       display: inline-block;
       margin-bottom: 12px;
@@ -32,6 +39,23 @@
       color: var(--text-light);
       font-size: 0.95rem;
       margin-top: 4px;
+    }
+    .cart-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .cart-link:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(15, 139, 58, 0.3);
     }
 
     .product-body {
@@ -334,10 +358,20 @@
 <script src="../script.js"></script>
 <script>
   const API_BASE = 'https://hooradsolar.com/api';
+  const CART_KEY = 'hoorad_cart';
 
   function getSlug() {
     const params = new URLSearchParams(window.location.search);
     return params.get('slug');
+  }
+
+  function updateCartCount() {
+    try {
+      const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+      const count = cart.reduce((s, i) => s + i.qty, 0);
+      const el = document.getElementById('cartCount');
+      if (el) el.textContent = count;
+    } catch {}
   }
 
   async function loadProduct() {
@@ -367,6 +401,7 @@
       }
       const p = await res.json();
       renderProduct(p);
+      updateCartCount();
     } catch (err) {
       container.innerHTML = `
         <div class="error-box">
@@ -380,22 +415,18 @@
   function renderProduct(p) {
     const container = document.getElementById('productContent');
 
-    // Price display
     const priceHTML = p.discount_price
       ? `${p.discount_price.toLocaleString()} تومان <span class="discount-price">${p.price.toLocaleString()}</span>`
       : `${p.price.toLocaleString()} تومان`;
 
-    // Stock display
     const stockHTML = p.stock > 0
       ? `<div class="stock">موجود در انبار: ${p.stock} عدد</div>`
       : `<div class="stock out">ناموجود</div>`;
 
-    // Main image
     const mainImage = p.main_image
       ? `<img src="${p.main_image}" alt="${p.name}" id="mainProductImage" />`
       : `<span class="no-image">تصویری برای این محصول ثبت نشده است</span>`;
 
-    // Gallery
     let galleryHTML = '';
     if (p.images && Array.isArray(p.images) && p.images.length > 0) {
       galleryHTML = `<div class="product-gallery">`;
@@ -405,7 +436,6 @@
       galleryHTML += `</div>`;
     }
 
-    // Specs
     let specsHTML = '';
     if (p.specs && typeof p.specs === 'object') {
       specsHTML = `<div class="section">
@@ -417,7 +447,6 @@
       specsHTML += `</table></div>`;
     }
 
-    // Full review
     let reviewHTML = '';
     if (p.full_review) {
       reviewHTML = `<div class="section">
@@ -426,7 +455,6 @@
       </div>`;
     }
 
-    // Add to cart (placeholder for now)
     const addToCartHTML = p.stock > 0
       ? `<button class="btn btn-primary" onclick="addToCart('${p.slug}')">افزودن به سبد خرید</button>`
       : `<button class="btn btn-primary" disabled>ناموجود</button>`;
@@ -434,9 +462,14 @@
     container.innerHTML = `
       <section class="product-header">
         <div class="container">
-          <a href="shop.html" class="back">← بازگشت به فروشگاه</a>
-          <h1>${p.name}</h1>
-          ${p.brand ? `<div class="brand">${p.brand}${p.model ? ' - ' + p.model : ''}</div>` : ''}
+          <div class="header-row">
+            <div>
+              <a href="shop.html" class="back">← بازگشت به فروشگاه</a>
+              <h1>${p.name}</h1>
+              ${p.brand ? `<div class="brand">${p.brand}${p.model ? ' - ' + p.model : ''}</div>` : ''}
+            </div>
+            <a href="cart.html" class="cart-link">🛒 سبد خرید (<span id="cartCount">0</span>)</a>
+          </div>
         </div>
       </section>
 
@@ -470,39 +503,40 @@
         </section>
       ` : ''}
     `;
+
+    updateCartCount();
   }
 
- function addToCart(slug) {
-  // We need product data — fetch it or pass it
-  fetch(`${API_BASE}/products/${slug}`)
-    .then(res => res.json())
-    .then(p => {
-      const CART_KEY = 'hoorad_cart';
-      let cart = [];
-      try {
-        cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
-      } catch {}
+  function addToCart(slug) {
+    fetch(`${API_BASE}/products/${slug}`)
+      .then(res => res.json())
+      .then(p => {
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+        } catch {}
 
-      const existing = cart.find(item => item.slug === p.slug);
-      const price = p.discount_price || p.price;
+        const existing = cart.find(item => item.slug === p.slug);
+        const price = p.discount_price || p.price;
 
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({
-          slug: p.slug,
-          name: p.name,
-          price: price,
-          image: p.main_image || '',
-          qty: 1
-        });
-      }
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          cart.push({
+            slug: p.slug,
+            name: p.name,
+            price: price,
+            image: p.main_image || '',
+            qty: 1
+          });
+        }
 
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-      alert('محصول به سبد خرید اضافه شد');
-    })
-    .catch(() => alert('خطا در افزودن به سبد خرید'));
-}
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        updateCartCount();
+        alert('محصول به سبد خرید اضافه شد');
+      })
+      .catch(() => alert('خطا در افزودن به سبد خرید'));
+  }
 
   loadProduct();
 </script>
