@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سبد خرید | برق‌آوران هوراد</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .cart-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+      text-align: center;
+    }
+    .cart-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .cart-header h1 span {
+      color: var(--primary);
+    }
+
+    .cart-body {
+      padding: 48px 0 80px;
+      background: var(--white);
+    }
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== CART ITEMS ===== */
+    .cart-items {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item .item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .cart-item .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cart-item .item-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 4px;
+    }
+    .cart-item .item-info .item-price {
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .cart-item .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gray-100);
+      border-radius: 50px;
+      padding: 4px;
+    }
+    .cart-item .qty-controls button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: var(--white);
+      color: var(--secondary);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .cart-item .qty-controls button:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .cart-item .qty-controls span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .cart-item .item-total {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--secondary);
+      min-width: 100px;
+      text-align: left;
+    }
+    .cart-item .remove-btn {
+      background: none;
+      border: none;
+      color: #e53e3e;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 4px;
+      transition: var(--transition);
+    }
+    .cart-item .remove-btn:hover {
+      transform: scale(1.2);
+    }
+
+    /* ===== SUMMARY ===== */
+    .cart-summary {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 24px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+    .cart-summary h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .summary-row.total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      padding-top: 12px;
+      border-top: 2px solid var(--primary-light);
+      margin-top: 12px;
+    }
+    .summary-row.total .amount {
+      color: var(--primary);
+    }
+    .cart-summary .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      transition: var(--transition);
+      display: block;
+      margin-top: 16px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(15, 139, 58, 0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      margin-top: 8px;
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .cart-empty {
+      text-align: center;
+      padding: 80px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .cart-empty h2 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+    .cart-empty p {
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .cart-header h1 {
+        font-size: 2rem;
+      }
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+      .cart-item {
+        grid-template-columns: 60px 1fr auto;
+        gap: 12px;
+      }
+      .cart-item .item-image {
+        width: 60px;
+        height: 60px;
+      }
+      .cart-item .item-total {
+        grid-column: 2 / 4;
+        text-align: right;
+        min-width: auto;
+      }
+      .cart-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cart-header h1 {
+        font-size: 1.6rem;
+      }
+      .cart-item .item-info h3 {
+        font-size: 0.9rem;
+      }
+      .cart-item .qty-controls button {
+        width: 26px;
+        height: 26px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../index.html" class="navbar__logo">
+      <img src="../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../index.html">صفحه اصلی</a>
+      <a href="services.html">خدمات</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="shop.html" class="active">فروشگاه</a>
+      <a href="blog.html">مقالات</a>
+      <a href="about.html">درباره ما</a>
+      <a href="contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HEADER ===== -->
+<section class="cart-header">
+  <div class="container">
+    <h1>سبد <span>خرید</span></h1>
+  </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<section class="cart-body">
+  <div class="container">
+    <div id="cartContent">
+      <div class="cart-empty">
+        <p>در حال بارگذاری...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  const CART_KEY = 'hoorad_cart';
+
+  function getCart() {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function formatPrice(n) {
+    return n.toLocaleString('fa-IR') + ' تومان';
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById('cartContent');
+
+    if (cart.length === 0) {
+      container.innerHTML = `
+        <div class="cart-empty">
+          <h2>سبد خرید شما خالی است</h2>
+          <p>هنوز محصولی به سبد خرید اضافه نکرده‌اید.</p>
+          <a href="shop.html" class="btn btn-primary" style="display:inline-block;padding:12px 32px;border-radius:50px;background:var(--primary);color:#fff;text-decoration:none;font-weight:600;">مشاهده محصولات</a>
+        </div>
+      `;
+      return;
+    }
+
+    let itemsHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const itemTotal = item.price * item.qty;
+      total += itemTotal;
+
+      itemsHTML += `
+        <div class="cart-item">
+          <div class="item-image">
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" />` : ''}
+          </div>
+          <div class="item-info">
+            <h3>${item.name}</h3>
+            <div class="item-price">${formatPrice(item.price)}</div>
+          </div>
+          <div class="qty-controls">
+            <button onclick="changeQty(${index}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${index}, 1)">+</button>
+          </div>
+          <div class="item-total">${formatPrice(itemTotal)}</div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = `
+      <div class="cart-layout">
+        <div class="cart-items">
+          ${itemsHTML}
+        </div>
+        <div class="cart-summary">
+          <h2>خلاصه سفارش</h2>
+          <div class="summary-row">
+            <span>تعداد اقلام</span>
+            <span>${cart.reduce((s, i) => s + i.qty, 0)} عدد</span>
+          </div>
+          <div class="summary-row total">
+            <span>مجموع</span>
+            <span class="amount">${formatPrice(total)}</span>
+          </div>
+          <a href="checkout.html" class="btn btn-primary">ادامه و تکمیل سفارش</a>
+          <a href="shop.html" class="btn btn-outline">ادامه خرید</a>
+          <button class="btn btn-outline" onclick="clearCart()" style="margin-top:8px;color:#e53e3e;border-color:#e53e3e;">خالی کردن سبد</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function changeQty(index, delta) {
+    const cart = getCart();
+    if (!cart[index]) return;
+
+    cart[index].qty += delta;
+
+    if (cart[index].qty <= 0) {
+      cart.splice(index, 1);
+    }
+
+    saveCart(cart);
+    renderCart();
+    updateCartBadge();
+  }
+
+  function clearCart() {
+    if (!confirm('آیا از خالی کردن سبد خرید مطمئن هستید؟')) return;
+    saveCart([]);
+    renderCart();
+    updateCartBadge();
+  }
+
+  function updateCartBadge() {
+    const cart = getCart();
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    // Optional: show badge in navbar
+    console.log('Cart items:', count);
+  }
+
+  renderCart();
+</script>
+</body>
+</html>

@@ -472,9 +472,37 @@
     `;
   }
 
-  function addToCart(slug) {
-    alert('به زودی: افزودن به سبد خرید\nمحصول: ' + slug);
-  }
+ function addToCart(slug) {
+  // We need product data — fetch it or pass it
+  fetch(`${API_BASE}/products/${slug}`)
+    .then(res => res.json())
+    .then(p => {
+      const CART_KEY = 'hoorad_cart';
+      let cart = [];
+      try {
+        cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+      } catch {}
+
+      const existing = cart.find(item => item.slug === p.slug);
+      const price = p.discount_price || p.price;
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          slug: p.slug,
+          name: p.name,
+          price: price,
+          image: p.main_image || '',
+          qty: 1
+        });
+      }
+
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      alert('محصول به سبد خرید اضافه شد');
+    })
+    .catch(() => alert('خطا در افزودن به سبد خرید'));
+}
 
   loadProduct();
 </script>
