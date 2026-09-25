@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تکمیل سفارش | برق‌آوران هوراد</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .checkout-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+      text-align: center;
+    }
+    .checkout-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .checkout-header h1 span {
+      color: var(--primary);
+    }
+
+    .checkout-body {
+      padding: 48px 0 80px;
+      background: var(--white);
+    }
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== FORM ===== */
+    .checkout-form {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .checkout-form h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+    .form-group label .required {
+      color: #e53e3e;
+      margin-right: 4px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: var(--transition);
+      background: var(--white);
+      color: var(--text-dark);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(15, 139, 58, 0.15);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* ===== SHIPPING ===== */
+    .shipping-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .shipping-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .shipping-option:hover {
+      border-color: var(--primary);
+    }
+    .shipping-option input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .shipping-option .info {
+      flex: 1;
+    }
+    .shipping-option .info .name {
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 0.95rem;
+    }
+    .shipping-option .info .desc {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+    .shipping-option:has(input:checked) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* ===== ORDER SUMMARY ===== */
+    .order-summary {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 24px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+    .order-summary h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 0.9rem;
+    }
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+    .summary-item .name {
+      color: var(--text-dark);
+      flex: 1;
+    }
+    .summary-item .qty {
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+    .summary-item .price {
+      color: var(--secondary);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid var(--primary-light);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+    .summary-total .amount {
+      color: var(--primary);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      border-radius: 50px;
+      border: none;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 16px;
+    }
+    .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(15, 139, 58, 0.3);
+    }
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 80px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .empty-cart h2 {
+      font-size: 1.6rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+    .empty-cart p {
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .checkout-header h1 {
+        font-size: 2rem;
+      }
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .order-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .checkout-header h1 {
+        font-size: 1.6rem;
+      }
+      .checkout-form {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../index.html" class="navbar__logo">
+      <img src="../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../index.html">صفحه اصلی</a>
+      <a href="services.html">خدمات</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="shop.html" class="active">فروشگاه</a>
+      <a href="blog.html">مقالات</a>
+      <a href="about.html">درباره ما</a>
+      <a href="contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HEADER ===== -->
+<section class="checkout-header">
+  <div class="container">
+    <h1>تکمیل <span>سفارش</span></h1>
+  </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<section class="checkout-body">
+  <div class="container">
+    <div id="checkoutContent">
+      <div class="empty-cart">
+        <p>در حال بارگذاری...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  const API_BASE = 'https://hooradsolar.com/api';
+  const CART_KEY = 'hoorad_cart';
+
+  const PROVINCES = [
+    'آذربایجان شرقی', 'آذربایجان غربی', 'اردبیل', 'اصفهان', 'البرز',
+    'ایلام', 'بوشهر', 'تهران', 'چهارمحال و بختیاری', 'خراسان جنوبی',
+    'خراسان رضوی', 'خراسان شمالی', 'خوزستان', 'زنجان', 'سمنان',
+    'سیستان و بلوچستان', 'فارس', 'قزوین', 'قم', 'کردستان',
+    'کرمان', 'کرمانشاه', 'کهگیلویه و بویراحمد', 'گلستان', 'گیلان',
+    'لرستان', 'مازندران', 'مرکزی', 'هرمزگان', 'همدان', 'یزد'
+  ];
+
+  function getCart() {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function formatPrice(n) {
+    return n.toLocaleString('fa-IR') + ' تومان';
+  }
+
+  function renderCheckout() {
+    const cart = getCart();
+    const container = document.getElementById('checkoutContent');
+
+    if (cart.length === 0) {
+      container.innerHTML = `
+        <div class="empty-cart">
+          <h2>سبد خرید شما خالی است</h2>
+          <p>برای تکمیل سفارش، ابتدا محصولی به سبد خرید اضافه کنید.</p>
+          <a href="shop.html" class="btn btn-primary" style="display:inline-block;padding:12px 32px;border-radius:50px;background:var(--primary);color:#fff;text-decoration:none;font-weight:600;">مشاهده محصولات</a>
+        </div>
+      `;
+      return;
+    }
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+    let itemsHTML = '';
+    cart.forEach(item => {
+      itemsHTML += `
+        <div class="summary-item">
+          <div>
+            <div class="name">${item.name}</div>
+            <div class="qty">${item.qty} عدد × ${formatPrice(item.price)}</div>
+          </div>
+          <div class="price">${formatPrice(item.price * item.qty)}</div>
+        </div>
+      `;
+    });
+
+    let provinceOptions = '<option value="">انتخاب کنید...</option>';
+    PROVINCES.forEach(p => {
+      provinceOptions += `<option value="${p}">${p}</option>`;
+    });
+
+    container.innerHTML = `
+      <div class="checkout-layout">
+        <form class="checkout-form" id="checkoutForm">
+          <h2>اطلاعات خریدار</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">نام و نام خانوادگی <span class="required">*</span></label>
+              <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">شماره تماس <span class="required">*</span></label>
+              <input type="tel" id="phone" placeholder="۰۹۱۲۱۲۳۴۵۶۷" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="province">استان <span class="required">*</span></label>
+              <select id="province" required>${provinceOptions}</select>
+            </div>
+            <div class="form-group">
+              <label for="city">شهر <span class="required">*</span></label>
+              <input type="text" id="city" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">آدرس کامل پستی <span class="required">*</span></label>
+            <textarea id="address" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="postal_code">کد پستی ده‌رقمی <span class="required">*</span></label>
+            <input type="text" id="postal_code" maxlength="10" required />
+          </div>
+
+          <div class="form-group">
+            <label for="notes">توضیحات تکمیلی</label>
+            <textarea id="notes" placeholder="اختیاری"></textarea>
+          </div>
+
+          <h2 style="margin-top:24px;">روش ارسال</h2>
+          <div class="shipping-options">
+            <label class="shipping-option">
+              <input type="radio" name="shipping" value="تیپاکس" checked />
+              <div class="info">
+                <div class="name">ارسال با تیپاکس</div>
+                <div class="desc">پسکرایه – هزینه ارسال هنگام تحویل پرداخت می‌شود</div>
+              </div>
+            </label>
+            <label class="shipping-option">
+              <input type="radio" name="shipping" value="باربری" />
+              <div class="info">
+                <div class="name">ارسال با باربری</div>
+                <div class="desc">پسکرایه – هزینه ارسال هنگام تحویل پرداخت می‌شود</div>
+              </div>
+            </label>
+          </div>
+        </form>
+
+        <div class="order-summary">
+          <h2>خلاصه سفارش</h2>
+          ${itemsHTML}
+          <div class="summary-total">
+            <span>مجموع</span>
+            <span class="amount">${formatPrice(total)}</span>
+          </div>
+          <button class="btn-submit" id="submitOrder" form="checkoutForm">ثبت سفارش</button>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('checkoutForm').addEventListener('submit', handleSubmit);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const cart = getCart();
+    if (cart.length === 0) return;
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const province = document.getElementById('province').value;
+    const city = document.getElementById('city').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const postal_code = document.getElementById('postal_code').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+    const shipping_method = document.querySelector('input[name="shipping"]:checked').value;
+
+    if (!name || !phone || !province || !city || !address || !postal_code) {
+      alert('لطفاً تمام فیلدهای اجباری را پر کنید.');
+      return;
+    }
+
+    if (phone.length < 10) {
+      alert('لطفاً شماره تماس معتبر وارد کنید.');
+      return;
+    }
+
+    if (postal_code.length !== 10 || !/^\d+$/.test(postal_code)) {
+      alert('کد پستی باید ۱۰ رقم باشد.');
+      return;
+    }
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+    const orderData = {
+      customer_name: name,
+      customer_phone: phone,
+      customer_email: '',
+      province,
+      city,
+      address,
+      postal_code,
+      items: cart,
+      total,
+      shipping_method,
+      notes
+    };
+
+    const submitBtn = document.getElementById('submitOrder');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'در حال ثبت سفارش...';
+
+    try {
+      const res = await fetch(`${API_BASE}/orders`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+      });
+
+      if (!res.ok) {
+        throw new Error('Order failed');
+      }
+
+      const data = await res.json();
+
+      // Save order details for thank-you page
+      localStorage.setItem('hoorad_last_order', JSON.stringify({
+        ...orderData,
+        order_number: data.order_number,
+        created_at: data.created_at
+      }));
+
+      // Clear cart
+      saveCart([]);
+
+      // Redirect
+      window.location.href = `thank-you.html?order=${data.order_number}`;
+    } catch (err) {
+      alert('خطا در ثبت سفارش. لطفاً دوباره تلاش کنید.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'ثبت سفارش';
+    }
+  }
+
+  renderCheckout();
+</script>
+</body>
+</html>
