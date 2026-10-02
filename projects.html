@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پروژه‌های اجراشده نیروگاه خورشیدی | برق‌آوران هوراد</title>
+  <meta name="description" content="نمونه پروژه‌های اجراشده نیروگاه خورشیدی توسط برق‌آوران هوراد برای منازل، کارگاه‌ها و صنایع کوچک" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .projects-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+      text-align: center;
+    }
+    .projects-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .projects-header h1 span {
+      color: var(--primary);
+    }
+    .projects-header p {
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 8px auto 0;
+    }
+
+    .projects-list {
+      padding: 48px 0 80px;
+      background: var(--white);
+    }
+
+    /* ===== GRID LAYOUT (3 per row desktop, 2 tablet, 1 mobile) ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--primary-light);
+    }
+
+    .project-card .body {
+      padding: 20px 20px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card .body h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .project-card .body .location {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .project-card .body .specs {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-card .body .specs span {
+      background: var(--gray-100);
+      padding: 2px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+    .project-card .body .description {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .project-card .body .btn-detail {
+      display: inline-block;
+      margin-top: auto;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+    .project-card .body .btn-detail:hover {
+      text-decoration: underline;
+    }
+
+    .projects-cta {
+      text-align: center;
+      margin-top: 48px;
+      padding: 40px 0;
+      background: var(--gray-100);
+      border-radius: var(--radius);
+    }
+    .projects-cta h3 {
+      font-size: 1.6rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+    .projects-cta p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .projects-header h1 {
+        font-size: 2rem;
+      }
+      .project-image {
+        height: 180px;
+      }
+    }
+    @media (max-width: 480px) {
+      .projects-header h1 {
+        font-size: 1.6rem;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .project-image {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../index.html" class="navbar__logo">
+      <img src="../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../index.html">صفحه اصلی</a>
+      <a href="services.html">خدمات</a>
+      <a href="projects.html" class="active">پروژه‌ها</a>
+      <a href="shop.html">فروشگاه</a>
+      <a href="blog.html">مقالات</a>
+      <a href="about.html">درباره ما</a>
+      <a href="contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HEADER ===== -->
+<section class="projects-header">
+  <div class="container">
+    <h1>پروژه‌های <span>اجراشده</span></h1>
+    <p>نمونه‌هایی از نیروگاه‌های خورشیدی اجرا شده توسط تیم برق‌آوران هوراد</p>
+  </div>
+</section>
+
+<!-- ===== PROJECTS LIST ===== -->
+<section class="projects-list">
+  <div class="container">
+    <div class="projects-grid">
+
+      <!-- ===== PROJECT 3: SAFA (Newest - shows first) ===== -->
+      <div class="project-card">
+        <img src="projects/Thumbnail3.jpg" alt="نیروگاه خورشیدی صفا" class="project-image" loading="lazy" />
+        <div class="body">
+          <h2>نیروگاه خورشیدی صفا</h2>
+          <div class="location">مزرعه خارج از شبکه</div>
+          <div class="specs">
+            <span>Off-Grid</span>
+            <span>۱۴۰۵</span>
+          </div>
+          <p class="description">
+            تأمین برق مستقل برای یک مزرعه فاقد دسترسی به شبکه برق شهری با ۸ پنل ۶۲۰ واتی، سانورتر ۶ کیلووات و ۱۰ کیلووات‌ساعت ذخیره‌سازی باتری.
+          </p>
+          <a href="projects/number3/project3.html" class="btn-detail">مشاهده جزئیات پروژه ←</a>
+        </div>
+      </div>
+
+      <!-- ===== PROJECT 2: MEHR KERMAN ===== -->
+      <div class="project-card">
+        <img src="projects/Thumbnail2.jpg" alt="نیروگاه خورشیدی مهر کرمان" class="project-image" loading="lazy" />
+        <div class="body">
+          <h2>مهر کرمان</h2>
+          <div class="location">کرمان</div>
+          <div class="specs">
+            <span>مسکونی</span>
+            <span>۱۴۰۵</span>
+          </div>
+          <p class="description">
+            تبدیل بخشی از روف‌گاردن یک ساختمان مسکونی به نیروگاه خورشیدی با ظرفیت ۹.۳ کیلووات پنل، سانورتر ۱۲ کیلووات و ۱۶ کیلووات‌ساعت ذخیره‌سازی.
+          </p>
+          <a href="projects/number2/project2.html" class="btn-detail">مشاهده جزئیات پروژه ←</a>
+        </div>
+      </div>
+
+      <!-- ===== PROJECT 1: SAYEBAN YAZD ===== -->
+      <div class="project-card">
+        <img src="projects/number1/Thumbnail.jpg" alt="نیروگاه خورشیدی سایه‌بان - یزد" class="project-image" loading="lazy" />
+        <div class="body">
+          <h2>نیروگاه خورشیدی سایه‌بان</h2>
+          <div class="location">یزد</div>
+          <div class="specs">
+            <span>Off-Grid</span>
+            <span>۱۴۰۵</span>
+          </div>
+          <p class="description">
+            طراحی و اجرای نیروگاه خورشیدی مستقل از شبکه (Off-Grid) با نصب ۱۳ پنل خورشیدی ۶۲۰ واتی Jinko، دو باتری لیتیومی ۵ کیلوواتی Marsriva و اینورتر Growatt.
+          </p>
+          <a href="projects/number1/project1.html" class="btn-detail">مشاهده جزئیات پروژه ←</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="projects-cta">
+      <h3>پروژه خود را به ما بسپارید</h3>
+      <p>برای دریافت مشاوره و برآورد پروژه خورشیدی خود با ما تماس بگیرید.</p>
+      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
