@@ -230,6 +230,7 @@
       border-radius: var(--radius);
       object-fit: contain;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      user-select: none;
     }
     .lightbox .close {
       position: absolute;
@@ -243,10 +244,51 @@
       line-height: 1;
       transition: var(--transition);
       font-weight: 300;
+      z-index: 2;
     }
     .lightbox .close:hover {
       color: var(--gray-200);
       transform: rotate(90deg);
+    }
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      z-index: 2;
+    }
+    .lightbox .nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .lightbox .nav.prev {
+      right: 20px;
+    }
+    .lightbox .nav.next {
+      left: 20px;
+    }
+    .lightbox .counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--white);
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 16px;
+      border-radius: 50px;
+      z-index: 2;
     }
 
     @media (max-width: 768px) {
@@ -288,6 +330,11 @@
       .lightbox .close {
         top: 16px;
         left: 20px;
+        font-size: 2rem;
+      }
+      .lightbox .nav {
+        width: 44px;
+        height: 44px;
         font-size: 2rem;
       }
     }
@@ -458,13 +505,13 @@
   <h2>گالری تصاویر</h2>
 
   <div class="project-gallery">
-    <img src="Gallery/1.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۱" onclick="openLightbox(this.src)" />
-    <img src="Gallery/2.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۲" onclick="openLightbox(this.src)" />
-    <img src="Gallery/3.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۳" onclick="openLightbox(this.src)" />
-    <img src="Gallery/4.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۴" onclick="openLightbox(this.src)" />
-    <img src="Gallery/5.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۵" onclick="openLightbox(this.src)" />
-    <img src="Gallery/6.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۶" onclick="openLightbox(this.src)" />
-    <img src="Gallery/7.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۷" onclick="openLightbox(this.src)" />
+    <img src="Gallery/1.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۱" />
+    <img src="Gallery/2.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۲" />
+    <img src="Gallery/3.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۳" />
+    <img src="Gallery/4.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۴" />
+    <img src="Gallery/5.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۵" />
+    <img src="Gallery/6.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۶" />
+    <img src="Gallery/7.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۷" />
   </div>
 
   <div class="cta-end">
@@ -476,7 +523,8 @@
   <div class="related-projects">
     <h3>پروژه‌های مرتبط</h3>
     <ul>
-      <li><a href="../number1/project1.html">تبدیل سایه‌بان خودرو به نیروگاه خورشیدی – یزد</a></li>
+      <li><a href="../number1/project1.html">نیروگاه خورشیدی سایه‌بان – یزد</a></li>
+      <li><a href="../number3/project3.html">نیروگاه خورشیدی صفا – مزرعه</a></li>
     </ul>
   </div>
 
@@ -493,22 +541,91 @@
 </footer>
 
 <!-- ===== LIGHTBOX ===== -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <button class="close" onclick="closeLightbox()">✕</button>
+  <button class="nav prev" onclick="showPrev(event)">‹</button>
   <img id="lightboxImg" src="" alt="تصویر بزرگ‌شده" />
+  <button class="nav next" onclick="showNext(event)">›</button>
+  <div class="counter" id="lightboxCounter"></div>
 </div>
 
 <script>
-  function openLightbox(src) {
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightbox').classList.add('open');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const galleryImages = document.querySelectorAll('.project-gallery img');
+  let currentIndex = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  // Attach click handlers to gallery images
+  galleryImages.forEach((img, i) => {
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
+    lightbox.classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  function showNext(e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    updateLightbox();
+  }
+
+  function showPrev(e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    lightboxImg.src = galleryImages[currentIndex].src;
+    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+  }
+
+  // Close when clicking the background (not the image or buttons)
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Swipe support
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const threshold = 50;
+    const diff = touchStartX - touchEndX;
+    if (diff > threshold) {
+      // Swiped left → next
+      showNext();
+    } else if (diff < -threshold) {
+      // Swiped right → prev
+      showPrev();
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') showNext();
+    if (e.key === 'ArrowRight') showPrev();
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 
 <script src="../../../script.js"></script>

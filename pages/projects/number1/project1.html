@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>تبدیل سایه‌بان خودرو به نیروگاه خورشیدی | برق‌آوران هوراد</title>
+  <title>نیروگاه خورشیدی سایه‌بان | یزد | برق‌آوران هوراد</title>
   <meta name="description" content="پروژه تبدیل سایه‌بان خودرو به نیروگاه خورشیدی Off-Grid با ۱۳ پنل Jinko، ۲ باتری Marsriva و اینورتر Growatt در یزد" />
   <link rel="stylesheet" href="../../../style.css" />
   <style>
@@ -17,6 +17,12 @@
       color: var(--secondary);
       max-width: 800px;
       line-height: 1.3;
+    }
+    .project-detail-header .subtitle {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
     }
     .project-detail-header .meta {
       color: var(--text-light);
@@ -84,58 +90,67 @@
       color: var(--primary-dark);
     }
 
-    .project-image {
+    .project-image-full {
       width: 100%;
       border-radius: var(--radius);
-      margin: 16px 0;
+      margin: 24px 0;
       display: block;
     }
-
-    .project-image.vertical-scaled {
-      max-width: 55%;
-      margin: 16px auto;
-      display: block;
+    .project-image-smaller {
+      max-width: 60%;
+      margin: 24px auto;
     }
 
     .project-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin: 16px 0;
+      margin: 24px 0;
     }
     .project-gallery img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
       border-radius: var(--radius);
       display: block;
-      transition: var(--transition);
       cursor: pointer;
+      transition: var(--transition);
     }
     .project-gallery img:hover {
       transform: scale(1.02);
       box-shadow: var(--shadow);
     }
 
-    .specs-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 24px;
+    .project-specs {
       background: var(--gray-100);
-      padding: 20px 24px;
+      padding: 24px 28px;
       border-radius: var(--radius);
-      margin: 20px 0;
+      margin: 24px 0;
     }
-    .specs-grid .item {
+    .project-specs h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-200);
       font-size: 0.95rem;
     }
-    .specs-grid .item .label {
-      color: var(--text-light);
-      font-size: 0.8rem;
+    .spec-row:last-child {
+      border-bottom: none;
     }
-    .specs-grid .item .value {
-      font-weight: 600;
+    .spec-row .label {
+      color: var(--text-light);
+    }
+    .spec-row .value {
       color: var(--secondary);
+      font-weight: 600;
+      text-align: left;
     }
 
     .related-projects {
@@ -165,7 +180,6 @@
     .related-projects ul li a:hover {
       text-decoration: underline;
     }
-
     .cta-end {
       text-align: center;
       margin-top: 40px;
@@ -207,6 +221,7 @@
       border-radius: var(--radius);
       object-fit: contain;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      user-select: none;
     }
     .lightbox .close {
       position: absolute;
@@ -220,15 +235,59 @@
       line-height: 1;
       transition: var(--transition);
       font-weight: 300;
+      z-index: 2;
     }
     .lightbox .close:hover {
       color: var(--gray-200);
       transform: rotate(90deg);
     }
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      z-index: 2;
+    }
+    .lightbox .nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .lightbox .nav.prev {
+      right: 20px;
+    }
+    .lightbox .nav.next {
+      left: 20px;
+    }
+    .lightbox .counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--white);
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 16px;
+      border-radius: 50px;
+      z-index: 2;
+    }
 
     @media (max-width: 768px) {
       .project-detail-header h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+      }
+      .project-detail-header .subtitle {
+        font-size: 1rem;
       }
       .project-detail-body {
         padding: 24px 16px 60px;
@@ -244,12 +303,8 @@
         font-size: 0.95rem;
         padding-right: 16px;
       }
-      .specs-grid {
-        grid-template-columns: 1fr;
-        padding: 16px 18px;
-      }
-      .project-image.vertical-scaled {
-        max-width: 80%;
+      .project-image-smaller {
+        max-width: 90%;
       }
       .project-gallery {
         grid-template-columns: repeat(2, 1fr);
@@ -265,17 +320,22 @@
         left: 20px;
         font-size: 2rem;
       }
+      .lightbox .nav {
+        width: 44px;
+        height: 44px;
+        font-size: 2rem;
+      }
     }
 
     @media (max-width: 480px) {
       .project-detail-header h1 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
       }
-      .project-detail-body {
-        padding: 16px 12px 40px;
+      .project-specs {
+        padding: 16px 18px;
       }
-      .project-image.vertical-scaled {
-        max-width: 100%;
+      .spec-row {
+        font-size: 0.85rem;
       }
       .project-gallery {
         grid-template-columns: 1fr 1fr;
@@ -320,9 +380,10 @@
 <section class="project-detail-header">
   <div class="container">
     <a href="../../projects.html" class="project-back">← بازگشت به پروژه‌ها</a>
+    <div class="subtitle">نیروگاه خورشیدی سایه‌بان | یزد</div>
     <h1>تبدیل سایه‌بان خودرو به نیروگاه خورشیدی</h1>
     <div class="meta">
-      <span>یزد، بلوار جمهوری</span>
+      <span>یزد</span>
       <span>Off-Grid</span>
       <span>۱۴۰۵</span>
     </div>
@@ -342,7 +403,7 @@
     هدف پروژه، استفاده بهینه از فضای موجود برای محافظت از خودرو، تولید و ذخیره انرژی و تأمین برق مورد نیاز ساختمان بود. همچنین امکان شارژ خودروی پلاگین‌هیبرید با استفاده از انرژی خورشیدی فراهم شد.
   </p>
 
-  <img src="theFullProdo.jpg" alt="نمای کلی سایه‌بان و حیاط" class="project-image" />
+  <img src="theFullProdo.jpg" alt="نمای کلی سایه‌بان و حیاط" class="project-image-full" />
 
   <h2>راهکار برق‌آوران هوراد</h2>
 
@@ -350,34 +411,35 @@
     در این پروژه، مجموعه برق‌آوران هوراد طراحی و اجرای کامل سیستم را بر عهده داشت؛ از طراحی سازه و سیستم خورشیدی تا تأمین تجهیزات، نصب، اجرای زیرساخت‌های الکتریکی و راه‌اندازی نهایی.
   </p>
 
-  <img src="AboveAngleOfThePanels.jpg" alt="نمای بالای پنل‌های نصب شده" class="project-image" />
+  <img src="AboveAngleOfThePanels.jpg" alt="نمای بالای پنل‌های نصب شده" class="project-image-full" />
 
   <h2>مشخصات سیستم</h2>
 
-  <div class="specs-grid">
-    <div class="item">
-      <div class="label">ظرفیت پنل‌ها</div>
-      <div class="value">۸.۰۶ کیلووات</div>
+  <div class="project-specs">
+    <h3>اطلاعات فنی</h3>
+    <div class="spec-row">
+      <span class="label">ظرفیت پنل‌ها</span>
+      <span class="value">۸.۰۶ کیلووات</span>
     </div>
-    <div class="item">
-      <div class="label">پنل خورشیدی</div>
-      <div class="value">۱۳ عدد Jinko ۶۲۰ وات</div>
+    <div class="spec-row">
+      <span class="label">پنل خورشیدی</span>
+      <span class="value">۱۳ عدد Jinko ۶۲۰ وات</span>
     </div>
-    <div class="item">
-      <div class="label">اینورتر</div>
-      <div class="value">Growatt SPF 12000 Hybrid</div>
+    <div class="spec-row">
+      <span class="label">اینورتر</span>
+      <span class="value">Growatt SPF 12000 Hybrid</span>
     </div>
-    <div class="item">
-      <div class="label">باتری</div>
-      <div class="value">۲ عدد Marsriva ۵ کیلووات‌ساعت</div>
+    <div class="spec-row">
+      <span class="label">باتری</span>
+      <span class="value">۲ عدد Marsriva ۵ کیلووات‌ساعت</span>
     </div>
-    <div class="item">
-      <div class="label">نوع سیستم</div>
-      <div class="value">Off-Grid</div>
+    <div class="spec-row">
+      <span class="label">نوع سیستم</span>
+      <span class="value">Off-Grid</span>
     </div>
   </div>
 
-  <img src="BAI.jpg" alt="تصویر باتری‌ها و اینورتر" class="project-image vertical-scaled" />
+  <img src="BAI.jpg" alt="تصویر باتری‌ها و اینورتر" class="project-image-full project-image-smaller" />
 
   <h2>نتیجه پروژه</h2>
 
@@ -389,22 +451,17 @@
     این پروژه نمونه‌ای از رویکرد برق‌آوران هوراد در طراحی سیستم‌های خورشیدی متناسب با فضا، نیاز و الگوی مصرف هر مشتری است.
   </p>
 
-  <img src="CarCharging.jpg" alt="خودروی پلاگین هیبرید در حال شارژ" class="project-image vertical-scaled" />
+  <img src="CarCharging.jpg" alt="خودروی پلاگین هیبرید در حال شارژ" class="project-image-full project-image-smaller" />
 
   <h2>گالری تصاویر</h2>
 
   <div class="project-gallery">
-    <img src="Gallery/1.jpg" alt="تصویر گالری ۱" onclick="openLightbox(this.src)" />
-    <img src="Gallery/2.jpg" alt="تصویر گالری ۲" onclick="openLightbox(this.src)" />
-    <img src="Gallery/3.jpg" alt="تصویر گالری ۳" onclick="openLightbox(this.src)" />
-    <img src="Gallery/4.jpg" alt="تصویر گالری ۴" onclick="openLightbox(this.src)" />
-    <img src="Gallery/5.jpg" alt="تصویر گالری ۵" onclick="openLightbox(this.src)" />
-    <img src="Gallery/6.jpg" alt="تصویر گالری ۶" onclick="openLightbox(this.src)" />
-  </div>
-
-  <div class="highlight-box">
-    <strong>شما هم می‌توانید از فضای موجود برای تولید انرژی استفاده کنید.</strong>
-    اگر در منزل، ویلا، کارگاه یا محل کسب خود فضای مناسبی برای نصب سیستم خورشیدی دارید، کارشناسان برق‌آوران هوراد می‌توانند متناسب با شرایط و نیاز شما، راهکار مناسب را طراحی و اجرا کنند.
+    <img src="Gallery/1.jpg" alt="نیروگاه خورشیدی سایه‌بان یزد - گالری ۱" />
+    <img src="Gallery/2.jpg" alt="نیروگاه خورشیدی سایه‌بان یزد - گالری ۲" />
+    <img src="Gallery/3.jpg" alt="نیروگاه خورشیدی سایه‌بان یزد - گالری ۳" />
+    <img src="Gallery/4.jpg" alt="نیروگاه خورشیدی سایه‌بان یزد - گالری ۴" />
+    <img src="Gallery/5.jpg" alt="نیروگاه خورشیدی سایه‌بان یزد - گالری ۵" />
+    <img src="Gallery/6.jpg" alt="نیروگاه خورشیدی سایه‌بان یزد - گالری ۶" />
   </div>
 
   <div class="cta-end">
@@ -412,10 +469,12 @@
     <a href="../../consultation.html" class="btn btn-primary">درخواست مشاوره</a>
   </div>
 
+  <!-- ===== RELATED PROJECTS ===== -->
   <div class="related-projects">
     <h3>پروژه‌های مرتبط</h3>
     <ul>
-      <li><a href="project1.html">تبدیل سایه‌بان خودرو به نیروگاه خورشیدی</a></li>
+      <li><a href="../number2/project2.html">مهر کرمان – نیروگاه خورشیدی مسکونی</a></li>
+      <li><a href="../number3/project3.html">نیروگاه خورشیدی صفا – مزرعه</a></li>
     </ul>
   </div>
 
@@ -432,22 +491,85 @@
 </footer>
 
 <!-- ===== LIGHTBOX ===== -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <button class="close" onclick="closeLightbox()">✕</button>
+  <button class="nav prev" onclick="showPrev(event)">‹</button>
   <img id="lightboxImg" src="" alt="تصویر بزرگ‌شده" />
+  <button class="nav next" onclick="showNext(event)">›</button>
+  <div class="counter" id="lightboxCounter"></div>
 </div>
 
 <script>
-  function openLightbox(src) {
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightbox').classList.add('open');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const galleryImages = document.querySelectorAll('.project-gallery img');
+  let currentIndex = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  galleryImages.forEach((img, i) => {
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
+    lightbox.classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  function showNext(e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    updateLightbox();
+  }
+
+  function showPrev(e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    lightboxImg.src = galleryImages[currentIndex].src;
+    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const threshold = 50;
+    const diff = touchStartX - touchEndX;
+    if (diff > threshold) {
+      showNext();
+    } else if (diff < -threshold) {
+      showPrev();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') showNext();
+    if (e.key === 'ArrowRight') showPrev();
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 
 <script src="../../../script.js"></script>
