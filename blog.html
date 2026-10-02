@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مقالات | دانشنامه انرژی خورشیدی | برق‌آوران هوراد</title>
+  <meta name="description" content="مقالات تخصصی آموزش انرژی خورشیدی، پنل‌های خورشیدی، اینورتر، باتری و راهنمای خرید تجهیزات" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .blog-header {
+      padding: 120px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+      text-align: center;
+    }
+    .blog-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .blog-header h1 span {
+      color: var(--primary);
+    }
+    .blog-header p {
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 8px auto 0;
+    }
+
+    .blog-archive {
+      padding: 48px 0 80px;
+      background: var(--white);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--gray-200);
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      border-color: var(--primary);
+    }
+    .blog-card__image {
+      height: 200px;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .blog-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+    .blog-card__image .no-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+    .blog-card__body {
+      padding: 20px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card__date {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .blog-card__title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .blog-card__title a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .blog-card__title a:hover {
+      color: var(--primary);
+    }
+    .blog-card__excerpt {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .blog-card__readmore {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .blog-card__readmore:hover {
+      gap: 12px;
+    }
+
+    .blog-empty {
+      text-align: center;
+      padding: 80px 0;
+      color: var(--text-light);
+    }
+    .blog-empty h3 {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .blog-header h1 {
+        font-size: 2rem;
+      }
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../index.html" class="navbar__logo">
+      <img src="../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../index.html">صفحه اصلی</a>
+      <a href="services.html">خدمات</a>
+      <a href="projects.html">پروژه‌ها</a>
+      <a href="shop.html">فروشگاه</a>
+      <a href="blog.html" class="active">مقالات</a>
+      <a href="about.html">درباره ما</a>
+      <a href="contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BLOG HEADER ===== -->
+<section class="blog-header">
+  <div class="container">
+    <h1>دانشنامه <span>انرژی خورشیدی</span></h1>
+    <p>مقالات تخصصی و آموزشی در حوزه انرژی خورشیدی، پنل، اینورتر و باتری</p>
+  </div>
+</section>
+
+<!-- ===== BLOG ARCHIVE ===== -->
+<section class="blog-archive">
+  <div class="container">
+    <div class="blog-grid" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">© ۱۴۰۵ تمامی حقوق محفوظ است.</p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  const articles = [
+    {
+      slug: "article1",
+      title: "برق خورشیدی چیست و چگونه کار می‌کند؟",
+      excerpt: "با افزایش مصرف انرژی و اهمیت تأمین برق پایدار، استفاده از انرژی خورشیدی به یکی از راهکارهای مهم برای تولید برق تبدیل شده است. در این مقاله با نحوه تولید برق خورشیدی و اجزای اصلی یک سیستم خورشیدی آشنا می‌شوید.",
+      date: "۱۴۰۵/۰۵/۱۵",
+      image: "articles/Thumbnails/1.jpg"
+    },
+    {
+      slug: "article2",
+      title: "انواع سیستم‌های خورشیدی",
+      excerpt: "سیستم‌های خورشیدی را می‌توان بر اساس نحوه ارتباط با شبکه برق و نحوه استفاده از انرژی تولیدشده به چند گروه اصلی تقسیم کرد. در این مقاله با سیستم‌های On-Grid، Off-Grid و Hybrid آشنا می‌شوید.",
+      date: "۱۴۰۵/۰۵/۲۵",
+      image: ""
+    },
+    {
+      slug: "article3",
+      title: "راهنمای خرید اینورتر خورشیدی",
+      excerpt: "اینورتر یکی از مهم‌ترین تجهیزات یک سیستم خورشیدی است. در این مقاله با نکات کلیدی برای انتخاب بهترین اینورتر متناسب با پروژه خود آشنا می‌شوید.",
+      date: "۱۴۰۵/۰۵/۲۵",
+      image: "articles/Thumbnails/3.jpg"
+    },
+    {
+      slug: "article4",
+      title: "راهنمای انتخاب ظرفیت پنل خورشیدی برای ساختمان مسکونی",
+      excerpt: "انتخاب ظرفیت مناسب پنل خورشیدی یکی از مهم‌ترین مراحل طراحی یک سیستم خورشیدی است. در این مقاله با نحوه محاسبه ظرفیت مناسب برای ساختمان خود آشنا می‌شوید.",
+      date: "۱۴۰۵/۰۵/۲۵",
+      image: ""
+    },
+    {
+      slug: "article5",
+      title: "چگونه ظرفیت باتری مورد نیاز واحد مسکونی را محاسبه کنیم؟",
+      excerpt: "در سیستم‌های خورشیدی مجهز به باتری، انتخاب ظرفیت مناسب باتری اهمیت زیادی دارد. در این مقاله با نحوه محاسبه ظرفیت باتری برای ساختمان مسکونی آشنا می‌شوید.",
+      date: "۱۴۰۵/۰۵/۲۵",
+      image: ""
+    },
+    {
+      slug: "article6",
+      title: "ارتباط باتری و اینورتر در سیستم‌های خورشیدی",
+      excerpt: "در سیستم‌های خورشیدی مجهز به باتری، اینورتر و باتری باید از نظر الکتریکی و کنترلی با یکدیگر هماهنگ باشند. در این مقاله با روش‌های ارتباط باتری و اینورتر آشنا می‌شوید.",
+      date: "۱۴۰۵/۰۵/۲۵",
+      image: ""
+    },
+    {
+      slug: "article7",
+      title: "وظیفه اینورتر در نیروگاه خورشیدی خانگی؛ مدیریت انرژی بین خورشید، باتری و شبکه",
+      excerpt: "در یک نیروگاه خورشیدی خانگی، اینورتر فقط وظیفه تبدیل برق DC به AC را ندارد؛ در سیستم‌های هیبریدی، اینورتر در واقع مرکز مدیریت انرژی بین سه منبع اصلی یعنی پنل خورشیدی، باتری و شبکه برق است.",
+      date: "۱۴۰۵/۰۵/۲۷",
+      image: ""
+    },
+    {
+      slug: "article8",
+      title: "برق اضطراری برای واحدهای مسکونی و تجاری",
+      excerpt: "قطع برق در خانه‌ها، فروشگاه‌ها و واحدهای تجاری می‌تواند باعث توقف فعالیت و خاموشی تجهیزات ضروری شود. یکی از راهکارهای مناسب برای رفع این مشکل، استفاده از اینورتر و باتری لیتیومی به‌عنوان سیستم برق اضطراری است.",
+      date: "۱۴۰۵/۰۵/۲۷",
+      image: ""
+    },
+    {
+      slug: "article9",
+      title: "نیروگاه خورشیدی برای کارگاه‌ها و واحدهای صنعتی کوچک",
+      excerpt: "کارگاه‌ها و واحدهای صنعتی کوچک معمولاً بخش قابل‌توجهی از مصرف برق خود را در ساعات کاری و طی روز دارند. استفاده از نیروگاه خورشیدی می‌تواند به کاهش وابستگی به شبکه و مدیریت بهتر هزینه انرژی کمک کند.",
+      date: "۱۴۰۵/۰۶/۰۴",
+      image: ""
+    }
+  ];
+
+  const grid = document.getElementById('blogGrid');
+
+  if (articles.length === 0) {
+    grid.innerHTML = `
+      <div class="blog-empty">
+        <h3>هنوز مقاله‌ای منتشر نشده است</h3>
+        <p>به زودی مقالات تخصصی در این بخش قرار خواهند گرفت.</p>
+      </div>
+    `;
+  } else {
+    articles.forEach(article => {
+      const card = document.createElement('div');
+      card.className = 'blog-card';
+
+      const imageHTML = article.image
+        ? `<img src="${article.image}" alt="${article.title}" loading="lazy" />`
+        : `<div class="no-image">انرژی خورشیدی</div>`;
+
+      card.innerHTML = `
+        <div class="blog-card__image">${imageHTML}</div>
+        <div class="blog-card__body">
+          <div class="blog-card__date">${article.date}</div>
+          <h2 class="blog-card__title">
+            <a href="articles/${article.slug}.html">${article.title}</a>
+          </h2>
+          <p class="blog-card__excerpt">${article.excerpt}</p>
+          <a href="articles/${article.slug}.html" class="blog-card__readmore">
+            مطالعه بیشتر ←
+          </a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+</script>
+</body>
+</html>
