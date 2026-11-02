@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نیروگاه خورشیدی مسکونی | کرمان | برق‌آوران هوراد</title>
+  <meta name="description" content="پروژه نیروگاه خورشیدی مسکونی در کرمان – ۹.۳ کیلووات پنل، سانورتر ۱۲ کیلووات، ۱۶ کیلووات‌ساعت ذخیره‌سازی" />
+  <link rel="stylesheet" href="../../../style.css" />
+  <style>
+    .project-detail-header {
+      padding: 140px 0 40px;
+      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+    }
+    .project-detail-header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--secondary);
+      max-width: 800px;
+      line-height: 1.3;
+    }
+    .project-detail-header .subtitle {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .project-detail-header .meta {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .project-detail-header .meta span {
+      background: var(--white);
+      padding: 4px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+    .project-detail-body {
+      padding: 48px 0 80px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .project-detail-body h2 {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+    .project-detail-body p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .project-detail-body ul {
+      margin: 16px 0 24px 0;
+      padding-right: 24px;
+      font-size: 1.05rem;
+      line-height: 2;
+    }
+    .project-detail-body ul li {
+      margin-bottom: 6px;
+    }
+    .project-detail-body strong {
+      color: var(--secondary);
+    }
+    .project-back {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .project-back:hover {
+      text-decoration: underline;
+    }
+    .highlight-box {
+      background: var(--primary-light);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border-right: 4px solid var(--primary);
+      margin: 24px 0;
+    }
+    .highlight-box strong {
+      color: var(--primary-dark);
+    }
+
+    .project-image-full {
+      width: 100%;
+      border-radius: var(--radius);
+      margin: 24px 0;
+      display: block;
+    }
+    .project-image-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .project-image-pair img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .project-gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .project-gallery img:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow);
+    }
+
+    .project-specs {
+      background: var(--gray-100);
+      padding: 24px 28px;
+      border-radius: var(--radius);
+      margin: 24px 0;
+    }
+    .project-specs h3 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 0.95rem;
+    }
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+    .spec-row .label {
+      color: var(--text-light);
+    }
+    .spec-row .value {
+      color: var(--secondary);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .related-projects {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .related-projects h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+    .related-projects ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .related-projects ul li {
+      margin-bottom: 8px;
+    }
+    .related-projects ul li a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .related-projects ul li a:hover {
+      text-decoration: underline;
+    }
+    .cta-end {
+      text-align: center;
+      margin-top: 40px;
+      padding: 32px 24px;
+      background: var(--gray-100);
+      border-radius: var(--radius);
+    }
+    .cta-end h3 {
+      font-size: 1.4rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+    .cta-end p {
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: var(--radius);
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      user-select: none;
+    }
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 2.5rem;
+      color: var(--white);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      transition: var(--transition);
+      font-weight: 300;
+      z-index: 2;
+    }
+    .lightbox .close:hover {
+      color: var(--gray-200);
+      transform: rotate(90deg);
+    }
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      z-index: 2;
+    }
+    .lightbox .nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .lightbox .nav.prev {
+      right: 20px;
+    }
+    .lightbox .nav.next {
+      left: 20px;
+    }
+    .lightbox .counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--white);
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 16px;
+      border-radius: 50px;
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .project-detail-header h1 {
+        font-size: 1.6rem;
+      }
+      .project-detail-header .subtitle {
+        font-size: 1rem;
+      }
+      .project-detail-body {
+        padding: 24px 16px 60px;
+      }
+      .project-detail-body h2 {
+        font-size: 1.4rem;
+      }
+      .project-detail-body p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+      .project-detail-body ul {
+        font-size: 0.95rem;
+        padding-right: 16px;
+      }
+      .project-image-pair {
+        grid-template-columns: 1fr;
+      }
+      .project-image-pair img {
+        height: 400px;
+      }
+      .project-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .project-gallery img {
+        height: 140px;
+      }
+      .lightbox {
+        padding: 20px;
+      }
+      .lightbox .close {
+        top: 16px;
+        left: 20px;
+        font-size: 2rem;
+      }
+      .lightbox .nav {
+        width: 44px;
+        height: 44px;
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-detail-header h1 {
+        font-size: 1.3rem;
+      }
+      .project-image-pair img {
+        height: 300px;
+      }
+      .project-specs {
+        padding: 16px 18px;
+      }
+      .spec-row {
+        font-size: 0.85rem;
+      }
+      .project-gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+      .project-gallery img {
+        height: 120px;
+      }
+      .lightbox {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="container navbar__wrapper">
+    <a href="../../../index.html" class="navbar__logo">
+      <img src="../../../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
+      <span class="logo-text">هوراد</span>
+    </a>
+    <nav class="navbar__links" id="navbarLinks">
+      <a href="../../../index.html">صفحه اصلی</a>
+      <a href="../../services.html">خدمات</a>
+      <a href="../../projects.html" class="active">پروژه‌ها</a>
+      <a href="../../shop.html">فروشگاه</a>
+      <a href="../../blog.html">مقالات</a>
+      <a href="../../about.html">درباره ما</a>
+      <a href="../../contact.html">تماس با ما</a>
+    </nav>
+    <div class="navbar__actions">
+      <a href="../../consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HEADER ===== -->
+<section class="project-detail-header">
+  <div class="container">
+    <a href="../../projects.html" class="project-back">← بازگشت به پروژه‌ها</a>
+    <div class="subtitle">نیروگاه خورشیدی مسکونی | کرمان</div>
+    <h1>تبدیل بخشی از روف‌گاردن به نیروگاه خورشیدی</h1>
+    <div class="meta">
+      <span>کرمان</span>
+      <span>مسکونی</span>
+      <span>۹.۳ کیلووات</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<article class="project-detail-body container">
+
+  <p>
+    در این پروژه، بخشی از فضای روف‌گاردن یک ساختمان مسکونی در کرمان، با طراحی و اجرای یک سایه‌بان خورشیدی به فضای تولید و ذخیره انرژی تبدیل شد.
+  </p>
+
+  <p>
+    این سیستم با ظرفیت ۹.۳ کیلووات پنل خورشیدی، سانورتر ۱۲ کیلووات و ۱۶ کیلووات‌ساعت ظرفیت ذخیره‌سازی طراحی و اجرا شده است.
+  </p>
+
+  <div class="project-image-pair">
+    <img src="image1.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - تصویر ۱" />
+    <img src="image2.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - تصویر ۲" />
+  </div>
+
+  <h2>تأمین برق بخش عمده نیازهای ساختمان</h2>
+
+  <p>
+    طراحی سیستم بر اساس الگوی مصرف واقعی ساختمان انجام شده و نیروگاه خورشیدی برق طیف گسترده‌ای از مصرف‌کننده‌های ساختمان را تأمین می‌کند؛ از جمله:
+  </p>
+
+  <ul>
+    <li>تجهیزات سرمایشی شامل کولرهای آبی و اسپیلت</li>
+    <li>پمپ‌های تصفیه استخر</li>
+    <li>پمپ‌های آب ساختمان</li>
+    <li>درب برقی پارکینگ</li>
+    <li>سایر مصارف الکتریکی ساختمان</li>
+    <li>شارژ خودروی برقی</li>
+  </ul>
+
+  <img src="image3.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - تصویر ۳" class="project-image-full" />
+
+  <p>
+    یکی از ویژگی‌های این پروژه، امکان شارژ خودروی برقی با استفاده از انرژی تولیدشده توسط نیروگاه خورشیدی است؛ به این ترتیب، انرژی مورد نیاز خودرو نیز بخشی از سیستم مدیریت انرژی ساختمان تأمین می‌شود.
+  </p>
+
+  <div class="highlight-box">
+    <strong>نکته:</strong> تنها آسانسور ساختمان به دلیل سه‌فاز بودن و عدم امکان اتصال به این سیستم، خارج از مدار نیروگاه خورشیدی قرار گرفته است.
+  </div>
+
+  <img src="image4.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - تصویر ۴" class="project-image-full" />
+
+  <h2>طراحی توسعه‌پذیر</h2>
+
+  <p>
+    این سیستم از ابتدا با رویکرد توسعه‌پذیری و امکان افزایش ظرفیت در آینده طراحی شده است. با افزایش نیاز مصرف‌کننده، امکان ارتقای ظرفیت تولید خورشیدی و توسعه بخش‌های مختلف سیستم، از جمله افزایش ظرفیت باتری‌های ذخیره‌ساز و ارتقای ظرفیت سانورتر، متناسب با شرایط فنی پروژه وجود دارد.
+  </p>
+
+  <p>
+    این ویژگی به کارفرما اجازه می‌دهد بدون نیاز به جایگزینی کامل سیستم، ظرفیت نیروگاه را همگام با افزایش مصرف و نیازهای آینده توسعه دهد.
+  </p>
+
+  <img src="image5.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - تصویر ۵" class="project-image-full" />
+
+  <h2>طراحی متناسب با فضای موجود</h2>
+
+  <p>
+    سازه نیروگاه به‌صورت اختصاصی طراحی و اجرا شده و در بخشی از روف‌گاردن به شکل سایه‌بان خورشیدی قرار گرفته است. به این ترتیب، فضای موجود بدون ایجاد کاربری جدید، هم برای تولید انرژی و هم به‌عنوان سایه‌بان مورد استفاده قرار گرفته است.
+  </p>
+
+  <p>
+    این پروژه نمونه‌ای از رویکرد برق‌آوران هوراد در طراحی راهکارهای خورشیدی متناسب با شرایط واقعی ساختمان است؛ راهکاری که در آن ظرفیت نیروگاه، ذخیره‌سازی انرژی، فضای نصب، الگوی مصرف و نیازهای آینده در کنار یکدیگر در نظر گرفته می‌شوند.
+  </p>
+
+  <img src="image6.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - تصویر ۶" class="project-image-full" />
+
+  <h2>مشخصات پروژه</h2>
+
+  <div class="project-specs">
+    <h3>اطلاعات فنی</h3>
+    <div class="spec-row">
+      <span class="label">محل اجرا</span>
+      <span class="value">کرمان</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">کاربری</span>
+      <span class="value">مسکونی</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">ظرفیت اسمی نیروگاه</span>
+      <span class="value">۹.۳ کیلووات</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">ظرفیت سانورتر</span>
+      <span class="value">۱۲ کیلووات</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">ظرفیت ذخیره‌سازی</span>
+      <span class="value">۱۶ کیلووات‌ساعت</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">نوع سازه</span>
+      <span class="value">سایه‌بان خورشیدی، طراحی و ساخته‌شده متناسب با روف‌گاردن</span>
+    </div>
+  </div>
+
+  <h2>گالری تصاویر</h2>
+
+  <div class="project-gallery">
+    <img src="Gallery/1.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۱" />
+    <img src="Gallery/2.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۲" />
+    <img src="Gallery/3.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۳" />
+    <img src="Gallery/4.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۴" />
+    <img src="Gallery/5.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۵" />
+    <img src="Gallery/6.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۶" />
+    <img src="Gallery/7.jpg" alt="نیروگاه خورشیدی مسکونی کرمان - گالری ۷" />
+  </div>
+
+  <div class="cta-end">
+    <h3>برای دریافت مشاوره و بررسی پروژه با ما در تماس باشید.</h3>
+    <a href="../../consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+  </div>
+
+  <!-- ===== RELATED PROJECTS ===== -->
+  <div class="related-projects">
+    <h3>پروژه‌های مرتبط</h3>
+    <ul>
+      <li><a href="../number1/project1.html">نیروگاه خورشیدی سایه‌بان – یزد</a></li>
+      <li><a href="../number3/project3.html">نیروگاه خورشیدی صفا – مزرعه</a></li>
+    </ul>
+  </div>
+
+</article>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی کوچک‌مقیاس</p>
+    <p style="font-size:0.85rem; opacity:0.6; margin-top:12px;">
+      © ۱۴۰۵ تمامی حقوق محفوظ است.
+    </p>
+  </div>
+</footer>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="close" onclick="closeLightbox()">✕</button>
+  <button class="nav prev" onclick="showPrev(event)">‹</button>
+  <img id="lightboxImg" src="" alt="تصویر بزرگ‌شده" />
+  <button class="nav next" onclick="showNext(event)">›</button>
+  <div class="counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const galleryImages = document.querySelectorAll('.project-gallery img');
+  let currentIndex = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  // Attach click handlers to gallery images
+  galleryImages.forEach((img, i) => {
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showNext(e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    updateLightbox();
+  }
+
+  function showPrev(e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    lightboxImg.src = galleryImages[currentIndex].src;
+    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+  }
+
+  // Close when clicking the background (not the image or buttons)
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Swipe support
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const threshold = 50;
+    const diff = touchStartX - touchEndX;
+    if (diff > threshold) {
+      // Swiped left → next
+      showNext();
+    } else if (diff < -threshold) {
+      // Swiped right → prev
+      showPrev();
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') showNext();
+    if (e.key === 'ArrowRight') showPrev();
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+<script src="../../../script.js"></script>
+</body>
+</html>
