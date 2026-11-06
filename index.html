@@ -8,7 +8,7 @@
   <style>
     /* ===== NEW PREMIUM PALETTE ===== */
     :root {
-      --bg-color: #FFFFFF; /* Changed to pure white */
+      --bg-color: #FFFFFF; 
       --text-main: #111111;
       --text-muted: #666666;
       --accent: #7DA69D;
@@ -280,17 +280,53 @@
     .edu-layout {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 120px;
+      gap: 80px;
       align-items: center;
     }
-    .edu-num {
-      font-size: 12rem;
-      font-weight: 300;
-      color: var(--accent);
-      line-height: 1;
-      opacity: 0.3;
-      font-family: 'VT323', monospace;
+
+    /* ===== THE CINEMATIC ICON REVEAL ===== */
+       .edu-icon {
+      width: 100%;
+      max-width: 350px; 
+      height: auto;
+      object-fit: contain;
+      opacity: 0; 
+      
+      /* Smoothly shifts the yellow to a clean green */
+      filter: sepia(1) hue-rotate(60deg) saturate(1.5) brightness(0.9);
+      
+      animation: 
+        cinematic-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+        float-icon 6s ease-in-out 1.2s infinite; 
     }
+
+    @keyframes cinematic-reveal {
+      0% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.8);
+        filter: sepia(1) hue-rotate(60deg) saturate(1.5) brightness(0.9) drop-shadow(0 0 0 transparent);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(10px) scale(1.05); 
+        /* Soft green flash */
+        filter: sepia(1) hue-rotate(60deg) saturate(1.5) brightness(1.1) drop-shadow(0 0 40px rgba(15, 139, 58, 0.5)); 
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        /* Settles into a subtle green drop shadow */
+        filter: sepia(1) hue-rotate(60deg) saturate(1.5) brightness(0.9) drop-shadow(0 30px 40px rgba(0, 0, 0, 0.1));
+      }
+    }
+
+    @keyframes float-icon {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+        
+
     .edu-content .meta-tag {
       font-size: 0.9rem;
       color: var(--accent);
@@ -385,8 +421,9 @@
       .hero-new h1 { font-size: 5rem; }
       .intro-grid { gap: 60px; }
       .services-grid-new { gap: 40px; }
-      .edu-layout { gap: 60px; }
+      .edu-layout { gap: 40px; }
       .edu-content h2 { font-size: 3rem; }
+      .edu-icon { max-width: 280px; }
     }
     @media (max-width: 992px) {
       .hero-new h1 { font-size: 4rem; }
@@ -398,8 +435,10 @@
       .project-card-min .img-wrapper { height: 280px; }
       .projects-header-wrap { flex-direction: column; align-items: flex-start; gap: 32px; }
       
-      .edu-layout { grid-template-columns: 1fr; gap: 32px; }
-      .edu-num { font-size: 6rem; }
+      .edu-layout { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .edu-icon { max-width: 220px; }
+      .edu-content p { margin-left: auto; margin-right: auto; }
+      .edu-content h2 { font-size: 2.5rem; }
       
       .intro-section, .services-new, .projects-preview, .edu-block, .cta-section {
         padding: 120px 0;
@@ -540,6 +579,14 @@
         <h3>نیروگاه خورشیدی صفا</h3>
         <span>مزرعه | Off-Grid</span>
       </a>
+      
+      <a href="pages/projects/number4/project4.html" class="project-card-min">
+        <div class="img-wrapper">
+          <img src="pages/projects/Thumbnail4.jpg" alt="نیروگاه خورشیدی آفتاب کوهسار" />
+        </div>
+        <h3>نیروگاه خورشیدی آفتاب کوهسار</h3>
+        <span>یزد | مسکونی</span>
+      </a>
 
     </div>
   </div>
@@ -548,9 +595,11 @@
 <!-- ===== EDUCATIONAL FUNNEL - SECTION 01 ===== -->
 <section class="edu-block">
   <div class="container">
-    <div class="edu-layout reveal">
-      <div class="edu-num">01</div>
-      <div class="edu-content">
+    <div class="edu-layout">
+      <div class="edu-icon-wrap">
+        <img src="assets/images/icon1.svg" alt="آیکون ۱" class="edu-icon" />
+      </div>
+      <div class="edu-content reveal">
         <h2>پنل خورشیدی چیست؟</h2>
         <p>پنل‌های خورشیدی (فتوولتائیک) نور خورشید را دریافت کرده و با استفاده از مواد نیمه‌رسانا (عمدتاً سیلیکون) آن را مستقیماً به جریان برق مستقیم (DC) تبدیل می‌کنند. این پنل‌ها قلب تپنده هر نیروگاه خورشیدی هستند و بدون نیاز به قطعات متحرک، سال‌ها انرژی پاک تولید می‌کنند.</p>
       </div>
@@ -561,9 +610,11 @@
 <!-- ===== EDUCATIONAL FUNNEL - SECTION 02 ===== -->
 <section class="edu-block">
   <div class="container">
-    <div class="edu-layout reveal">
-      <div class="edu-num">02</div>
-      <div class="edu-content">
+    <div class="edu-layout">
+      <div class="edu-icon-wrap">
+        <img src="assets/images/icon2.svg" alt="آیکون ۲" class="edu-icon" />
+      </div>
+      <div class="edu-content reveal">
         <h2>برق چگونه تولید می‌شود؟</h2>
         <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی اضافی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
       </div>
@@ -574,9 +625,11 @@
 <!-- ===== EDUCATIONAL FUNNEL - SECTION 03 (ARTICLE 1) ===== -->
 <section class="edu-block">
   <div class="container">
-    <div class="edu-layout reveal">
-      <div class="edu-num">03</div>
-      <div class="edu-content">
+    <div class="edu-layout">
+      <div class="edu-icon-wrap">
+        <img src="assets/images/icon3.svg" alt="آیکون ۳" class="edu-icon" />
+      </div>
+      <div class="edu-content reveal">
         <div class="meta-tag">آموزش</div>
         <h2>برق خورشیدی چیست و چگونه کار می‌کند؟</h2>
         <p>با افزایش مصرف انرژی و اهمیت تأمین برق پایدار، استفاده از انرژی خورشیدی به یکی از راهکارهای مهم برای تولید برق تبدیل شده است. در این مقاله با نحوه تولید برق خورشیدی، اجزای اصلی یک سیستم خورشیدی شامل پنل، اینورتر، باتری و تجهیزات جانبی آشنا می‌شوید.</p>
@@ -592,9 +645,11 @@
 <!-- ===== EDUCATIONAL FUNNEL - SECTION 04 (ARTICLE 2) ===== -->
 <section class="edu-block">
   <div class="container">
-    <div class="edu-layout reveal">
-      <div class="edu-num">04</div>
-      <div class="edu-content">
+    <div class="edu-layout">
+      <div class="edu-icon-wrap">
+        <img src="assets/images/icon4.svg" alt="آیکون ۴" class="edu-icon" />
+      </div>
+      <div class="edu-content reveal">
         <div class="meta-tag">راهنمای خرید</div>
         <h2>راهنمای خرید اینورتر خورشیدی</h2>
         <p>اینورتر یکی از مهم‌ترین تجهیزات یک سیستم خورشیدی است. پنل‌ها برق DC تولید می‌کنند و اینورتر آن را به برق AC مورد استفاده تجهیزات ساختمان تبدیل می‌کند. در این مقاله با نکات کلیدی برای انتخاب بهترین اینورتر متناسب با پروژه خود آشنا می‌شوید.</p>
@@ -610,9 +665,11 @@
 <!-- ===== EDUCATIONAL FUNNEL - SECTION 05 (ARTICLE 3) ===== -->
 <section class="edu-block">
   <div class="container">
-    <div class="edu-layout reveal">
-      <div class="edu-num">05</div>
-      <div class="edu-content">
+    <div class="edu-layout">
+      <div class="edu-icon-wrap">
+        <img src="assets/images/icon5.svg" alt="آیکون ۵" class="edu-icon" />
+      </div>
+      <div class="edu-content reveal">
         <div class="meta-tag">برق اضطراری</div>
         <h2>برق اضطراری برای واحدهای مسکونی و تجاری</h2>
         <p>قطع برق در خانه‌ها، فروشگاه‌ها و واحدهای تجاری می‌تواند باعث توقف فعالیت و خاموشی تجهیزات ضروری شود. یکی از راهکارهای مناسب برای رفع این مشکل، استفاده از اینورتر و باتری لیتیومی به‌عنوان سیستم برق اضطراری است. در این مقاله با نحوه عملکرد این سیستم‌ها آشنا می‌شوید.</p>
@@ -628,9 +685,11 @@
 <!-- ===== EDUCATIONAL FUNNEL - SECTION 06 (ALL ARTICLES) ===== -->
 <section class="edu-block">
   <div class="container">
-    <div class="edu-layout reveal">
-      <div class="edu-num">06</div>
-      <div class="edu-content">
+    <div class="edu-layout">
+      <div class="edu-icon-wrap">
+        <img src="assets/images/icon6.svg" alt="آیکون ۶" class="edu-icon" />
+      </div>
+      <div class="edu-content reveal">
         <h2>می‌خواهید بیشتر بدانید؟</h2>
         <p>ما در بخش مقالات، دانشنامه کاملی درباره انواع سیستم‌ها، باتری‌ها، اینورترها و نحوه طراحی نیروگاه‌های خورشیدی آماده کرده‌ایم. اگر می‌خواهید قبل از شروع پروژه، شناخت کامل‌تری داشته باشید، به دانشنامه ما سر بزنید.</p>
         <a href="pages/blog.html" class="btn-funnel" style="background: var(--text-main);">
