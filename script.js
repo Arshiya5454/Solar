@@ -1,19 +1,31 @@
+// ===== CLOUDFLARE WEB ANALYTICS =====
+(function() {
+    var script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    // Correct token string applied here
+    script.setAttribute('data-cf-beacon', '{"token": "6073f4a2c524435abad9e3b2bb1a0f96"}');
+    document.head.appendChild(script);
+})();
+
 // ===== MOBILE MENU TOGGLE =====
 const menuToggle = document.getElementById('menuToggle');
 const navbarLinks = document.getElementById('navbarLinks');
 
-menuToggle.addEventListener('click', () => {
-  navbarLinks.classList.toggle('open');
-  menuToggle.classList.toggle('active');
-});
-
-// Close menu on link click (mobile)
-document.querySelectorAll('.navbar__links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navbarLinks.classList.remove('open');
-    menuToggle.classList.remove('active');
+if (menuToggle && navbarLinks) {
+  menuToggle.addEventListener('click', () => {
+    navbarLinks.classList.toggle('open');
+    menuToggle.classList.toggle('active');
   });
-});
+
+  // Close menu on link click (mobile)
+  document.querySelectorAll('.navbar__links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navbarLinks.classList.remove('open');
+      menuToggle.classList.remove('active');
+    });
+  });
+}
 
 // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -29,10 +41,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===== STICKY NAVBAR SHADOW ON SCROLL =====
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.navbar');
-  if (window.scrollY > 50) {
-    navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.08)';
-  } else {
-    navbar.style.boxShadow = 'none';
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.08)';
+    } else {
+      navbar.style.boxShadow = 'none';
+    }
   }
 });
 
