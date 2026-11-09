@@ -22,38 +22,13 @@
       font-family: var(--font);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      position: relative;
-    }
-
-    /* ===== THE GROWING VINES BACKGROUND ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.08; /* Toned down to be elegant */
-      pointer-events: none;
-      
-      /* Procedural vine SVG */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300' viewBox='0 0 200 300'%3E%3Cpath d='M10,0 Q40,80 10,150 T20,300' fill='none' stroke='%237DA69D' stroke-width='2'/%3E%3Cpath d='M10,80 Q40,70 50,90 Q30,100 10,80' fill='%237DA69D'/%3E%3Cpath d='M15,200 Q45,190 55,210 Q35,220 15,200' fill='%237DA69D'/%3E%3Cpath d='M190,0 Q160,100 180,200 T170,300' fill='none' stroke='%237DA69D' stroke-width='2'/%3E%3Cpath d='M180,50 Q150,40 140,60 Q160,70 180,50' fill='%237DA69D'/%3E%3Cpath d='M175,150 Q145,140 135,160 Q155,170 175,150' fill='%237DA69D'/%3E%3Cpath d='M100,0 Q120,150 90,250 T110,300' fill='none' stroke='%237DA69D' stroke-width='1'/%3E%3Cpath d='M105,100 Q135,90 145,110 Q125,120 105,100' fill='%237DA69D'/%3E%3C/svg%3E");
-      background-size: 300px 450px;
-      
-      animation: grow-vines 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes grow-vines {
-      0% { transform: scale(1) translateY(0); background-position: 0 0; }
-      100% { transform: scale(1.05) translateY(-20px); background-position: 0 -50px; }
     }
 
     /* ===== THE CINEMATIC FADE ANIMATION ===== */
     .reveal {
       opacity: 0;
       transform: translateY(40px) scale(0.98);
-      filter: blur(5px); /* Start blurry */
+      filter: blur(5px); 
       transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
       will-change: transform, opacity, filter;
     }
@@ -61,10 +36,9 @@
     .reveal.active {
       opacity: 1;
       transform: translateY(0) scale(1);
-      filter: blur(0); /* Snap into focus */
+      filter: blur(0); 
     }
 
-    /* Images get a slightly deeper slide and scale */
     .reveal-graphic {
       opacity: 0;
       transform: translateY(60px) scale(0.95);
@@ -86,7 +60,6 @@
       padding: 160px 0 100px;
       position: relative;
       overflow: hidden;
-      background: transparent; 
     }
     
     .hero-layout {
@@ -160,9 +133,7 @@
 
     /* ===== INTRO SECTION ===== */
     .intro-section {
-      padding: 120px 0;
-      background: rgba(250, 250, 250, 0.85); 
-      backdrop-filter: blur(8px);
+      padding: 140px 0;
     }
     .intro-grid {
       display: grid;
@@ -207,8 +178,7 @@
 
     /* ===== SERVICES GRID ===== */
     .services-new {
-      padding: 120px 0;
-      background: transparent;
+      padding: 140px 0;
     }
     .services-header h2 {
       font-size: 3.5rem;
@@ -222,11 +192,9 @@
     }
     .service-item-new {
       padding-top: 32px;
-      border-top: 1px solid var(--border-color);
       transition: all 0.4s ease;
     }
     .service-item-new:hover {
-      border-top-color: var(--accent);
       transform: translateY(-8px);
     }
     .service-item-new .icon-img {
@@ -249,13 +217,9 @@
 
     /* ===== RECENT PROJECTS ===== */
     .projects-preview {
-      padding: 80px 0 120px;
+      padding: 140px 0;
       overflow: hidden;
       position: relative;
-      background: rgba(250, 250, 250, 0.85); 
-      backdrop-filter: blur(8px);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
     }
     .projects-header-wrap {
       display: flex;
@@ -327,8 +291,7 @@
 
     /* ===== EDUCATIONAL FUNNEL ===== */
     .edu-block {
-      padding: 120px 0;
-      background: transparent;
+      padding: 140px 0;
     }
     .edu-layout {
       display: grid;
@@ -398,8 +361,6 @@
       background: var(--text-main);
       color: #fff;
       text-align: center;
-      position: relative;
-      z-index: 10;
     }
     .cta-section h2 {
       font-size: 3.5rem;
@@ -629,7 +590,7 @@
   </div>
 </section>
 
-<section class="edu-block" style="background: rgba(250, 250, 250, 0.85); backdrop-filter: blur(8px);">
+<section class="edu-block">
   <div class="container">
     <div class="edu-layout">
       <div class="edu-icon-wrap reveal-graphic">
