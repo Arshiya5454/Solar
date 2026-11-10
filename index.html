@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>برق‌آوران هوراد | مجری تخصصی نیروگاه‌های خورشیدی</title>
+  <title>برق‌آوران هوراد | مجری تخصصی نیروگاه خورشیدی</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     /* ===== NEW PREMIUM PALETTE ===== */
@@ -144,34 +144,40 @@
       margin-bottom: 60px;
     }
     
-    /* MADE TITLE BOLD HERE */
     .projects-header-wrap h2 {
       font-size: 3.5rem;
-      font-weight: 700; /* Changed from 300 to 700 */
+      font-weight: 700;
       margin-bottom: 0;
     }
-    
-    /* Infinite Loop CSS */
+
+    /* NEW SCROLL MECHANICS */
+    .scroll-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
     .scroll-container {
       position: relative;
       width: 100%;
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      overflow-x: auto; 
+      scroll-behavior: smooth;
+      scrollbar-width: none; 
+      -ms-overflow-style: none; 
+      padding-bottom: 20px;
+      
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
     }
+    
+    .scroll-container::-webkit-scrollbar {
+      display: none; 
+    }
+
     .scroll-row {
       display: flex;
       gap: 40px;
       width: max-content;
-      animation: scroll-left 30s linear infinite;
-    }
-    .scroll-row:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(50%); } 
+      padding: 10px 20px;
     }
 
     .project-card-min {
@@ -180,6 +186,9 @@
       text-decoration: none;
       color: inherit;
       display: block;
+    }
+    @media (max-width: 768px) {
+      .project-card-min { width: 300px; }
     }
     .project-card-min .img-wrapper {
       overflow: hidden;
@@ -208,9 +217,7 @@
     }
 
     /* ===== INTRO SECTION ===== */
-    .intro-section {
-      padding: 140px 0;
-    }
+    .intro-section { padding: 140px 0; }
     .intro-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -253,9 +260,7 @@
     }
 
     /* ===== SERVICES GRID ===== */
-    .services-new {
-      padding: 140px 0;
-    }
+    .services-new { padding: 140px 0; }
     .services-header h2 {
       font-size: 3.5rem;
       font-weight: 300;
@@ -292,9 +297,7 @@
     }
 
     /* ===== EDUCATIONAL FUNNEL ===== */
-    .edu-block {
-      padding: 140px 0;
-    }
+    .edu-block { padding: 140px 0; }
     .edu-layout {
       display: grid;
       grid-template-columns: 1fr 1.5fr;
@@ -406,6 +409,11 @@
       .intro-section, .services-new, .projects-preview, .edu-block, .cta-section {
         padding: 80px 0;
       }
+      .projects-header-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
     }
   </style>
 </head>
@@ -463,7 +471,6 @@
   <div class="container reveal">
     <div class="projects-header-wrap">
       <div>
-        <!-- BOLD TITLE APPLIED HERE -->
         <h2>پروژه‌های اخیر</h2>
         <p style="color: var(--text-muted); margin-top: 8px;">نگاهی به برخی از راهکارهای اجراشده توسط تیم ما</p>
       </div>
@@ -473,57 +480,59 @@
     </div>
   </div>
   
-  <div class="scroll-container">
-    <div class="scroll-row" id="projectScroll">
-      
-      <a href="pages/projects/number1/project1.html" class="project-card-min">
-        <div class="img-wrapper">
-          <img src="pages/projects/number1/theFullProdo.jpg" alt="نیروگاه خورشیدی سایه‌بان" />
-        </div>
-        <h3>نیروگاه خورشیدی سایه‌بان</h3>
-        <span>یزد | Off-Grid</span>
-      </a>
+  <div class="scroll-wrapper">
+    <div class="scroll-container" id="scrollContainer">
+      <div class="scroll-row" id="projectScroll">
+        
+        <a href="pages/projects/number1/project1.html" class="project-card-min">
+          <div class="img-wrapper">
+            <img src="pages/projects/number1/theFullProdo.jpg" alt="نیروگاه خورشیدی سایه‌بان" />
+          </div>
+          <h3>نیروگاه خورشیدی سایه‌بان</h3>
+          <span>یزد | Off-Grid</span>
+        </a>
 
-      <a href="pages/projects/number2/project2.html" class="project-card-min">
-        <div class="img-wrapper">
-          <img src="pages/projects/Thumbnail2.jpg" alt="نیروگاه خورشیدی مهر کرمان" />
-        </div>
-        <h3>پروژه مهر کرمان</h3>
-        <span>کرمان | مسکونی</span>
-      </a>
+        <a href="pages/projects/number2/project2.html" class="project-card-min">
+          <div class="img-wrapper">
+            <img src="pages/projects/Thumbnail2.jpg" alt="پروژه مهر کرمان" />
+          </div>
+          <h3>نیروگاه خورشیدی مهر کرمان</h3>
+          <span>کرمان | مسکونی</span>
+        </a>
 
-      <a href="pages/projects/number3/project3.html" class="project-card-min">
-        <div class="img-wrapper">
-          <img src="pages/projects/Thumbnail3.jpg" alt="نیروگاه خورشیدی صفا" />
-        </div>
-        <h3>نیروگاه خورشیدی صفا</h3>
-        <span>فارس | کشاورزی</span>
-      </a>
-      
-      <a href="pages/projects/number4/project4.html" class="project-card-min">
-        <div class="img-wrapper">
-          <img src="pages/projects/Thumbnail4.jpg" alt="نیروگاه خورشیدی آفتاب کوهسار" />
-        </div>
-        <h3>نیروگاه خورشیدی آفتاب کوهسار</h3>
-        <span>یزد | مسکونی</span>
-      </a>
+        <a href="pages/projects/number3/project3.html" class="project-card-min">
+          <div class="img-wrapper">
+            <img src="pages/projects/Thumbnail3.jpg" alt="نیروگاه خورشیدی صفا" />
+          </div>
+          <h3>نیروگاه خورشیدی صفا</h3>
+          <span>فارس | کشاورزی</span>
+        </a>
+        
+        <a href="pages/projects/number4/project4.html" class="project-card-min">
+          <div class="img-wrapper">
+            <img src="pages/projects/Thumbnail4.jpg" alt="نیروگاه خورشیدی آفتاب کوهسار" />
+          </div>
+          <h3>نیروگاه خورشیدی آفتاب کوهسار</h3>
+          <span>یزد | مسکونی</span>
+        </a>
 
-      <a href="pages/projects/number5/project5.html" class="project-card-min">
-        <div class="img-wrapper">
-          <img src="pages/projects/Thumbnail5.jpg" alt="نیروگاه خورشیدی کلاه‌فرنگی" />
-        </div>
-        <h3>نیروگاه خانگی کلاه‌فرنگی</h3>
-        <span>مسکونی</span>
-      </a>
+        <a href="pages/projects/number5/project5.html" class="project-card-min">
+          <div class="img-wrapper">
+            <img src="pages/projects/Thumbnail5.jpg" alt="نیروگاه خانگی کلاه‌فرنگی" />
+          </div>
+          <h3>نیروگاه خورشیدی کلاه‌فرنگی</h3>
+          <span>مسکونی</span>
+        </a>
 
-      <a href="pages/projects/number6/project6.html" class="project-card-min">
-        <div class="img-wrapper">
-          <img src="pages/projects/Thumbnail6.jpg" alt="نیروگاه خورشیدی مطهر" />
-        </div>
-        <h3>نیروگاه خورشیدی مطهر</h3>
-        <span>مسکونی | هیبرید</span>
-      </a>
+        <a href="pages/projects/number6/project6.html" class="project-card-min">
+          <div class="img-wrapper">
+            <img src="pages/projects/Thumbnail6.jpg" alt="نیروگاه خورشیدی مطهر" />
+          </div>
+          <h3>نیروگاه خورشیدی مطهر</h3>
+          <span>مسکونی | هیبرید</span>
+        </a>
 
+      </div>
     </div>
   </div>
 </section>
@@ -633,11 +642,38 @@
   window.addEventListener("scroll", reveal);
   reveal();
 
-  // 2. Loop the projects slider
+  // 2. Infinite Native Scroll Slider Logic
+  const scrollContainer = document.getElementById('scrollContainer');
   const scrollRow = document.getElementById('projectScroll');
-  if (scrollRow) {
+
+  if (scrollContainer && scrollRow) {
+    // Duplicate content for the infinite loop
     const cards = scrollRow.innerHTML;
-    scrollRow.innerHTML = cards + cards; 
+    scrollRow.innerHTML = cards + cards;
+
+    let isHovered = false;
+    let isTouching = false;
+    let autoScrollSpeed = 1; 
+
+    // Hover/Touch Pause logic
+    scrollContainer.addEventListener('mouseenter', () => isHovered = true);
+    scrollContainer.addEventListener('mouseleave', () => isHovered = false);
+    scrollContainer.addEventListener('touchstart', () => isTouching = true);
+    scrollContainer.addEventListener('touchend', () => isTouching = false);
+
+    // Auto-scroll animation loop
+    function autoScroll() {
+      if (!isHovered && !isTouching) {
+        scrollContainer.scrollLeft -= autoScrollSpeed;
+        
+        if (Math.abs(scrollContainer.scrollLeft) >= (scrollContainer.scrollWidth / 2)) {
+          scrollContainer.scrollLeft = 0;
+        }
+      }
+      requestAnimationFrame(autoScroll);
+    }
+    
+    requestAnimationFrame(autoScroll);
   }
 </script>
 
