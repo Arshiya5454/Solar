@@ -65,37 +65,31 @@
       display: block;
     }
 
-    /* ===== FRAMED TITLE (WITH HOVER EFFECTS) ===== */
+    /* ===== FRAMED TITLE ===== */
     .title-frame {
       position: relative;
-      padding: 48px 40px;
+      padding: 36px 40px;
       border: 1.5px solid var(--primary);
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(125, 166, 157, 0.15) 0%, rgba(125, 166, 157, 0.05) 50%, rgba(255, 255, 255, 0.9) 100%);
+      background: linear-gradient(180deg, #fdfefe 0%, #ffffff 100%);
       overflow: hidden;
-      text-align: center;
-      cursor: default;
-      
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s ease;
-      will-change: transform, opacity, box-shadow;
-      
+      text-align: center; /* FIXED: Centered title */
       opacity: 0;
       transform: translateY(24px) scale(0.985);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
-
     .title-frame::before,
     .title-frame::after {
       content: "";
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       border-color: var(--primary-dark);
       border-style: solid;
       opacity: 0;
       transition: opacity 0.6s ease 0.6s;
-      z-index: 2;
     }
     .title-frame::before {
       top: -1.5px; left: -1.5px;
@@ -105,7 +99,6 @@
       bottom: -1.5px; right: -1.5px;
       border-width: 0 2px 2px 0;
     }
-
     .title-frame.is-visible {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -114,70 +107,41 @@
     .title-frame.is-visible::after {
       opacity: 1;
     }
-
-    .title-frame:hover {
-      box-shadow: 0 15px 40px rgba(125, 166, 157, 0.25);
-      transform: translateY(-5px) scale(1.01);
-    }
-
     .title-frame h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 800;
       color: var(--secondary);
-      line-height: 1.4;
-      margin: 0 auto;
+      line-height: 1.35;
+      margin: 0 auto; /* Centered */
       max-width: 900px;
-      
-      transition: opacity 0.8s ease 0.35s,
-                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform;
-      
       opacity: 0;
       transform: translateY(12px);
+      transition: opacity 0.8s ease 0.35s,
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
     }
-
     .title-frame.is-visible h1 {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .title-frame:hover h1 {
-      transform: scale(1.02); 
+    .article-date {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-top: 18px;
     }
 
     /* ===== ARTICLE BODY ===== */
     .article-body {
-      padding: 40px 0 100px;
+      padding: 60px 0 100px;
       max-width: 820px;
       margin: 0 auto;
     }
-    
-    /* Updated first paragraph (Lead Paragraph) */
-    .article-body p.lead-para {
-      font-size: 1.25rem;
-      font-weight: 500;
-      line-height: 2.1;
-      color: var(--text-dark);
-      margin-bottom: 32px;
-      transition: transform 0.3s ease, color 0.3s ease;
-      transform-origin: right center;
-    }
-
     .article-body p {
       font-size: 1.15rem;
       line-height: 2.2;
       color: var(--text-dark);
       margin-bottom: 24px;
-      
-      transition: transform 0.3s ease, color 0.3s ease;
-      transform-origin: right center;
     }
-    
-    .article-body p:hover, .article-body p.lead-para:hover {
-      transform: scale(1.015);
-      color: #000;
-    }
-
     .article-body h2 {
       font-size: 2rem;
       font-weight: 700;
@@ -202,15 +166,33 @@
     }
     .article-body li {
       margin-bottom: 12px;
-      transition: transform 0.3s ease;
-      transform-origin: right center;
-    }
-    .article-body li:hover {
-      transform: scale(1.01);
     }
     .article-body strong {
       color: var(--secondary);
       font-weight: 700;
+    }
+
+    /* ===== COMPARISON IMAGE FRAME (Clean, no caption) ===== */
+    .comparison-figure {
+      margin: 0 auto 48px auto; /* No top margin so it sits high */
+      max-width: 100%;
+      text-align: center;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .comparison-figure:hover {
+      transform: scale(1.01);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+    }
+    .comparison-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
 
     /* ===== TECHNICAL CALLOUT BOX ===== */
@@ -222,11 +204,6 @@
       margin: 32px 0;
       font-size: 1.1rem;
       line-height: 2;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .tech-note:hover {
-      transform: scale(1.01);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
     .tech-note strong {
       display: block;
@@ -241,11 +218,6 @@
       border-radius: var(--radius);
       box-shadow: 0 10px 40px rgba(0,0,0,0.05);
       border: 1px solid var(--gray-200);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .table-wrapper:hover {
-      transform: scale(1.005);
-      box-shadow: 0 15px 50px rgba(0,0,0,0.08);
     }
     .tech-table {
       width: 100%;
@@ -297,21 +269,21 @@
     .delay-3 { transition-delay: 0.3s; }
 
     @media (max-width: 768px) {
+      .article-header h1 {
+        font-size: 2rem;
+      }
       .title-frame {
-        padding: 32px 20px;
+        padding: 24px 22px;
       }
       .title-frame h1 {
-        font-size: 1.6rem;
+        font-size: 1.85rem;
       }
       .article-body {
-        padding: 24px 16px 60px;
+        padding: 32px 16px 60px;
       }
       .article-body p, .article-body ul, .article-body ol {
         font-size: 1rem;
         line-height: 2;
-      }
-      .article-body p.lead-para {
-        font-size: 1.1rem;
       }
       .article-body h2 {
         font-size: 1.5rem;
@@ -409,19 +381,21 @@
   <div class="container">
     <a href="../blog.html" class="back-link reveal">← بازگشت به مقالات</a>
     <span class="meta-tag reveal delay-1">گزارش فنی – تحلیلی</span>
-    
-    <!-- Frame with full green gradient background & hover glow -->
     <div class="title-frame reveal delay-2" id="titleFrame">
       <h1>یکپارچگی صنعتی یا موازی‌سازی سنتی؟ بررسی فنی اینورتر هیبرید سه‌فاز ۱۵ کیلووات Growatt سری WIT در برابر ترکیب سه دستگاه ۶ کیلووات</h1>
     </div>
-    
+    <div class="article-date reveal delay-3"></div>
   </div>
 </section>
 
 <!-- ===== ARTICLE BODY ===== -->
 <article class="article-body">
 
-  <!-- Removed the H2 "مقدمه". First paragraph is now a Lead Paragraph -->
+  <!-- ===== COMPARISON IMAGE (At the top) ===== -->
+  <figure class="comparison-figure reveal">
+    <img src="article images/10.jpg" alt="مقایسه اینورتر یکپارچه Growatt WIT و موازی‌سازی سه اینورتر ۶ کیلووات" loading="eager" />
+  </figure>
+
   <p class="reveal lead-para">
     در طراحی و اجرای سیستم‌های ذخیره‌سازی و برق خورشیدی سه‌فاز (Residential & Commercial)، همواره یک دوگانه میان «استفاده از یک سیستم هیبرید سه‌فاز یکپارچه صنعتی» و «موازی‌سازی سه دستگاه اینورتر تک‌فاز کوچک‌تر» به وجود می‌آید. در نگاه اول، برخی مجریان به دلیل تفاوت در قیمت اولیه خرید تجهیزات یا دستیابی اسمی به توان بالاتر (۱۸ کیلووات در برابر ۱۵ کیلووات)، استفاده از ۳ دستگاه اینورتر ۶ کیلووات را اقتصادی‌تر می‌دانند.
   </p>
