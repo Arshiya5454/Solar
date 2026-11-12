@@ -3,198 +3,318 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== PRIMARY SEO ===== -->
   <title>برق اضطراری برای واحدهای مسکونی و تجاری | برق‌آوران هوراد</title>
   <meta name="description" content="سیستم برق اضطراری با اینورتر و باتری لیتیومی برای خانه‌ها و واحدهای تجاری، با قابلیت توسعه به نیروگاه خورشیدی" />
+  <meta name="keywords" content="برق اضطراری, باتری لیتیومی, اینورتر, قطعی برق, سیستم پشتیبان, نیروگاه خورشیدی" />
+  <meta name="author" content="برق‌آوران هوراد" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://hooradsolar.com/pages/articles/article8.html" />
+
+  <!-- ===== OPEN GRAPH ===== -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:site_name" content="برق‌آوران هوراد" />
+  <meta property="og:title" content="برق اضطراری برای واحدهای مسکونی و تجاری" />
+  <meta property="og:description" content="سیستم برق اضطراری با اینورتر و باتری لیتیومی، با قابلیت توسعه به نیروگاه خورشیدی" />
+  <meta property="og:url" content="https://hooradsolar.com/pages/articles/article8.html" />
+  <meta property="og:image" content="https://hooradsolar.com/pages/articles/Thumbnails/TN8.png" />
+  <meta property="og:image:width" content="1376" />
+  <meta property="og:image:height" content="768" />
+  <meta property="article:published_time" content="2026-08-18T00:00:00+03:30" />
+  <meta property="article:section" content="راهکار" />
+
+  <!-- ===== TWITTER / X ===== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="برق اضطراری برای واحدهای مسکونی و تجاری" />
+  <meta name="twitter:description" content="سیستم برق اضطراری با اینورتر و باتری لیتیومی، با قابلیت توسعه به نیروگاه خورشیدی" />
+  <meta name="twitter:image" content="https://hooradsolar.com/pages/articles/Thumbnails/TN8.png" />
+
+  <!-- ===== FAVICON ===== -->
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+
+  <!-- ===== STYLESHEET ===== -->
   <link rel="stylesheet" href="../../style.css" />
+
   <style>
+    /* ===== ARTICLE HEADER ===== */
     .article-header {
-      padding: 140px 0 40px;
-      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
+      padding: 160px 0 60px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--gray-200);
     }
-    .article-header h1 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: var(--secondary);
-      max-width: 800px;
-      line-height: 1.3;
-    }
-    .article-date {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      margin-top: 8px;
-    }
-    .article-body {
-      padding: 48px 0 80px;
-      max-width: 820px;
-      margin: 0 auto;
-    }
-    .article-body h2 {
-      font-size: 1.8rem;
-      margin-top: 40px;
-      margin-bottom: 12px;
-      color: var(--secondary);
-    }
-    .article-body h3 {
-      font-size: 1.3rem;
-      margin-top: 28px;
-      margin-bottom: 8px;
-      color: var(--secondary);
-    }
-    .article-body p {
-      font-size: 1.05rem;
-      line-height: 2;
-      color: var(--text-dark);
-      margin-bottom: 16px;
-    }
-    .article-body ul {
-      margin: 16px 0 24px 0;
-      padding-right: 24px;
-      font-size: 1.05rem;
-      line-height: 2;
-    }
-    .article-body ul li {
-      margin-bottom: 6px;
-    }
-    .article-body strong {
-      color: var(--secondary);
-    }
-    .article-back {
+    .article-header .back-link {
       display: inline-block;
       margin-bottom: 24px;
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
     }
-    .article-back:hover {
+    .article-header .back-link:hover {
       text-decoration: underline;
     }
-    .highlight-box {
-      background: var(--primary-light);
-      padding: 20px 24px;
+    .article-header .meta-tag {
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    /* ===== FRAMED TITLE ===== */
+    .title-frame {
+      position: relative;
+      padding: 36px 40px;
+      border: 1.5px solid var(--primary);
       border-radius: var(--radius);
-      border-right: 4px solid var(--primary);
-      margin: 24px 0;
+      background: linear-gradient(180deg, #fdfefe 0%, #ffffff 100%);
+      overflow: hidden;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px) scale(0.985);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
-    .highlight-box strong {
-      color: var(--primary-dark);
+    .title-frame::before,
+    .title-frame::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--primary-dark);
+      border-style: solid;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.6s;
     }
-    .related-articles {
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--gray-200);
+    .title-frame::before {
+      top: -1.5px; left: -1.5px;
+      border-width: 2px 0 0 2px;
     }
-    .related-articles h3 {
-      font-size: 1.4rem;
+    .title-frame::after {
+      bottom: -1.5px; right: -1.5px;
+      border-width: 0 2px 2px 0;
+    }
+    .title-frame.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .title-frame.is-visible::before,
+    .title-frame.is-visible::after {
+      opacity: 1;
+    }
+    .title-frame h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+      line-height: 1.35;
+      margin: 0 auto;
+      max-width: 900px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s ease 0.35s,
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+    }
+    .title-frame.is-visible h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .article-date {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-top: 18px;
+    }
+
+    /* ===== ARTICLE BODY ===== */
+    .article-body {
+      padding: 60px 0 100px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    
+    /* Lead Paragraph */
+    .article-body p.lead-para {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 2.1;
+      color: var(--text-dark);
+      margin-bottom: 32px;
+      transition: transform 0.3s ease, color 0.3s ease;
+      transform-origin: right center;
+    }
+
+    .article-body p {
+      font-size: 1.15rem;
+      line-height: 2.2;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+      transition: transform 0.3s ease, color 0.3s ease;
+      transform-origin: right center;
+    }
+    
+    .article-body p:hover, .article-body p.lead-para:hover {
+      transform: scale(1.015);
+      color: #000;
+    }
+
+    .article-body h2 {
+      font-size: 2rem;
       font-weight: 700;
       color: var(--secondary);
-      margin-bottom: 16px;
+      margin-top: 48px;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gray-200);
     }
-    .related-articles ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .article-body h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-top: 32px;
+      margin-bottom: 12px;
     }
-    .related-articles ul li {
+    .article-body ul, .article-body ol {
+      margin: 16px 0 32px 0;
+      padding-right: 24px;
+      font-size: 1.15rem;
+      line-height: 2.2;
+    }
+    .article-body li {
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
+      transform-origin: right center;
+    }
+    .article-body li:hover {
+      transform: scale(1.01);
+    }
+    .article-body strong {
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    /* ===== TECHNICAL CALLOUT BOX ===== */
+    .tech-note {
+      background: var(--gray-100);
+      padding: 24px 32px;
+      border-radius: var(--radius);
+      border-right: 6px solid var(--primary);
+      margin: 32px 0;
+      font-size: 1.1rem;
+      line-height: 2;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tech-note:hover {
+      transform: scale(1.01);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .tech-note strong {
+      display: block;
       margin-bottom: 8px;
+      color: var(--primary-dark);
     }
-    .related-articles ul li a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
+
+    /* ===== CINEMATIC FADE ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      filter: blur(5px);
+      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity, filter;
     }
-    .related-articles ul li a:hover {
-      text-decoration: underline;
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
 
     @media (max-width: 768px) {
-      .article-header {
-        padding: 120px 0 30px;
+      .title-frame {
+        padding: 24px 22px;
       }
-      .article-header h1 {
-        font-size: 1.6rem !important;
-        word-wrap: break-word;
-      }
-      .article-body {
-        padding: 24px 16px 60px;
-      }
-      .article-body h2 {
-        font-size: 1.3rem !important;
-      }
-      .article-body h3 {
-        font-size: 1.1rem !important;
-      }
-      .article-body p {
-        font-size: 0.95rem !important;
-        line-height: 1.8;
-        word-wrap: break-word;
-      }
-      .article-body ul {
-        font-size: 0.95rem !important;
-        padding-right: 16px;
-      }
-      .article-body ul li {
-        word-wrap: break-word;
-      }
-      .highlight-box {
-        padding: 16px 18px;
-        margin: 16px 0;
-      }
-      .highlight-box strong {
-        display: block;
-        margin-bottom: 4px;
-      }
-      .article-back {
-        font-size: 0.9rem;
-        margin-bottom: 16px;
-      }
-      .container {
-        padding: 0 16px;
-      }
-      .related-articles {
-        margin-top: 32px;
-        padding-top: 20px;
-      }
-      .related-articles h3 {
-        font-size: 1.2rem;
-      }
-      .related-articles ul li a {
-        font-size: 0.95rem;
-        word-wrap: break-word;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .article-header h1 {
-        font-size: 1.3rem !important;
+      .title-frame h1 {
+        font-size: 1.85rem;
       }
       .article-body {
-        padding: 16px 12px 40px;
+        padding: 32px 16px 60px;
+      }
+      .article-body p, .article-body ul, .article-body ol {
+        font-size: 1rem;
+        line-height: 2;
       }
       .article-body h2 {
-        font-size: 1.1rem !important;
+        font-size: 1.5rem;
       }
-      .article-body p {
-        font-size: 0.9rem !important;
-      }
-      .article-body ul {
-        font-size: 0.9rem !important;
-        padding-right: 12px;
-      }
-      .highlight-box {
-        padding: 12px 14px;
-        font-size: 0.9rem;
+      .tech-note {
+        padding: 16px 20px;
       }
     }
   </style>
+
+  <!-- ===== STRUCTURED DATA: TechArticle ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "برق اضطراری برای واحدهای مسکونی و تجاری",
+    "description": "سیستم برق اضطراری با اینورتر و باتری لیتیومی برای خانه‌ها و واحدهای تجاری، با قابلیت توسعه به نیروگاه خورشیدی",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://hooradsolar.com/pages/articles/Thumbnails/TN8.png",
+      "width": 1376,
+      "height": 768
+    },
+    "datePublished": "2026-08-18",
+    "dateModified": "2026-08-18",
+    "inLanguage": "fa-IR",
+    "author": {
+      "@type": "Organization",
+      "name": "برق‌آوران هوراد",
+      "url": "https://hooradsolar.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "برق‌آوران هوراد",
+      "url": "https://hooradsolar.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hooradsolar.com/assets/images/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://hooradsolar.com/pages/articles/article8.html"
+    }
+  }
+  </script>
+
+  <!-- ===== STRUCTURED DATA: Breadcrumb ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "صفحه اصلی", "item": "https://hooradsolar.com/" },
+      { "@type": "ListItem", "position": 2, "name": "مقالات", "item": "https://hooradsolar.com/pages/blog.html" },
+      { "@type": "ListItem", "position": 3, "name": "برق اضطراری برای واحدهای مسکونی و تجاری", "item": "https://hooradsolar.com/pages/articles/article8.html" }
+    ]
+  }
+  </script>
 </head>
 <body>
 
 <!-- ===== NAVBAR ===== -->
-<header class="navbar">
+<header class="navbar" style="background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E0E0E0;">
   <div class="container navbar__wrapper">
     <a href="../../index.html" class="navbar__logo">
       <img src="../../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
-      <span class="logo-text">هوراد</span>
     </a>
     <nav class="navbar__links" id="navbarLinks">
       <a href="../../index.html">صفحه اصلی</a>
@@ -206,7 +326,7 @@
       <a href="../contact.html">تماس با ما</a>
     </nav>
     <div class="navbar__actions">
-      <a href="../consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <a href="../start-project.html" class="btn btn-primary" style="border-radius: 2px; padding: 10px 24px;">شروع پروژه</a>
       <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
@@ -217,65 +337,70 @@
 <!-- ===== ARTICLE HEADER ===== -->
 <section class="article-header">
   <div class="container">
-    <a href="../blog.html" class="article-back">← بازگشت به مقالات</a>
-    <h1>برق اضطراری برای واحدهای مسکونی و تجاری</h1>
+    <a href="../blog.html" class="back-link reveal">← بازگشت به مقالات</a>
+    <span class="meta-tag reveal delay-1">راهکار</span>
+    <div class="title-frame reveal delay-2" id="titleFrame">
+      <h1>برق اضطراری برای واحدهای مسکونی و تجاری</h1>
+    </div>
   </div>
 </section>
 
 <!-- ===== ARTICLE BODY ===== -->
-<article class="article-body container">
+<article class="article-body">
 
-  <p>
+  <p class="reveal lead-para">
     قطع برق در خانه‌ها، فروشگاه‌ها و واحدهای تجاری می‌تواند باعث توقف فعالیت و خاموشی تجهیزات ضروری شود. یکی از راهکارهای مناسب برای رفع این مشکل، استفاده از اینورتر و باتری لیتیومی به‌عنوان سیستم برق اضطراری است.
   </p>
 
-  <p>
+  <p class="reveal">
     در این سیستم، برق شبکه در شرایط عادی مصرف‌کننده‌ها را تغذیه کرده و باتری در حالت آماده‌به‌کار یا شارژ قرار دارد. هنگام قطع برق، اینورتر به‌صورت خودکار انرژی ذخیره‌شده در باتری را به برق AC تبدیل کرده و در اختیار ساختمان قرار می‌دهد.
   </p>
 
-  <h2>آیا می‌توان کل ساختمان را به این سیستم متصل کرد؟</h2>
+  <h2 class="reveal">آیا می‌توان کل ساختمان را به این سیستم متصل کرد؟</h2>
 
-  <p>
+  <p class="reveal">
     بله، در صورت انتخاب صحیح ظرفیت اینورتر و باتری، می‌توان بخش عمده یا حتی کل واحد را روی خروجی برق اضطراری قرار داد. البته توان مصرفی هم‌زمان، تجهیزات پرمصرف و جریان راه‌اندازی وسایلی مانند کولر، پمپ و یخچال باید در طراحی در نظر گرفته شود.
   </p>
 
-  <div class="highlight-box">
-    <strong>نکته مهم:</strong> ظرفیت باتری نیز مدت زمان تأمین برق را مشخص می‌کند. هرچه مصرف ساختمان بیشتر یا زمان پشتیبانی مورد انتظار طولانی‌تر باشد، ظرفیت باتری بیشتری مورد نیاز است.
+  <div class="tech-note reveal">
+    <strong>نکته مهم:</strong>
+    ظرفیت باتری نیز مدت زمان تأمین برق را مشخص می‌کند. هرچه مصرف ساختمان بیشتر یا زمان پشتیبانی مورد انتظار طولانی‌تر باشد، ظرفیت باتری بیشتری مورد نیاز است.
   </div>
 
-  <h2>قابلیت توسعه به سیستم خورشیدی</h2>
+  <h2 class="reveal">قابلیت توسعه به سیستم خورشیدی</h2>
 
-  <p>
+  <p class="reveal">
     یکی از مزایای این راهکار، امکان توسعه آن در آینده است. می‌توان ابتدا سیستم را به‌عنوان برق اضطراری با اینورتر و باتری لیتیومی اجرا کرد و در صورت نیاز، در آینده پنل‌های خورشیدی را به آن اضافه کرد.
   </p>
 
-  <p>
+  <p class="reveal">
     در این حالت، سیستم از یک منبع برق پشتیبان به یک سیستم کامل تولید، ذخیره و مدیریت انرژی تبدیل می‌شود.
   </p>
 
-  <div class="highlight-box">
-    <strong>توجه:</strong> انتخاب اینورتر مناسب از ابتدا اهمیت زیادی دارد؛ زیرا باید قابلیت توسعه و اتصال به پنل‌های خورشیدی را نیز در نظر گرفت.
+  <div class="tech-note reveal">
+    <strong>توجه:</strong>
+    انتخاب اینورتر مناسب از ابتدا اهمیت زیادی دارد؛ زیرا باید قابلیت توسعه و اتصال به پنل‌های خورشیدی را نیز در نظر گرفت.
   </div>
 
-  <h2>جمع‌بندی</h2>
+  <h2 class="reveal">جمع‌بندی</h2>
 
-  <p>
+  <p class="reveal">
     برق‌آوران هوراد با بررسی توان مصرفی و نیاز ساختمان، سیستم‌های برق اضطراری و راهکارهای ذخیره‌سازی انرژی را با قابلیت توسعه به سیستم خورشیدی طراحی و اجرا می‌کند.
   </p>
 
+  <p class="reveal" style="margin-top: 48px; text-align: center;">
+    <a href="../start-project.html" class="btn btn-primary" style="padding: 16px 48px; font-size: 1.1rem;">درخواست مشاوره تخصصی</a>
+  </p>
+
   <!-- ===== RELATED ARTICLES ===== -->
-  <div class="related-articles">
-    <h3>مقالات مرتبط</h3>
-    <ul>
-      <li><a href="article5.html">چگونه ظرفیت باتری مورد نیاز واحد مسکونی را محاسبه کنیم؟</a></li>
-      <li><a href="article6.html">ارتباط باتری و اینورتر در سیستم‌های خورشیدی</a></li>
-      <li><a href="article7.html">وظیفه اینورتر در نیروگاه خورشیدی خانگی</a></li>
+  <div class="reveal" style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--gray-200);">
+    <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--secondary); margin-bottom: 16px;">مقالات مرتبط</h3>
+    <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; line-height: 2;">
+      <li style="margin-bottom: 8px;"><a href="article5.html" style="color: var(--primary); text-decoration: none;">چگونه ظرفیت باتری مورد نیاز واحد مسکونی را محاسبه کنیم؟</a></li>
+      <li style="margin-bottom: 8px;"><a href="article6.html" style="color: var(--primary); text-decoration: none;">ارتباط باتری و اینورتر در سیستم‌های خورشیدی</a></li>
+      <li style="margin-bottom: 8px;"><a href="article7.html" style="color: var(--primary); text-decoration: none;">وظیفه اینورتر در نیروگاه خورشیدی خانگی</a></li>
     </ul>
   </div>
-
-  <p style="margin-top: 40px; text-align: center;">
-    <a href="../consultation.html" class="btn btn-primary">درخواست مشاوره تخصصی رایگان</a>
-  </p>
 
 </article>
 
@@ -290,5 +415,29 @@
 </footer>
 
 <script src="../../script.js"></script>
+<script>
+  // ===== REVEAL ON SCROLL =====
+  function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 100;
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add("active");
+      }
+    }
+    // ===== TITLE FRAME ENTRANCE =====
+    var frame = document.getElementById("titleFrame");
+    if (frame) {
+      var top = frame.getBoundingClientRect().top;
+      if (top < window.innerHeight - 60) {
+        frame.classList.add("is-visible");
+      }
+    }
+  }
+  window.addEventListener("scroll", reveal);
+  reveal();
+</script>
 </body>
 </html>
