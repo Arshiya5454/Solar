@@ -132,7 +132,7 @@
     }
 
     /* ========================================================
-       NEW: ARTICLE FLASHCARD DECK (Below Hero)
+       ARTICLE FLASHCARD DECK (Custom JS Animation)
        ======================================================== */
     .flashcard-section {
       padding: 100px 0;
@@ -157,7 +157,6 @@
       margin-top: 12px;
     }
 
-    /* Deck Container */
     .card-deck {
       position: relative;
       width: 100%;
@@ -168,9 +167,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      touch-action: pan-y; 
     }
 
-    /* Individual Card */
     .flash-card {
       position: absolute;
       width: 520px;
@@ -180,25 +179,29 @@
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(0,0,0,0.1);
       border: 1px solid var(--border-color);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
+      
+      /* Critical: No CSS transition on transform. JS handles it directly. */
+      cursor: grab;
       text-decoration: none;
       color: inherit;
       will-change: transform, opacity;
+      user-select: none;
       
-      /* Initial state for entrance animation */
       opacity: 0;
       transform: translateY(100px) scale(0.8);
     }
 
-    /* The Deal Animation triggers when the parent reveals */
+    .flash-card:active {
+      cursor: grabbing;
+    }
+
     .reveal.active .flash-card {
       animation: deal-card 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes deal-card {
       0% { opacity: 0; transform: translateY(100px) scale(0.8) rotate(0deg); }
-      100% { opacity: 1; } /* Final transform handled by JS */
+      100% { opacity: 1; }
     }
 
     .flash-card img {
@@ -206,6 +209,7 @@
       height: 65%;
       object-fit: cover;
       border-bottom: 1px solid var(--border-color);
+      pointer-events: none; 
     }
 
     .flash-card-content {
@@ -214,6 +218,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      pointer-events: none;
     }
 
     .flash-card-tag {
@@ -279,7 +284,7 @@
       box-shadow: none;
     }
 
-    /* ===== RECENT PROJECTS (Section 2) ===== */
+    /* ===== RECENT PROJECTS ===== */
     .projects-preview {
       padding: 100px 0 140px;
       overflow: hidden;
@@ -298,7 +303,6 @@
       margin-bottom: 0;
     }
 
-    /* NEW SCROLL MECHANICS */
     .scroll-wrapper {
       position: relative;
       width: 100%;
@@ -539,9 +543,9 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
-      .flash-card { width: 360px; height: 480px; }
-      .card-deck { height: 520px; max-width: 400px; }
-      .flash-card-title { font-size: 1.1rem; }
+      .flash-card { width: 340px; height: 480px; }
+      .card-deck { height: 520px; max-width: 380px; }
+      .flash-card-title { font-size: 1.15rem; }
       
       .hero-layout { grid-template-columns: 1fr; text-align: center; }
       .hero-content h1 { font-size: 4rem; }
@@ -565,6 +569,13 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
+      }
+    }
+
+    /* HIDE BUTTONS ON MOBILE */
+    @media (max-width: 768px) {
+      .flashcard-controls {
+        display: none; 
       }
     }
   </style>
@@ -618,7 +629,7 @@
   </div>
 </section>
 
-<!-- ===== NEW: ARTICLE FLASHCARD SECTION ===== -->
+<!-- ===== ARTICLE FLASHCARD SECTION ===== -->
 <section class="flashcard-section">
   <div class="container reveal">
     <div class="flashcard-header">
@@ -628,7 +639,6 @@
 
     <div class="card-deck" id="cardDeck">
       
-      <!-- Card 7 -->
       <a href="pages/articles/article7.html" class="flash-card">
         <img src="pages/articles/Thumbnails/TN7.png" alt="وظیفه اینورتر در نیروگاه خانگی">
         <div class="flash-card-content">
@@ -637,7 +647,6 @@
         </div>
       </a>
 
-      <!-- Card 8 -->
       <a href="pages/articles/article8.html" class="flash-card">
         <img src="pages/articles/Thumbnails/TN8.png" alt="برق اضطراری">
         <div class="flash-card-content">
@@ -646,7 +655,6 @@
         </div>
       </a>
 
-      <!-- Card 9 -->
       <a href="pages/articles/article9.html" class="flash-card">
         <img src="pages/articles/Thumbnails/TN9.png" alt="نیروگاه خورشیدی برای کارگاه‌ها">
         <div class="flash-card-content">
@@ -655,7 +663,6 @@
         </div>
       </a>
 
-      <!-- Card 10 (NEWEST) -->
       <a href="pages/articles/article10.html" class="flash-card">
         <img src="pages/articles/Thumbnails/TN10.png" alt="بررسی فنی اینورتر Growatt">
         <div class="flash-card-content">
@@ -666,7 +673,6 @@
 
     </div>
 
-    <!-- Controls -->
     <div class="flashcard-controls">
       <button class="deck-btn" id="prevCard" aria-label="Previous Article">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
@@ -882,82 +888,240 @@
     requestAnimationFrame(autoScroll);
   }
 
-  // 3. NEW: Flashcard Deck Logic
+  // ========================================================
+  // 3. Flashcard Deck Logic (Smooth RequestAnimationFrame Interpolation)
+  // ========================================================
   const deck = document.getElementById('cardDeck');
   const cards = document.querySelectorAll('.flash-card');
   const prevBtn = document.getElementById('prevCard');
   const nextBtn = document.getElementById('nextCard');
   
-  let currentIndex = cards.length - 1; // Start with the newest card (last in list)
+  let currentIndex = cards.length - 1; 
+  let isAnimating = false; 
 
-  function updateCards() {
-    cards.forEach((card, index) => {
-      const diff = index - currentIndex;
-      
-      let translateX = 0;
-      let translateY = 0;
-      let scale = 1;
-      let rotateZ = 0;
-      let rotateY = 0;
-      let opacity = 1;
-      let zIndex = 100 - Math.abs(diff);
+  // Calculate the target properties for a card based on its distance from the active index
+  function getCardState(index) {
+    const diff = index - currentIndex;
+    
+    let translateX = 0;
+    let translateY = 0;
+    let scale = 1;
+    let rotateZ = 0;
+    let rotateY = 0;
+    let opacity = 1;
+    let zIndex = 100 - Math.abs(diff);
 
-      if (diff === 0) {
-        // Active Card (Front and center)
-        translateX = 0;
-        translateY = 0;
-        scale = 1;
-        rotateZ = 0;
-        rotateY = 0;
-        opacity = 1;
-        zIndex = 100;
-      } else if (diff < 0) {
-        // Past cards (fanned right)
-        const offset = Math.abs(diff);
-        translateX = offset * 50; 
-        translateY = offset * -10; 
-        rotateZ = offset * 5;
-        rotateY = -offset * 5; // 3D depth effect
-        scale = 1 - (offset * 0.05);
-        opacity = offset > 3 ? 0 : 1;
-      } else {
-        // Future cards (fanned left)
-        const offset = Math.abs(diff);
-        translateX = offset * -50; 
-        translateY = offset * -10;
-        rotateZ = offset * -5;
-        rotateY = offset * 5;
-        scale = 1 - (offset * 0.05);
-        opacity = offset > 3 ? 0 : 1;
-      }
-
-      // Apply styles
-      card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotateZ(${rotateZ}deg) rotateY(${rotateY}deg) scale(${scale})`;
-      card.style.opacity = opacity;
-      card.style.zIndex = zIndex;
-      card.style.pointerEvents = diff === 0 ? 'auto' : 'none';
-    });
-
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === cards.length - 1;
+    if (diff === 0) {
+      // Active Card
+      translateX = 0; translateY = 0; scale = 1; rotateZ = 0; rotateY = 0; opacity = 1; zIndex = 100;
+    } else if (diff < 0) {
+      // Past cards (fanned right)
+      const offset = Math.abs(diff);
+      translateX = offset * 50; translateY = offset * -10; rotateZ = offset * 5; rotateY = -offset * 5;
+      scale = 1 - (offset * 0.05); opacity = offset > 3 ? 0 : 1;
+    } else {
+      // Future cards (fanned left)
+      const offset = Math.abs(diff);
+      translateX = offset * -50; translateY = offset * -10; rotateZ = offset * -5; rotateY = offset * 5;
+      scale = 1 - (offset * 0.05); opacity = offset > 3 ? 0 : 1;
+    }
+    
+    return { translateX, translateY, scale, rotateZ, rotateY, opacity, zIndex };
   }
 
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCards();
-    }
-  });
+  // Apply a state immediately to a card
+  function applyState(card, state) {
+    card.style.transform = `translateX(${state.translateX}px) translateY(${state.translateY}px) rotateZ(${state.rotateZ}deg) rotateY(${state.rotateY}deg) scale(${state.scale})`;
+    card.style.opacity = state.opacity;
+    card.style.zIndex = state.zIndex;
+    card.style.pointerEvents = state.scale === 1 ? 'auto' : 'none';
+  }
 
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < cards.length - 1) {
-      currentIndex++;
-      updateCards();
-    }
-  });
+  // Animate all cards to their new states over a duration
+  function animateToNewIndex() {
+    if (isAnimating) return;
+    isAnimating = true;
 
-  // Initialize 
-  updateCards();
+    // Capture starting states
+    const startStates = Array.from(cards).map((card, index) => {
+      // If the card is currently invisible, start from where it should logically be
+      if (card.style.opacity === '0' || !card.style.transform) {
+        return getCardState(index);
+      }
+      
+      // We parse the current computed transform matrix
+      const style = window.getComputedStyle(card);
+      const matrix = new DOMMatrixReadOnly(style.transform);
+      
+      // Extract values from the matrix
+      const translateX = matrix.m41;
+      const translateY = matrix.m42;
+      const scale = matrix.m11; // Approximating scale from X axis
+      
+      // For rotations, parsing matrices is messy. Instead, we'll re-apply the previous state's known values
+      // (This is why we must store the exact start states before updating currentIndex)
+      return {
+        translateX: matrix.m41,
+        translateY: matrix.m42,
+        scale: Math.sqrt(matrix.m11 * matrix.m11 + matrix.m12 * matrix.m12), // better scale approximation
+        rotateZ: 0, // Will snap back to 0 if we can't parse, but the rest of the animation will look smooth
+        rotateY: 0,
+        opacity: parseFloat(style.opacity),
+        zIndex: parseInt(style.zIndex)
+      };
+    });
+
+    // Note: Since parsing matrix for rotateZ/rotateY is unreliable, we use a simpler approach below:
+    // We just re-calculate the PREVIOUS index state and start from there.
+    const previousIndex = currentIndex === 0 ? 1 : currentIndex - 1; 
+    // Wait, this logic is flawed. Let's do it the right way.
+    
+    isAnimating = false; // reset for the proper function below
+    runCustomAnimation();
+  }
+
+  // The proper custom animation function
+  function runCustomAnimation() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const duration = 600; // ms
+    const startTime = performance.now();
+
+    // 1. Store the exact START states of all cards BEFORE we change currentIndex.
+    // We have to reconstruct the state based on the PREVIOUS current index.
+    const startStates = Array.from(cards).map((card, index) => {
+       // We need to know what the index WAS.
+       // Since we already updated currentIndex before calling this, let's reverse it temporarily.
+       // Actually, let's just use the DOM's current state.
+       const style = window.getComputedStyle(card);
+       return {
+         transform: style.transform,
+         opacity: parseFloat(style.opacity)
+       };
+    });
+
+    // 2. Calculate the TARGET states based on the NEW currentIndex.
+    const targetStates = Array.from(cards).map((card, index) => getCardState(index));
+
+    // 3. Animate
+    function animateFrame(now) {
+      let progress = (now - startTime) / duration;
+      if (progress > 1) progress = 1;
+      
+      // Custom cubic-bezier easing (ease-out back style)
+      // Approximation of cubic-bezier(0.2, 0.8, 0.2, 1)
+      const eased = 1 - Math.pow(1 - progress, 3); 
+
+      cards.forEach((card, index) => {
+        const start = startStates[index];
+        const target = targetStates[index];
+        
+        // For simplicity and performance, we'll just interpolate opacity and apply target transform.
+        // Interpolating matrices is tough in vanilla JS. 
+        // But since we want smoothness, we'll use Web Animations API with direct CSS values.
+        card.style.opacity = start.opacity + (target.opacity - start.opacity) * eased;
+        card.style.zIndex = target.zIndex; // z-index should snap, not interpolate
+      });
+
+      if (progress < 1) {
+        requestAnimationFrame(animateFrame);
+      } else {
+        // Snap to final state
+        cards.forEach((card, index) => applyState(card, targetStates[index]));
+        isAnimating = false;
+        updateButtonStates();
+      }
+    }
+
+    // Actually apply the transform animations using WAAPI for smooth hardware acceleration
+    cards.forEach((card, index) => {
+      const target = targetStates[index];
+      const endTransform = `translateX(${target.translateX}px) translateY(${target.translateY}px) rotateZ(${target.rotateZ}deg) rotateY(${target.rotateY}deg) scale(${target.scale})`;
+      
+      card.animate(
+        [
+          { transform: startStates[index].transform, opacity: startStates[index].opacity },
+          { transform: endTransform, opacity: target.opacity }
+        ],
+        {
+          duration: duration,
+          easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+          fill: 'forwards'
+        }
+      );
+    });
+
+    // Cleanup after animation finishes
+    setTimeout(() => {
+      cards.forEach((card, index) => {
+        applyState(card, targetStates[index]);
+        card.getAnimations().forEach(anim => anim.cancel());
+      });
+      isAnimating = false;
+      updateButtonStates();
+    }, duration);
+
+    requestAnimationFrame(animateFrame);
+  }
+
+  function updateButtonStates() {
+    if(prevBtn) prevBtn.disabled = currentIndex === 0;
+    if(nextBtn) nextBtn.disabled = currentIndex === cards.length - 1;
+  }
+
+  // Initial setup
+  cards.forEach((card, index) => applyState(card, getCardState(index)));
+  updateButtonStates();
+
+  // Button Listeners
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0 && !isAnimating) { 
+        currentIndex--; 
+        runCustomAnimation(); 
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < cards.length - 1 && !isAnimating) { 
+        currentIndex++; 
+        runCustomAnimation(); 
+      }
+    });
+  }
+
+  // SWIPE LOGIC
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  if (deck) {
+    deck.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    deck.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+  }
+
+  function handleSwipe() {
+    const swipeThreshold = 40; 
+    const diff = touchStartX - touchEndX;
+
+    if (diff > swipeThreshold) { // Swiped Left (Next)
+      if (currentIndex < cards.length - 1 && !isAnimating) {
+        currentIndex++;
+        runCustomAnimation();
+      }
+    } else if (diff < -swipeThreshold) { // Swiped Right (Prev)
+      if (currentIndex > 0 && !isAnimating) {
+        currentIndex--;
+        runCustomAnimation();
+      }
+    }
+  }
 </script>
 
 </body>
