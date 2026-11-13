@@ -6,7 +6,6 @@
   <title>برق‌آوران هوراد | مجری تخصصی نیروگاه خورشیدی</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ===== NEW PREMIUM PALETTE ===== */
     :root {
       --bg-color: #FFFFFF; 
       --text-main: #111111;
@@ -24,7 +23,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ===== THE CINEMATIC FADE ANIMATION ===== */
     .reveal {
       opacity: 0;
       transform: translateY(40px) scale(0.98);
@@ -32,7 +30,6 @@
       transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
       will-change: transform, opacity, filter;
     }
-
     .reveal.active {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -45,14 +42,12 @@
       filter: blur(10px);
       transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
     .reveal-graphic.active {
       opacity: 1;
       transform: translateY(0) scale(1);
       filter: blur(0);
     }
 
-    /* ===== HERO SECTION ===== */
     .hero-new {
       min-height: 100vh;
       display: flex;
@@ -94,23 +89,99 @@
       max-width: 90%;
     }
 
+    /* ===== ANIMATED LOGO GRAPHIC ===== */
     .hero-graphic {
       width: 100%;
       height: 500px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: transparent;
-    }
-    
-    .hero-graphic img {
-      width: 100%;
-      max-width: 450px;
-      height: auto;
-      object-fit: contain;
+      position: relative;
+      gap: 24px;
     }
 
-    /* ===== BUTTONS ===== */
+    .logo-mark {
+      position: relative;
+      width: min(80%, 340px);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+      /* Initial state: invisible and small — cheap to render, no blur */
+      opacity: 0;
+      transform: scale(0.6);
+      will-change: transform, opacity;
+    }
+
+    .logo-mark.play img {
+      animation: logo-pop 2.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes logo-pop {
+      0%   { opacity: 0; transform: scale(0.6); }
+      30%  { opacity: 1; transform: scale(1.08); }
+      60%  { opacity: 1; transform: scale(0.96); }
+      80%  { opacity: 1; transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Burst */
+    .logo-mark .burst {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 70%; aspect-ratio: 1;
+      margin: -35% 0 0 -35%;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(255,255,255,0.95) 0%,
+        rgba(125,166,157,0.55) 30%,
+        rgba(125,166,157,0) 65%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .logo-mark.play .burst {
+      animation: logo-burst 2.8s ease-out 0.6s forwards;
+    }
+    @keyframes logo-burst {
+      0%   { opacity: 0; transform: scale(0.1); }
+      35%  { opacity: 1; transform: scale(0.9); }
+      100% { opacity: 0; transform: scale(1.8); }
+    }
+
+    /* Ring */
+    .logo-mark .ring {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 14%; aspect-ratio: 1;
+      margin: -7% 0 0 -7%;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .logo-mark.play .ring {
+      animation: logo-ring 2.8s ease-out 0.6s forwards;
+    }
+    @keyframes logo-ring {
+      from { opacity: 0.8; transform: scale(0.2); }
+      to   { opacity: 0;   transform: scale(8); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-mark.play * { animation-duration: 0.01s !important; animation-delay: 0s !important; }
+    }
+
     .btn-minimal {
       display: inline-flex;
       align-items: center;
@@ -124,167 +195,12 @@
       transition: all 0.4s ease;
       border-radius: 2px;
     }
-    
     .btn-minimal:hover {
       background: var(--accent);
       transform: translateY(-4px);
       box-shadow: 0 15px 30px rgba(125, 166, 157, 0.2);
     }
 
-    /* ========================================================
-       ARTICLE FLASHCARD DECK (Custom JS Animation)
-       ======================================================== */
-    .flashcard-section {
-      padding: 100px 0;
-      background: #fafafa;
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      overflow: hidden;
-    }
-
-    .flashcard-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .flashcard-header h2 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-    .flashcard-header p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      margin-top: 12px;
-    }
-
-    .card-deck {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      height: 650px;
-      margin: 0 auto;
-      perspective: 1500px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      touch-action: pan-y; 
-    }
-
-    .flash-card {
-      position: absolute;
-      width: 520px;
-      height: 580px;
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-      border: 1px solid var(--border-color);
-      
-      /* Critical: No CSS transition on transform. JS handles it directly. */
-      cursor: grab;
-      text-decoration: none;
-      color: inherit;
-      will-change: transform, opacity;
-      user-select: none;
-      
-      opacity: 0;
-      transform: translateY(100px) scale(0.8);
-    }
-
-    .flash-card:active {
-      cursor: grabbing;
-    }
-
-    .reveal.active .flash-card {
-      animation: deal-card 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes deal-card {
-      0% { opacity: 0; transform: translateY(100px) scale(0.8) rotate(0deg); }
-      100% { opacity: 1; }
-    }
-
-    .flash-card img {
-      width: 100%;
-      height: 65%;
-      object-fit: cover;
-      border-bottom: 1px solid var(--border-color);
-      pointer-events: none; 
-    }
-
-    .flash-card-content {
-      padding: 24px;
-      height: 35%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .flash-card-tag {
-      font-size: 0.85rem;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-
-    .flash-card-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* Controls */
-    .flashcard-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 24px;
-      margin-top: 40px;
-      position: relative;
-      z-index: 200;
-    }
-
-    .deck-btn {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1px solid var(--border-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: var(--text-main);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    }
-    
-    .deck-btn:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-      transform: scale(1.05);
-    }
-    
-    .deck-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      background: #fff;
-      color: var(--text-main);
-      border-color: var(--border-color);
-      transform: none;
-      box-shadow: none;
-    }
-
-    /* ===== RECENT PROJECTS ===== */
     .projects-preview {
       padding: 100px 0 140px;
       overflow: hidden;
@@ -296,18 +212,12 @@
       align-items: flex-end;
       margin-bottom: 60px;
     }
-    
     .projects-header-wrap h2 {
       font-size: 3.5rem;
       font-weight: 700;
       margin-bottom: 0;
     }
-
-    .scroll-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
+    .scroll-wrapper { position: relative; width: 100%; }
     .scroll-container {
       position: relative;
       width: 100%;
@@ -316,22 +226,16 @@
       scrollbar-width: none; 
       -ms-overflow-style: none; 
       padding-bottom: 20px;
-      
       mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
     }
-    
-    .scroll-container::-webkit-scrollbar {
-      display: none; 
-    }
-
+    .scroll-container::-webkit-scrollbar { display: none; }
     .scroll-row {
       display: flex;
       gap: 40px;
       width: max-content;
       padding: 10px 20px;
     }
-
     .project-card-min {
       width: 450px;
       flex-shrink: 0;
@@ -368,7 +272,6 @@
       color: var(--text-muted);
     }
 
-    /* ===== INTRO SECTION ===== */
     .intro-section { padding: 140px 0; }
     .intro-grid {
       display: grid;
@@ -376,7 +279,6 @@
       gap: 80px;
       align-items: center;
     }
-    
     .intro-graphic {
       width: 100%;
       height: 500px;
@@ -390,7 +292,6 @@
       height: 100%;
       object-fit: cover;
     }
-
     .intro-right h2 {
       font-size: 3.5rem;
       font-weight: 300;
@@ -411,7 +312,6 @@
       font-weight: 500;
     }
 
-    /* ===== SERVICES GRID ===== */
     .services-new { padding: 140px 0; }
     .services-header h2 {
       font-size: 3.5rem;
@@ -448,7 +348,6 @@
       line-height: 1.9;
     }
 
-    /* ===== EDUCATIONAL FUNNEL ===== */
     .edu-block { padding: 140px 0; }
     .edu-layout {
       display: grid;
@@ -456,7 +355,6 @@
       gap: 80px;
       align-items: center;
     }
-    
     .edu-icon {
       width: 100%;
       max-width: 250px;
@@ -465,13 +363,11 @@
       filter: sepia(1) hue-rotate(60deg) saturate(1.5) brightness(0.9) drop-shadow(0 20px 30px rgba(0,0,0,0.1));
       animation: float-icon 6s ease-in-out infinite;
     }
-
     @keyframes float-icon {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-15px); }
       100% { transform: translateY(0px); }
     }
-
     .edu-content .meta-tag {
       font-size: 0.9rem;
       color: var(--accent);
@@ -493,7 +389,6 @@
       line-height: 2.2;
       margin-bottom: 40px;
     }
-    
     .btn-funnel {
       display: inline-flex;
       align-items: center;
@@ -512,7 +407,6 @@
       transform: translateY(-4px);
     }
 
-    /* ===== CTA SECTION ===== */
     .cta-section {
       padding: 140px 0;
       background: var(--text-main);
@@ -541,18 +435,13 @@
       color: #fff;
     }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
-      .flash-card { width: 340px; height: 480px; }
-      .card-deck { height: 520px; max-width: 380px; }
-      .flash-card-title { font-size: 1.15rem; }
-      
       .hero-layout { grid-template-columns: 1fr; text-align: center; }
       .hero-content h1 { font-size: 4rem; }
       .hero-content h2 { font-size: 2rem; }
       .hero-content p { margin: 0 auto 32px; }
-      .hero-graphic { height: 350px; }
-      .hero-graphic img { max-width: 300px; }
+      .hero-graphic { height: 400px; }
+      .logo-mark { width: min(80%, 280px); }
       
       .intro-grid { grid-template-columns: 1fr; gap: 40px; }
       .intro-graphic { height: 300px; }
@@ -571,18 +460,10 @@
         gap: 20px;
       }
     }
-
-    /* HIDE BUTTONS ON MOBILE */
-    @media (max-width: 768px) {
-      .flashcard-controls {
-        display: none; 
-      }
-    }
   </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <header class="navbar" style="background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E0E0E0;">
   <div class="container navbar__wrapper">
     <a href="index.html" class="navbar__logo">
@@ -606,7 +487,6 @@
   </div>
 </header>
 
-<!-- ===== SECTION 1: HERO ===== -->
 <section class="hero-new">
   <div class="container">
     <div class="hero-layout">
@@ -621,70 +501,18 @@
         </a>
       </div>
 
-      <div class="hero-graphic reveal-graphic" style="transition-delay: 0.2s;">
-        <img src="assets/images/logo.png" alt="لوگوی برق‌آوران هوراد" />
+      <div class="hero-graphic" id="logoGraphic">
+        <div class="logo-mark" id="logoMark">
+          <img src="assets/images/logo.png" alt="برق‌آوران هوراد" loading="eager" fetchpriority="high" />
+          <div class="burst"></div>
+          <div class="ring"></div>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ===== ARTICLE FLASHCARD SECTION ===== -->
-<section class="flashcard-section">
-  <div class="container reveal">
-    <div class="flashcard-header">
-      <h2>آخرین مقالات</h2>
-      <p>جدیدترین گزارش‌ها و آموزش‌های تخصصی انرژی خورشیدی</p>
-    </div>
-
-    <div class="card-deck" id="cardDeck">
-      
-      <a href="pages/articles/article7.html" class="flash-card">
-        <img src="pages/articles/Thumbnails/TN7.png" alt="وظیفه اینورتر در نیروگاه خانگی">
-        <div class="flash-card-content">
-          <div class="flash-card-tag">فنی</div>
-          <div class="flash-card-title">وظیفه اینورتر در نیروگاه خورشیدی خانگی</div>
-        </div>
-      </a>
-
-      <a href="pages/articles/article8.html" class="flash-card">
-        <img src="pages/articles/Thumbnails/TN8.png" alt="برق اضطراری">
-        <div class="flash-card-content">
-          <div class="flash-card-tag">راهکار</div>
-          <div class="flash-card-title">برق اضطراری برای واحدهای مسکونی و تجاری</div>
-        </div>
-      </a>
-
-      <a href="pages/articles/article9.html" class="flash-card">
-        <img src="pages/articles/Thumbnails/TN9.png" alt="نیروگاه خورشیدی برای کارگاه‌ها">
-        <div class="flash-card-content">
-          <div class="flash-card-tag">صنعتی</div>
-          <div class="flash-card-title">نیروگاه خورشیدی برای کارگاه‌ها و واحدهای صنعتی کوچک</div>
-        </div>
-      </a>
-
-      <a href="pages/articles/article10.html" class="flash-card">
-        <img src="pages/articles/Thumbnails/TN10.png" alt="بررسی فنی اینورتر Growatt">
-        <div class="flash-card-content">
-          <div class="flash-card-tag">گزارش فنی</div>
-          <div class="flash-card-title">بررسی فنی اینورتر هیبرید سه‌فاز ۱۵ کیلووات Growatt</div>
-        </div>
-      </a>
-
-    </div>
-
-    <div class="flashcard-controls">
-      <button class="deck-btn" id="prevCard" aria-label="Previous Article">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-      <button class="deck-btn" id="nextCard" aria-label="Next Article">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SECTION 2: RECENT PROJECTS ===== -->
 <section class="projects-preview">
   <div class="container reveal">
     <div class="projects-header-wrap">
@@ -703,49 +531,37 @@
       <div class="scroll-row" id="projectScroll">
         
         <a href="pages/projects/number1/project1.html" class="project-card-min">
-          <div class="img-wrapper">
-            <img src="pages/projects/number1/theFullProdo.jpg" alt="نیروگاه خورشیدی سایه‌بان" />
-          </div>
+          <div class="img-wrapper"><img src="pages/projects/number1/theFullProdo.jpg" alt="نیروگاه خورشیدی سایه‌بان" /></div>
           <h3>نیروگاه خورشیدی سایه‌بان</h3>
           <span>یزد | Off-Grid</span>
         </a>
 
         <a href="pages/projects/number2/project2.html" class="project-card-min">
-          <div class="img-wrapper">
-            <img src="pages/projects/Thumbnail2.jpg" alt="پروژه مهر کرمان" />
-          </div>
+          <div class="img-wrapper"><img src="pages/projects/Thumbnail2.jpg" alt="پروژه مهر کرمان" /></div>
           <h3>نیروگاه خورشیدی مهر کرمان</h3>
           <span>کرمان | مسکونی</span>
         </a>
 
         <a href="pages/projects/number3/project3.html" class="project-card-min">
-          <div class="img-wrapper">
-            <img src="pages/projects/Thumbnail3.jpg" alt="نیروگاه خورشیدی صفا" />
-          </div>
+          <div class="img-wrapper"><img src="pages/projects/Thumbnail3.jpg" alt="نیروگاه خورشیدی صفا" /></div>
           <h3>نیروگاه خورشیدی صفا</h3>
           <span>فارس | کشاورزی</span>
         </a>
         
         <a href="pages/projects/number4/project4.html" class="project-card-min">
-          <div class="img-wrapper">
-            <img src="pages/projects/Thumbnail4.jpg" alt="نیروگاه خورشیدی آفتاب کوهسار" />
-          </div>
+          <div class="img-wrapper"><img src="pages/projects/Thumbnail4.jpg" alt="نیروگاه خورشیدی آفتاب کوهسار" /></div>
           <h3>نیروگاه خورشیدی آفتاب کوهسار</h3>
           <span>یزد | مسکونی</span>
         </a>
 
         <a href="pages/projects/number5/project5.html" class="project-card-min">
-          <div class="img-wrapper">
-            <img src="pages/projects/Thumbnail5.jpg" alt="نیروگاه خانگی کلاه‌فرنگی" />
-          </div>
+          <div class="img-wrapper"><img src="pages/projects/Thumbnail5.jpg" alt="نیروگاه خورشیدی کلاه‌فرنگی" /></div>
           <h3>نیروگاه خورشیدی کلاه‌فرنگی</h3>
           <span>مسکونی</span>
         </a>
 
         <a href="pages/projects/number6/project6.html" class="project-card-min">
-          <div class="img-wrapper">
-            <img src="pages/projects/Thumbnail6.jpg" alt="نیروگاه خورشیدی مطهر" />
-          </div>
+          <div class="img-wrapper"><img src="pages/projects/Thumbnail6.jpg" alt="نیروگاه خورشیدی مطهر" /></div>
           <h3>نیروگاه خورشیدی مطهر</h3>
           <span>مسکونی | هیبرید</span>
         </a>
@@ -755,57 +571,47 @@
   </div>
 </section>
 
-<!-- ===== SECTION 3: INTRO ===== -->
 <section class="intro-section">
   <div class="container">
     <div class="intro-grid">
-      
       <div class="intro-graphic reveal-graphic">
         <img src="assets/images/image3.jpg" alt="نصب پنل خورشیدی" />
       </div>
-
       <div class="intro-right reveal" style="transition-delay: 0.2s;">
         <h2>راهکارهای متمایز، برای نیازهای واقعی.</h2>
         <p>ما معتقدیم اجرای یک نیروگاه خورشیدی با نصب چند پنل و اینورتر به پایان نمی‌رسد. از همان مرحله طراحی، به این فکر می‌کنیم که سیستم چگونه باید اجرا شود تا ایمن، استاندارد، قابل سرویس و متناسب با نیاز واقعی کارفرما باشد.</p>
         <p>گاهی بهترین راهکار، نصب پنل‌ها روی یک سایه‌بان خودرو است؛ گاهی باید برای دسترسی مناسب به پنل‌ها در ارتفاع، مسیر سرویس و نگهداری طراحی شود. در هر پروژه، راهکار را بر اساس شرایط واقعی همان محل انتخاب می‌کنیم.</p>
         <p>برای ما مهم است که پروژه فقط در روز تحویل، خوب به نظر نرسد؛ بلکه سال‌ها بعد هم درست و قابل اتکا کار کند.</p>
       </div>
-      
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 4: SERVICES ===== -->
 <section class="services-new">
   <div class="container">
     <div class="services-header reveal">
       <h2>چه خدماتی ارائه می‌دهیم؟</h2>
     </div>
     <div class="services-grid-new">
-      
       <div class="service-item-new reveal" style="transition-delay: 0.1s;">
         <img src="assets/images/icon1.svg" alt="طراحی" class="icon-img" />
         <h3>طراحی و مهندسی</h3>
         <p>طراحی فنی و اقتصادی نیروگاه خورشیدی متناسب با نیاز مصرفی، شرایط محل و بودجه پروژه.</p>
       </div>
-
       <div class="service-item-new reveal" style="transition-delay: 0.2s;">
         <img src="assets/images/icon2.svg" alt="اجرا" class="icon-img" />
         <h3>اجرا و نصب</h3>
         <p>اجرای کامل نیروگاه‌های خورشیدی برای منازل، ویلاها، کارگاه‌ها و صنایع کوچک.</p>
       </div>
-
       <div class="service-item-new reveal" style="transition-delay: 0.3s;">
         <img src="assets/images/icon3.svg" alt="تجهیزات" class="icon-img" />
         <h3>تأمین تجهیزات</h3>
         <p>تأمین پنل، اینورتر، باتری، سازه و کلیه تجهیزات مورد نیاز از برندهای معتبر.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 5 & 6: EDUCATIONAL FUNNEL ===== -->
 <section class="edu-block">
   <div class="container">
     <div class="edu-layout">
@@ -834,7 +640,6 @@
   </div>
 </section>
 
-<!-- ===== SECTION 7: CTA ===== -->
 <section class="cta-section">
   <div class="container reveal">
     <h2>آماده شروع پروژه خورشیدی خود هستید؟</h2>
@@ -845,7 +650,6 @@
 
 <script src="script.js"></script>
 <script>
-  // 1. Reveal on scroll animation
   function reveal() {
     var reveals = document.querySelectorAll(".reveal, .reveal-graphic");
     for (var i = 0; i < reveals.length; i++) {
@@ -860,7 +664,6 @@
   window.addEventListener("scroll", reveal);
   reveal();
 
-  // 2. Infinite Native Scroll Slider Logic (Projects)
   const scrollContainer = document.getElementById('scrollContainer');
   const scrollRow = document.getElementById('projectScroll');
 
@@ -888,238 +691,25 @@
     requestAnimationFrame(autoScroll);
   }
 
-  // ========================================================
-  // 3. Flashcard Deck Logic (Smooth RequestAnimationFrame Interpolation)
-  // ========================================================
-  const deck = document.getElementById('cardDeck');
-  const cards = document.querySelectorAll('.flash-card');
-  const prevBtn = document.getElementById('prevCard');
-  const nextBtn = document.getElementById('nextCard');
-  
-  let currentIndex = cards.length - 1; 
-  let isAnimating = false; 
+  // ===== ANIMATED LOGO =====
+  const logoMark = document.getElementById('logoMark');
+  const logoImg = logoMark ? logoMark.querySelector('img') : null;
 
-  // Calculate the target properties for a card based on its distance from the active index
-  function getCardState(index) {
-    const diff = index - currentIndex;
-    
-    let translateX = 0;
-    let translateY = 0;
-    let scale = 1;
-    let rotateZ = 0;
-    let rotateY = 0;
-    let opacity = 1;
-    let zIndex = 100 - Math.abs(diff);
+  function playLogo() {
+    if (!logoMark) return;
+    logoMark.classList.remove('play');
+    // Force reflow so the animation can restart cleanly
+    void logoMark.offsetWidth;
+    logoMark.classList.add('play');
+  }
 
-    if (diff === 0) {
-      // Active Card
-      translateX = 0; translateY = 0; scale = 1; rotateZ = 0; rotateY = 0; opacity = 1; zIndex = 100;
-    } else if (diff < 0) {
-      // Past cards (fanned right)
-      const offset = Math.abs(diff);
-      translateX = offset * 50; translateY = offset * -10; rotateZ = offset * 5; rotateY = -offset * 5;
-      scale = 1 - (offset * 0.05); opacity = offset > 3 ? 0 : 1;
+  if (logoImg && logoMark) {
+    // Only play after the image is fully decoded, so the animation isn't wasted
+    const startSequence = () => setTimeout(playLogo, 400);
+    if (logoImg.complete && logoImg.naturalWidth > 0) {
+      startSequence();
     } else {
-      // Future cards (fanned left)
-      const offset = Math.abs(diff);
-      translateX = offset * -50; translateY = offset * -10; rotateZ = offset * -5; rotateY = offset * 5;
-      scale = 1 - (offset * 0.05); opacity = offset > 3 ? 0 : 1;
-    }
-    
-    return { translateX, translateY, scale, rotateZ, rotateY, opacity, zIndex };
-  }
-
-  // Apply a state immediately to a card
-  function applyState(card, state) {
-    card.style.transform = `translateX(${state.translateX}px) translateY(${state.translateY}px) rotateZ(${state.rotateZ}deg) rotateY(${state.rotateY}deg) scale(${state.scale})`;
-    card.style.opacity = state.opacity;
-    card.style.zIndex = state.zIndex;
-    card.style.pointerEvents = state.scale === 1 ? 'auto' : 'none';
-  }
-
-  // Animate all cards to their new states over a duration
-  function animateToNewIndex() {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    // Capture starting states
-    const startStates = Array.from(cards).map((card, index) => {
-      // If the card is currently invisible, start from where it should logically be
-      if (card.style.opacity === '0' || !card.style.transform) {
-        return getCardState(index);
-      }
-      
-      // We parse the current computed transform matrix
-      const style = window.getComputedStyle(card);
-      const matrix = new DOMMatrixReadOnly(style.transform);
-      
-      // Extract values from the matrix
-      const translateX = matrix.m41;
-      const translateY = matrix.m42;
-      const scale = matrix.m11; // Approximating scale from X axis
-      
-      // For rotations, parsing matrices is messy. Instead, we'll re-apply the previous state's known values
-      // (This is why we must store the exact start states before updating currentIndex)
-      return {
-        translateX: matrix.m41,
-        translateY: matrix.m42,
-        scale: Math.sqrt(matrix.m11 * matrix.m11 + matrix.m12 * matrix.m12), // better scale approximation
-        rotateZ: 0, // Will snap back to 0 if we can't parse, but the rest of the animation will look smooth
-        rotateY: 0,
-        opacity: parseFloat(style.opacity),
-        zIndex: parseInt(style.zIndex)
-      };
-    });
-
-    // Note: Since parsing matrix for rotateZ/rotateY is unreliable, we use a simpler approach below:
-    // We just re-calculate the PREVIOUS index state and start from there.
-    const previousIndex = currentIndex === 0 ? 1 : currentIndex - 1; 
-    // Wait, this logic is flawed. Let's do it the right way.
-    
-    isAnimating = false; // reset for the proper function below
-    runCustomAnimation();
-  }
-
-  // The proper custom animation function
-  function runCustomAnimation() {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    const duration = 600; // ms
-    const startTime = performance.now();
-
-    // 1. Store the exact START states of all cards BEFORE we change currentIndex.
-    // We have to reconstruct the state based on the PREVIOUS current index.
-    const startStates = Array.from(cards).map((card, index) => {
-       // We need to know what the index WAS.
-       // Since we already updated currentIndex before calling this, let's reverse it temporarily.
-       // Actually, let's just use the DOM's current state.
-       const style = window.getComputedStyle(card);
-       return {
-         transform: style.transform,
-         opacity: parseFloat(style.opacity)
-       };
-    });
-
-    // 2. Calculate the TARGET states based on the NEW currentIndex.
-    const targetStates = Array.from(cards).map((card, index) => getCardState(index));
-
-    // 3. Animate
-    function animateFrame(now) {
-      let progress = (now - startTime) / duration;
-      if (progress > 1) progress = 1;
-      
-      // Custom cubic-bezier easing (ease-out back style)
-      // Approximation of cubic-bezier(0.2, 0.8, 0.2, 1)
-      const eased = 1 - Math.pow(1 - progress, 3); 
-
-      cards.forEach((card, index) => {
-        const start = startStates[index];
-        const target = targetStates[index];
-        
-        // For simplicity and performance, we'll just interpolate opacity and apply target transform.
-        // Interpolating matrices is tough in vanilla JS. 
-        // But since we want smoothness, we'll use Web Animations API with direct CSS values.
-        card.style.opacity = start.opacity + (target.opacity - start.opacity) * eased;
-        card.style.zIndex = target.zIndex; // z-index should snap, not interpolate
-      });
-
-      if (progress < 1) {
-        requestAnimationFrame(animateFrame);
-      } else {
-        // Snap to final state
-        cards.forEach((card, index) => applyState(card, targetStates[index]));
-        isAnimating = false;
-        updateButtonStates();
-      }
-    }
-
-    // Actually apply the transform animations using WAAPI for smooth hardware acceleration
-    cards.forEach((card, index) => {
-      const target = targetStates[index];
-      const endTransform = `translateX(${target.translateX}px) translateY(${target.translateY}px) rotateZ(${target.rotateZ}deg) rotateY(${target.rotateY}deg) scale(${target.scale})`;
-      
-      card.animate(
-        [
-          { transform: startStates[index].transform, opacity: startStates[index].opacity },
-          { transform: endTransform, opacity: target.opacity }
-        ],
-        {
-          duration: duration,
-          easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
-          fill: 'forwards'
-        }
-      );
-    });
-
-    // Cleanup after animation finishes
-    setTimeout(() => {
-      cards.forEach((card, index) => {
-        applyState(card, targetStates[index]);
-        card.getAnimations().forEach(anim => anim.cancel());
-      });
-      isAnimating = false;
-      updateButtonStates();
-    }, duration);
-
-    requestAnimationFrame(animateFrame);
-  }
-
-  function updateButtonStates() {
-    if(prevBtn) prevBtn.disabled = currentIndex === 0;
-    if(nextBtn) nextBtn.disabled = currentIndex === cards.length - 1;
-  }
-
-  // Initial setup
-  cards.forEach((card, index) => applyState(card, getCardState(index)));
-  updateButtonStates();
-
-  // Button Listeners
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0 && !isAnimating) { 
-        currentIndex--; 
-        runCustomAnimation(); 
-      }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < cards.length - 1 && !isAnimating) { 
-        currentIndex++; 
-        runCustomAnimation(); 
-      }
-    });
-  }
-
-  // SWIPE LOGIC
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  if (deck) {
-    deck.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    deck.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-  }
-
-  function handleSwipe() {
-    const swipeThreshold = 40; 
-    const diff = touchStartX - touchEndX;
-
-    if (diff > swipeThreshold) { // Swiped Left (Next)
-      if (currentIndex < cards.length - 1 && !isAnimating) {
-        currentIndex++;
-        runCustomAnimation();
-      }
-    } else if (diff < -swipeThreshold) { // Swiped Right (Prev)
-      if (currentIndex > 0 && !isAnimating) {
-        currentIndex--;
-        runCustomAnimation();
-      }
+      logoImg.addEventListener('load', startSequence);
     }
   }
 </script>
