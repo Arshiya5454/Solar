@@ -89,50 +89,40 @@
       max-width: 90%;
     }
 
-    /* ===== ANIMATED LOGO GRAPHIC ===== */
+    /* ===== ANIMATED LOGO GRAPHIC — JAVASCRIPT-DRIVEN ===== */
     .hero-graphic {
       width: 100%;
       height: 500px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       position: relative;
-      gap: 24px;
     }
 
     .logo-mark {
       position: relative;
-      width: min(80%, 340px);
+      width: min(100%, 460px);
       aspect-ratio: 1 / 1;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .logo-mark img {
+    .logo-piece {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      position: relative;
-      z-index: 2;
-      /* Initial state: invisible and small — cheap to render, no blur */
       opacity: 0;
-      transform: scale(0.6);
+      z-index: 2;
       will-change: transform, opacity;
     }
 
-    .logo-mark.play img {
-      animation: logo-pop 2.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    @keyframes logo-pop {
-      0%   { opacity: 0; transform: scale(0.6); }
-      30%  { opacity: 1; transform: scale(1.08); }
-      60%  { opacity: 1; transform: scale(0.96); }
-      80%  { opacity: 1; transform: scale(1.02); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+    .piece-tl   { transform-origin: 27% 27%; }
+    .piece-bl   { transform-origin: 27% 73%; }
+    .piece-br   { transform-origin: 73% 73%; }
+    .piece-leaf { transform-origin: 53% 46%; z-index: 3; }
 
     /* Burst */
     .logo-mark .burst {
@@ -148,14 +138,7 @@
       opacity: 0;
       pointer-events: none;
       z-index: 1;
-    }
-    .logo-mark.play .burst {
-      animation: logo-burst 2.8s ease-out 0.6s forwards;
-    }
-    @keyframes logo-burst {
-      0%   { opacity: 0; transform: scale(0.1); }
-      35%  { opacity: 1; transform: scale(0.9); }
-      100% { opacity: 0; transform: scale(1.8); }
+      transform: scale(0.1);
     }
 
     /* Ring */
@@ -169,19 +152,10 @@
       opacity: 0;
       pointer-events: none;
       z-index: 1;
-    }
-    .logo-mark.play .ring {
-      animation: logo-ring 2.8s ease-out 0.6s forwards;
-    }
-    @keyframes logo-ring {
-      from { opacity: 0.8; transform: scale(0.2); }
-      to   { opacity: 0;   transform: scale(8); }
+      transform: scale(0.2);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .logo-mark.play * { animation-duration: 0.01s !important; animation-delay: 0s !important; }
-    }
-
+    /* ===== BUTTONS ===== */
     .btn-minimal {
       display: inline-flex;
       align-items: center;
@@ -201,6 +175,7 @@
       box-shadow: 0 15px 30px rgba(125, 166, 157, 0.2);
     }
 
+    /* ===== RECENT PROJECTS ===== */
     .projects-preview {
       padding: 100px 0 140px;
       overflow: hidden;
@@ -272,6 +247,7 @@
       color: var(--text-muted);
     }
 
+    /* ===== INTRO SECTION ===== */
     .intro-section { padding: 140px 0; }
     .intro-grid {
       display: grid;
@@ -312,6 +288,7 @@
       font-weight: 500;
     }
 
+    /* ===== SERVICES GRID ===== */
     .services-new { padding: 140px 0; }
     .services-header h2 {
       font-size: 3.5rem;
@@ -348,6 +325,7 @@
       line-height: 1.9;
     }
 
+    /* ===== EDUCATIONAL FUNNEL ===== */
     .edu-block { padding: 140px 0; }
     .edu-layout {
       display: grid;
@@ -407,6 +385,7 @@
       transform: translateY(-4px);
     }
 
+    /* ===== CTA SECTION ===== */
     .cta-section {
       padding: 140px 0;
       background: var(--text-main);
@@ -435,13 +414,14 @@
       color: #fff;
     }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
       .hero-layout { grid-template-columns: 1fr; text-align: center; }
       .hero-content h1 { font-size: 4rem; }
       .hero-content h2 { font-size: 2rem; }
       .hero-content p { margin: 0 auto 32px; }
       .hero-graphic { height: 400px; }
-      .logo-mark { width: min(80%, 280px); }
+      .logo-mark { width: min(80%, 320px); }
       
       .intro-grid { grid-template-columns: 1fr; gap: 40px; }
       .intro-graphic { height: 300px; }
@@ -503,9 +483,13 @@
 
       <div class="hero-graphic" id="logoGraphic">
         <div class="logo-mark" id="logoMark">
-          <img src="assets/images/logo.png" alt="برق‌آوران هوراد" loading="eager" fetchpriority="high" />
-          <div class="burst"></div>
-          <div class="ring"></div>
+          <img class="logo-piece piece-tl" src="assets/images/logo-tl.png" alt="" />
+          <img class="logo-piece piece-bl" src="assets/images/logo-bl.png" alt="" />
+          <img class="logo-piece piece-br" src="assets/images/logo-br.png" alt="" />
+          <img class="logo-piece piece-leaf" src="assets/images/logo-leaf.png" alt="" />
+          
+          <div class="burst" id="logoBurst"></div>
+          <div class="ring" id="logoRing"></div>
         </div>
       </div>
 
@@ -634,7 +618,7 @@
       </div>
       <div class="edu-content reveal">
         <h2>برق چگونه تولید می‌شود؟</h2>
-        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی اضافی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
+        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
       </div>
     </div>
   </div>
@@ -691,27 +675,105 @@
     requestAnimationFrame(autoScroll);
   }
 
-  // ===== ANIMATED LOGO =====
-  const logoMark = document.getElementById('logoMark');
-  const logoImg = logoMark ? logoMark.querySelector('img') : null;
+  // ===== ANIMATED LOGO — JAVASCRIPT-DRIVEN TIMELINE =====
+  const pieces = {
+    tl:   document.querySelector('.piece-tl'),
+    bl:   document.querySelector('.piece-bl'),
+    br:   document.querySelector('.piece-br'),
+    leaf: document.querySelector('.piece-leaf')
+  };
+  const logoBurst = document.getElementById('logoBurst');
+  const logoRing = document.getElementById('logoRing');
+
+  function easeOutBack(t) {
+    const c1 = 1.70158;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  }
+
+  function animatePiece(el, delayMs, duration, startTime, now) {
+    const elapsed = now - startTime - delayMs;
+    if (elapsed < 0) return; 
+    
+    const t = Math.min(elapsed / duration, 1);
+    const ease = easeOutBack(t);
+    
+    const scale = 0.4 + 0.6 * ease;
+    const opacity = Math.min(t * 3, 1);
+    
+    el.style.transform = `scale(${scale})`;
+    el.style.opacity = opacity;
+  }
 
   function playLogo() {
-    if (!logoMark) return;
-    logoMark.classList.remove('play');
-    // Force reflow so the animation can restart cleanly
-    void logoMark.offsetWidth;
-    logoMark.classList.add('play');
+    const startTime = performance.now();
+    const totalDuration = 3500; 
+    const pieceDuration = 800;  
+    
+    const tlDelay = 0;
+    const blDelay = 250;
+    const brDelay = 500;
+    const leafDelay = 1000; 
+    const burstStart = 1400;
+
+    function frame(now) {
+      const elapsed = now - startTime;
+      
+      animatePiece(pieces.tl, tlDelay, pieceDuration, startTime, now);
+      animatePiece(pieces.bl, blDelay, pieceDuration, startTime, now);
+      animatePiece(pieces.br, brDelay, pieceDuration, startTime, now);
+      
+      const leafElapsed = elapsed - leafDelay;
+      if (leafElapsed >= 0) {
+        const t = Math.min(leafElapsed / pieceDuration, 1);
+        const ease = easeOutBack(t);
+        const scale = 0.4 + 0.6 * ease;
+        const rotate = (1 - t) * -20; 
+        const opacity = Math.min(t * 3, 1);
+        pieces.leaf.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
+        pieces.leaf.style.opacity = opacity;
+      }
+      
+      const burstElapsed = elapsed - burstStart;
+      if (burstElapsed >= 0 && burstElapsed <= 1500) {
+        const bt = burstElapsed / 1500;
+        logoBurst.style.opacity = Math.sin(bt * Math.PI);
+        logoBurst.style.transform = `scale(${0.1 + bt * 1.7})`;
+        
+        logoRing.style.opacity = Math.max(0, 0.8 * (1 - bt));
+        logoRing.style.transform = `scale(${0.2 + bt * 7.8})`;
+      } else if (burstElapsed > 1500) {
+        logoBurst.style.opacity = 0;
+        logoRing.style.opacity = 0;
+      }
+      
+      if (elapsed < totalDuration) {
+        requestAnimationFrame(frame);
+      }
+    }
+    
+    requestAnimationFrame(frame);
   }
 
-  if (logoImg && logoMark) {
-    // Only play after the image is fully decoded, so the animation isn't wasted
-    const startSequence = () => setTimeout(playLogo, 400);
-    if (logoImg.complete && logoImg.naturalWidth > 0) {
-      startSequence();
-    } else {
-      logoImg.addEventListener('load', startSequence);
+  const allImages = [pieces.tl, pieces.bl, pieces.br, pieces.leaf];
+  let loadedCount = 0;
+  let allLoaded = false;
+  
+  function checkAllLoaded() {
+    loadedCount++;
+    if (loadedCount === allImages.length && !allLoaded) {
+      allLoaded = true;
+      setTimeout(playLogo, 400);
     }
   }
+  
+  allImages.forEach(img => {
+    if (img.complete && img.naturalWidth > 0) {
+      checkAllLoaded();
+    } else {
+      img.addEventListener('load', checkAllLoaded);
+    }
+  });
 </script>
 
 </body>
