@@ -3,148 +3,273 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>درخواست مشاوره و برآورد نیروگاه خورشیدی | برق‌آوران هوراد</title>
-  <meta name="description" content="برای دریافت مشاوره تخصصی و برآورد نیروگاه خورشیدی با شماره ۰۹۱۳۳۳۷۰۷۷۴ تماس بگیرید." />
+  <title>شروع پروژه | برق‌آوران هوراد</title>
+  <meta name="description" content="پروژه خورشیدی خود را با برق‌آوران هوراد شروع کنید. فرم ارزیابی اولیه برای دریافت مشاوره تخصصی و طراحی سیستم." />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .consultation-header {
-      padding: 140px 0 40px;
-      background: linear-gradient(135deg, #f8fffb, #e6f5ec);
-      text-align: center;
-    }
-    .consultation-header h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--secondary);
-    }
-    .consultation-header h1 span {
-      color: var(--primary);
-    }
-    .consultation-header p {
-      color: var(--text-light);
-      max-width: 600px;
-      margin: 8px auto 0;
+    :root {
+      --bg-color: #FFFFFF; 
+      --text-main: #111111;
+      --text-muted: #666666;
+      --accent: #7DA69D;
+      --accent-dark: #5C827A;
+      --border-color: #E0E0E0;
+      --navy: #0f3b57;
     }
 
-    .consultation-numbers {
-      padding: 48px 0 80px;
-      background: var(--white);
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    .numbers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
+
+    /* ===== HEADER ===== */
+    .start-header {
+      padding: 160px 0 60px;
+      background: #FFFFFF;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .start-header h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .start-header p {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ===== FORM SECTION ===== */
+    .start-form-section {
+      padding: 80px 0 120px;
+      background: #fafafa;
+    }
+
+    .form-container {
       max-width: 800px;
       margin: 0 auto;
-    }
-    .number-card {
-      background: var(--gray-100);
-      padding: 32px 24px;
+      background: #fff;
       border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    /* Progress Steps */
+    .form-progress {
+      display: flex;
+      background: var(--gray-100);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .step {
+      flex: 1;
+      padding: 20px;
       text-align: center;
-      transition: var(--transition);
-      border: 1px solid transparent;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
     }
-    .number-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--primary);
-      box-shadow: var(--shadow);
+    .step.active {
+      color: var(--accent-dark);
+      border-bottom-color: var(--accent);
+      background: #fff;
     }
-    .number-card .label {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      font-weight: 500;
+
+    /* Form Content */
+    .form-content {
+      padding: 48px;
     }
-    .number-card .number {
-      font-size: 1.8rem;
+    .form-step {
+      display: none;
+    }
+    .form-step.active {
+      display: block;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-step h2 {
+      font-size: 2rem;
       font-weight: 700;
-      color: var(--secondary);
-      direction: ltr;
-      display: inline-block;
-      margin-top: 4px;
-    }
-    .number-card .number a {
-      color: var(--secondary);
-      text-decoration: none;
-    }
-    .number-card .number a:hover {
-      color: var(--primary);
-    }
-    .number-card .note {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-top: 12px;
+      color: var(--navy);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .whatsapp-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 32px;
-      background: #25D366;
-      color: var(--white);
-      border-radius: 50px;
+    .input-group {
+      margin-bottom: 24px;
+    }
+    .input-group label {
+      display: block;
       font-weight: 600;
-      font-size: 1.1rem;
-      text-decoration: none;
-      transition: var(--transition);
+      margin-bottom: 8px;
+      color: var(--text-main);
     }
-    .whatsapp-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    .input-group input, 
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text-main);
+      background: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .input-group input:focus, 
+    .input-group select:focus,
+    .input-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(125, 166, 157, 0.15);
     }
 
-    .contact-extra {
+    /* Radio Cards for system type */
+    .radio-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .radio-card {
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
       text-align: center;
+    }
+    .radio-card:hover {
+      border-color: var(--accent);
+    }
+    .radio-card input {
+      display: none;
+    }
+    .radio-card input:checked + .radio-card-content {
+      color: var(--accent-dark);
+    }
+    .radio-card.selected {
+      border-color: var(--accent);
+      background: rgba(125, 166, 157, 0.05);
+    }
+    .radio-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+    .radio-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Buttons */
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
       margin-top: 40px;
-      padding-top: 32px;
-      border-top: 1px solid var(--gray-200);
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
     }
-    .contact-extra p {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-    .contact-extra a {
-      color: var(--primary);
-      text-decoration: none;
+    .btn-form {
+      padding: 16px 40px;
+      border-radius: 8px;
       font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: none;
     }
-    .contact-extra a:hover {
-      text-decoration: underline;
+    .btn-next, .btn-submit {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-next:hover, .btn-submit:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(125, 166, 157, 0.2);
+    }
+    .btn-prev {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+    .btn-prev:hover {
+      border-color: var(--text-muted);
+      color: var(--text-main);
+    }
+
+    /* Success State */
+    .success-state {
+      display: none;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .success-state.show {
+      display: block;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(125, 166, 157, 0.1);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 24px;
+      color: var(--accent);
+      font-size: 2.5rem;
+    }
+    .success-state h2 {
+      font-size: 2.5rem;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .success-state p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @media (max-width: 768px) {
-      .consultation-header h1 {
-        font-size: 2rem;
-      }
-      .number-card .number {
-        font-size: 1.4rem;
-      }
-      .numbers-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .consultation-header h1 {
-        font-size: 1.6rem;
-      }
-      .whatsapp-btn {
-        font-size: 0.95rem;
-        padding: 10px 24px;
-      }
+      .start-header { padding: 120px 0 40px; }
+      .start-header h1 { font-size: 2.5rem; }
+      .start-header p { font-size: 1.1rem; }
+      .form-content { padding: 32px 24px; }
+      .radio-cards { grid-template-columns: 1fr; }
+      .step { font-size: 0.8rem; padding: 16px 8px; }
+      .btn-form { width: 100%; text-align: center; }
+      .form-actions { flex-direction: column-reverse; gap: 16px; }
     }
   </style>
 </head>
 <body>
 
 <!-- ===== NAVBAR ===== -->
-<header class="navbar">
+<header class="navbar" style="background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E0E0E0;">
   <div class="container navbar__wrapper">
     <a href="../index.html" class="navbar__logo">
       <img src="../assets/images/logo.png" alt="برق‌آوران هوراد" class="logo-image" />
-      <span class="logo-text">هوراد</span>
     </a>
     <nav class="navbar__links" id="navbarLinks">
       <a href="../index.html">صفحه اصلی</a>
@@ -156,7 +281,7 @@
       <a href="contact.html">تماس با ما</a>
     </nav>
     <div class="navbar__actions">
-      <a href="consultation.html" class="btn btn-primary">درخواست مشاوره</a>
+      <a href="consultation.html" class="btn btn-primary" style="border-radius: 2px; padding: 10px 24px;">درخواست مشاوره</a>
       <button class="navbar__toggle" id="menuToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
@@ -165,37 +290,120 @@
 </header>
 
 <!-- ===== HEADER ===== -->
-<section class="consultation-header">
+<section class="start-header">
   <div class="container">
-    <h1>درخواست <span>مشاوره و برآورد</span></h1>
-    <p>برای دریافت مشاوره تخصصی و برآورد هزینه نیروگاه خورشیدی، با ما تماس بگیرید.</p>
+    <h1>پروژه خود را شروع کنید</h1>
+    <p>در چند قدم ساده، اطلاعات اولیه پروژه خود را ثبت کنید. تیم مهندسی ما ظرف ۲۴ ساعت آینده با شما تماس خواهد گرفت.</p>
   </div>
 </section>
 
-<!-- ===== PHONE NUMBERS ===== -->
-<section class="consultation-numbers">
+<!-- ===== FORM SECTION ===== -->
+<section class="start-form-section">
   <div class="container">
-    <div class="numbers-grid">
-      <!-- Phone -->
-      <div class="number-card">
-        <div class="label">تماس و واتساپ</div>
-        <div class="number"><a href="tel:09133370774">۰۹۱۳۳۳۷۰۷۷۴</a></div>
-        <div class="note">پاسخگویی در تمام ساعات</div>
+    <div class="form-container" id="formContainer">
+      
+      <!-- Progress Bar -->
+      <div class="form-progress">
+        <div class="step active" id="step1Indicator">۱. اطلاعات پایه</div>
+        <div class="step" id="step2Indicator">۲. جزئیات پروژه</div>
       </div>
-    </div>
 
-    <!-- WhatsApp CTA -->
-    <div style="text-align: center; margin-top: 32px;">
-      <a href="https://wa.me/989133370774" target="_blank" class="whatsapp-btn">
-        ارسال پیام در واتساپ
-      </a>
-    </div>
+      <form id="projectForm" novalidate>
+        
+        <!-- STEP 1 -->
+        <div class="form-content">
+          <div class="form-step active" id="step1">
+            <h2>اطلاعات پایه</h2>
+            
+            <div class="input-group">
+              <label>نام و نام خانوادگی</label>
+              <input type="text" id="fullName" placeholder="مثال: علی رضایی" required />
+            </div>
 
-    <!-- Extra Contact Info -->
-    <div class="contact-extra">
-      <p>
-        همچنین می‌توانید از طریق <a href="../pages/contact.html">صفحه تماس با ما</a> با ما در ارتباط باشید.
-      </p>
+            <div class="input-group">
+              <label>شماره تماس</label>
+              <input type="tel" id="phone" placeholder="۰۹۱۳۳۳۷۰۷۷۴" required />
+            </div>
+
+            <div class="input-group">
+              <label>نوع سیستم مورد نیاز</label>
+              <div class="radio-cards">
+                <label class="radio-card" id="cardOnGrid">
+                  <input type="radio" name="systemType" value="on-grid" checked />
+                  <div class="radio-card-content">
+                    <h3>متصل به شبکه</h3>
+                    <p>فروش برق مازاد به شبکه</p>
+                  </div>
+                </label>
+
+                <label class="radio-card" id="cardOffGrid">
+                  <input type="radio" name="systemType" value="off-grid" />
+                  <div class="radio-card-content">
+                    <h3>مستقل از شبکه</h3>
+                    <p>مناسب مناطق بدون برق</p>
+                  </div>
+                </label>
+
+                <label class="radio-card" id="cardHybrid">
+                  <input type="radio" name="systemType" value="hybrid" />
+                  <div class="radio-card-content">
+                    <h3>هیبرید</h3>
+                    <p>تامین برق اضطراری + باتری</p>
+                  </div>
+                </label>
+
+                <label class="radio-card" id="cardUnknown">
+                  <input type="radio" name="systemType" value="unknown" />
+                  <div class="radio-card-content">
+                    <h3>نمی‌دانم</h3>
+                    <p>نیاز به مشاوره دارم</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div></div> <!-- Spacer -->
+              <button type="button" class="btn-form btn-next" id="btnNext1">مرحله بعد ←</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="form-step" id="step2">
+            <h2>جزئیات پروژه</h2>
+
+            <div class="input-group">
+              <label>موقعیت پروژه (شهر / استان)</label>
+              <input type="text" id="location" placeholder="مثال: یزد، شهرستان مهریز" required />
+            </div>
+
+            <div class="input-group">
+              <label>میزان مصرف برق تقریبی (کیلووات ساعت در ماه)</label>
+              <input type="number" id="consumption" placeholder="مثال: ۵۰۰" />
+            </div>
+
+            <div class="input-group">
+              <label>توضیحات تکمیلی</label>
+              <textarea id="notes" rows="4" placeholder="اگر نیاز خاصی دارید، اینجا بنویسید..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-form btn-prev" id="btnPrev2">→ مرحله قبل</button>
+              <button type="submit" class="btn-form btn-submit" id="btnSubmit">ثبت و ارسال درخواست</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="successState">
+        <div class="success-icon">✓</div>
+        <h2>درخواست شما ثبت شد</h2>
+        <p>تیم مهندسی برق‌آوران هوراد به‌زودی با شما تماس خواهد گرفت تا جزئیات پروژه را بررسی کنیم.</p>
+        <a href="../index.html" class="btn-minimal" style="padding: 16px 40px; font-size: 1rem; border-radius: 8px;">بازگشت به صفحه اصلی</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -211,5 +419,55 @@
 </footer>
 
 <script src="../script.js"></script>
+<script>
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step1Indicator = document.getElementById('step1Indicator');
+  const step2Indicator = document.getElementById('step2Indicator');
+  const formContainer = document.getElementById('formContainer');
+  const successState = document.getElementById('successState');
+  const form = document.getElementById('projectForm');
+
+  // Navigation
+  document.getElementById('btnNext1').addEventListener('click', () => {
+    const name = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !phone) {
+      alert('لطفاً نام و شماره تماس خود را وارد کنید.');
+      return;
+    }
+    step1.classList.remove('active');
+    step2.classList.add('active');
+    step1Indicator.classList.remove('active');
+    step2Indicator.classList.add('active');
+  });
+
+  document.getElementById('btnPrev2').addEventListener('click', () => {
+    step2.classList.remove('active');
+    step1.classList.add('active');
+    step2Indicator.classList.remove('active');
+    step1Indicator.classList.add('active');
+  });
+
+  // Visual feedback for radio cards
+  document.querySelectorAll('.radio-card input').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
+      if(e.target.checked) {
+        e.target.closest('.radio-card').classList.add('selected');
+      }
+    });
+    if(radio.checked) radio.closest('.radio-card').classList.add('selected');
+  });
+
+  // Form Submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    form.style.display = 'none';
+    document.querySelector('.form-progress').style.display = 'none';
+    successState.classList.add('show');
+  });
+</script>
+
 </body>
 </html>
