@@ -39,7 +39,7 @@
       z-index: -1;
     }
     #cb { z-index: -1; }
-    #cf { z-index: -1; }
+    #cf { z-index: 10; } /* Foreground vines on top */
 
     .reveal {
       opacity: 0;
@@ -236,7 +236,7 @@
     }
 
     /* ========================================================
-       DAD'S ANIMATED TEXT (Placed under logo)
+       DAD'S ANIMATED TEXT
        ======================================================== */
     .logo-text-wrap {
       text-align: center;
@@ -258,7 +258,6 @@
       opacity: 0;
     }
     
-    /* Now the play class is on body, so this works */
     .play .logo-text-wrap h1 span {
       animation: word .8s cubic-bezier(.2,.8,.2,1) both;
     }
@@ -770,7 +769,7 @@
       </div>
       <div class="edu-content reveal">
         <h2>برق چگونه تولید می‌شود؟</h2>
-        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی اضافی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
+        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
       </div>
     </div>
   </div>
@@ -829,117 +828,211 @@
     requestAnimationFrame(autoScroll);
   }
 
-  // 3. Dad's Animated Logo & Vines
-  const tilt = document.getElementById('tilt');
+  // ==========================================
+  // DAD'S ANIMATED LOGO + VINES MATH
+  // ==========================================
   const logo = document.getElementById('logo');
-  const pieces = [
-    { class: 'tl', src: 'assets/images/logo-tl.png', fx: '-300px', fy: '-200px', ry: '-30deg' },
-    { class: 'bl', src: 'assets/images/logo-bl.png', fx: '-300px', fy: '200px', ry: '30deg' },
-    { class: 'br', src: 'assets/images/logo-br.png', fx: '300px', fy: '200px', ry: '-30deg' },
-    { class: 'leaf', src: 'assets/images/logo-leaf.png' }
-  ];
-  let loadedImages = 0;
+  const tilt = document.getElementById('tilt');
+  const m = document.body; // using body for the play class
+  
+  // Dad's variables for the math
+  var PC = {
+    tl: 'assets/images/logo-tl.png',
+    bl: 'assets/images/logo-bl.png',
+    br: 'assets/images/logo-br.png',
+    leaf: 'assets/images/logo-leaf.png'
+  };
+  var FULL = 'assets/images/logo.png'; // We use the full logo for the gloss mask
+  var FLY = {
+    tl: ["-320px", "-220px", "260px", "-130deg"],
+    leaf: ["320px", "-260px", "320px", "140deg"],
+    bl: ["-320px", "260px", "220px", "110deg"],
+    br: ["320px", "240px", "360px", "-120deg"]
+  };
+  
+  // Dad's math vars for the vines
+  var BX = 0.45;
+  var BY = 0.6;
 
-  pieces.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'pc ' + p.class;
-    const img = document.createElement('img');
-    img.src = p.src;
-    img.alt = '';
-    img.addEventListener('load', () => {
-      loadedImages++;
-      if (loadedImages === pieces.length) {
-        setTimeout(() => {
-          document.body.classList.add('play');
-        }, 400);
-      }
+  // Build the 3D stacked images (Dad's exact code)
+  function build() {
+    var w = logo.offsetWidth, step = w / 85;
+    tilt.innerHTML = "";
+    ["bl", "br", "tl", "leaf"].forEach(function(k) {
+        var g = document.createElement("div");
+        g.className = "pc " + k;
+        if (FLY[k]) {
+            g.style.setProperty("--fx", FLY[k][0]);
+            g.style.setProperty("--fy", FLY[k][1]);
+            g.style.setProperty("--ry", FLY[k][2]);
+        }
+        for (var i = 16; i >= 0; i--) {
+            var im = document.createElement("img");
+            im.alt = "";
+            im.src = PC[k];
+            im.style.transform = "translateZ(" + (-i * step) + "px)";
+            if (i > 0) im.style.filter = "brightness(" + (.74 - i * .016) + ")";
+            g.appendChild(im);
+        }
+        tilt.appendChild(g);
     });
-    div.appendChild(img);
+    ["g1", "g2"].forEach(function(c) {
+        var d = document.createElement("div");
+        d.className = "gloss " + c;
+        d.style.setProperty("--m", "url(" + FULL + ")");
+        tilt.appendChild(d);
+    });
+  }
 
-    if (p.class !== 'leaf') {
-      const g1 = document.createElement('div');
-      g1.className = 'gloss g1';
-      const g2 = document.createElement('div');
-      g2.className = 'gloss g2';
-      div.appendChild(g1);
-      div.appendChild(g2);
-      div.style.setProperty('--fx', p.fx);
-      div.style.setProperty('--fy', p.fy);
-      div.style.setProperty('--ry', p.ry);
-    }
-    tilt.appendChild(div);
+  // Smooth step easing
+  function sm(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
+  function cl(x, a, b) { return Math.max(a, Math.min(b, x)); }
+
+  var T0 = 0, raf = 0, px = 0, py = 0, cx0 = 0, cy0 = 0, last = 0;
+  
+  // Mouse tilt
+  addEventListener("pointermove", function(e) {
+    py = ((e.clientX / innerWidth) - .5) * 50;
+    px = -((e.clientY / innerHeight) - .5) * 30;
+    last = performance.now();
   });
 
-  // ==========================================
-  // VINE CANVAS ANIMATION
-  // ==========================================
-  (function(){
-    var cb = document.getElementById('cb'), cf = document.getElementById('cf');
-    var bx = cb.getContext('2d'), fx = cf.getContext('2d');
-    var W, H, t0 = performance.now(), leaves = [], vines = [];
+  var cb = document.getElementById('cb');
+  var cf = document.getElementById('cf');
+  var xb = cb.getContext('2d');
+  var xf = cf.getContext('2d');
+  var LEAF = new Image();
+  LEAF.src = 'assets/images/logo-leaf.png';
 
-    function resize() {
-      W = window.innerWidth;
-      H = window.innerHeight;
-      cb.width = cf.width = W * devicePixelRatio;
-      cb.height = cf.height = H * devicePixelRatio;
-      cb.style.width = cf.style.width = W + 'px';
-      cb.style.height = cf.style.height = H + 'px';
-      bx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-      fx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-      init();
-    }
+  var N = 260, NL = 30, F = 1100;
 
-    function init() {
-      vines = []; leaves = [];
-      var n = Math.max(4, Math.floor(W / 220));
-      for (var i = 0; i < n; i++) {
-        vines.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          len: Math.random() * 200 + 100,
-          ang: Math.random() * Math.PI * 2,
-          speed: Math.random() * 0.2 + 0.1,
-          sway: Math.random() * 2
-        });
+  // 3D Spiral Math for the vines
+  function P3(f, w, h, t) {
+    var bx = (BX - .5) * w, by = (BY - .5) * h;
+    var ph = .6 + f * Math.PI * 2 * 2.3;
+    var R = w * (.1 + .9 * Math.pow(Math.sin(Math.PI * f), .8));
+    var X = R * Math.cos(ph) + bx * (1 - f);
+    var Z = R * Math.sin(ph);
+    var Y = by + w * (.26 * Math.sin(f * Math.PI * 2 * 1.15 + .4) - .1 * f);
+    var ps = t * .55;
+    var ca = Math.cos(ps), sa = Math.sin(ps);
+    var X1 = X * ca + Z * sa;
+    var Z1 = -X * sa + Z * ca;
+    var al = .3;
+    var cA = Math.cos(al), sA = Math.sin(al);
+    var Y2 = Y * cA - Z1 * sA;
+    var Z2 = Y * sA + Z1 * cA;
+    var s = F / (F - Z2);
+    return [X1 * s, Y2 * s, Z2, s];
+  }
+
+  function draw(t) {
+    var d = Math.min(2, window.devicePixelRatio || 1);
+    var W = innerWidth, H = innerHeight;
+    [cb, cf].forEach(function(c) {
+      if (c.width !== W * d) {
+        c.width = W * d;
+        c.height = H * d;
       }
+    });
+    [xb, xf].forEach(function(x) {
+      x.setTransform(d, 0, 0, d, 0, 0);
+      x.clearRect(0, 0, W, H);
+    });
+
+    var r = logo.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    var cx = r.left + w * .5, cy = r.top + h * .5;
+
+    var g = sm((t - 1) / 2.8);
+    var ret = 1 - sm((t - 4.1) / 1.2);
+    var vend = Math.min(g, ret);
+    if (vend <= .002) return;
+
+    var pts = [];
+    for (var i = 0; i <= N; i++) {
+      var f = i / N;
+      if (f > vend) break;
+      pts.push(P3(f, w, h, t));
     }
 
-    function draw(now) {
-      var t = (now - t0) / 1000;
-      bx.clearRect(0, 0, W, H);
-      fx.clearRect(0, 0, W, H);
+    var lw = Math.max(1.5, w * .014);
+    xb.lineCap = xf.lineCap = "round";
 
-      // Draw background vines
-      bx.lineWidth = 1.5;
-      bx.strokeStyle = 'rgba(79, 168, 74, 0.15)'; // Light green
-      vines.forEach(v => {
-        bx.beginPath();
-        bx.moveTo(v.x, v.y);
-        var ex = v.x + Math.cos(v.ang) * v.len;
-        var ey = v.y + Math.sin(v.ang) * v.len;
-        bx.lineTo(ex, ey);
-        bx.stroke();
-      });
-
-      // Draw foreground floating leaves
-      fx.fillStyle = 'rgba(79, 168, 74, 0.1)';
-      vines.forEach(v => {
-        var lx = v.x + Math.cos(v.ang) * v.len + Math.sin(t * v.speed) * 20;
-        var ly = v.y + Math.sin(v.ang) * v.len + Math.cos(t * v.speed) * 20;
-        fx.beginPath();
-        fx.ellipse(lx, ly, 10, 5, v.ang, 0, Math.PI * 2);
-        fx.fill();
-      });
-
-      requestAnimationFrame(draw);
+    for (var i = 1; i < pts.length; i++) {
+      var a = pts[i - 1], b = pts[i];
+      var zz = (a[2] + b[2]) / 2;
+      var x = zz > 0 ? xf : xb;
+      x.globalAlpha = zz > 0 ? .8 : .5;
+      x.strokeStyle = zz > 0 ? "#4fa84a" : "#78b874";
+      x.lineWidth = lw * (a[3] + b[3]) / 2;
+      x.beginPath();
+      x.moveTo(cx + a[0], cy + a[1]);
+      x.lineTo(cx + b[0], cy + b[1]);
+      x.stroke();
     }
 
-    window.addEventListener('resize', resize);
-    resize();
-    requestAnimationFrame(draw);
-  })();
+    if (!LEAF.complete) return;
 
+    var order = [];
+    for (var k = 1; k <= NL; k++) {
+      var f = .04 + .9 * (k / (NL + 1));
+      if (f > vend) continue;
+      var sc = sm((vend - f) * 9);
+      if (sc <= .01) continue;
+      var p = P3(f, w, h, t);
+      var q = P3(Math.min(1, f + .012), w, h, t);
+      order.push({ f: f, p: p, q: q, sc: sc, k: k });
+    }
+
+    order.sort(function(a, b) { return a.p[2] - b.p[2]; });
+
+    order.forEach(function(o) {
+      var p = o.p, q = o.q;
+      var tg = Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI;
+      var side = o.k % 2 ? 1 : -1;
+      var rot = tg + side * (50 + (o.k * 37 % 20)) + 45;
+      var sz = w * (.1 + .1 * (1 - o.f) + ((o.k * 13) % 7) * .004) * p[3] * o.sc;
+      var x = p[2] > 0 ? xf : xb;
+      x.save();
+      x.globalAlpha = p[2] > 0 ? .78 : .42;
+      x.translate(cx + p[0], cy + p[1]);
+      x.rotate(rot * Math.PI / 180);
+      x.drawImage(LEAF, 0, -sz, sz, sz * (LEAF.height / LEAF.width));
+      x.restore();
+    });
+  }
+
+  function frame(now) {
+    var t = window.__t !== undefined ? window.__t : (now - T0) / 1000;
+    draw(t);
+    
+    var ry = py, rx = px;
+    if (now - last > 2500) {
+      ry = Math.sin(t * .7) * (t > 7 ? 18 : 0);
+      rx = Math.sin(t * .5) * (t > 7 ? 5 : 0) + (t > 7 ? 3 : 0);
+    }
+    
+    cx0 += (ry - cx0) * .07;
+    cy0 += (rx - cy0) * .07;
+    tilt.style.transform = "rotateX(" + cy0.toFixed(2) + "deg) rotateY(" + cx0.toFixed(2) + "deg)";
+    
+    raf = requestAnimationFrame(frame);
+  }
+
+  function play() {
+    cancelAnimationFrame(raf);
+    m.classList.remove("play");
+    build();
+    void m.offsetWidth;
+    m.classList.add("play");
+    T0 = performance.now();
+    last = 0;
+    raf = requestAnimationFrame(frame);
+  }
+
+  // Initialize
+  play();
 </script>
 
 </body>
