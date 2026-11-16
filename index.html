@@ -13,6 +13,11 @@
       --accent: #7DA69D;
       --accent-dark: #5C827A;
       --border-color: #E0E0E0;
+      
+      /* Dad's colors */
+      --ink: #0f3b57;
+      --soft: #5b7f96;
+      --green: #4fa84a;
     }
 
     body {
@@ -36,18 +41,7 @@
       filter: blur(0); 
     }
 
-    .reveal-graphic {
-      opacity: 0;
-      transform: translateY(60px) scale(0.95);
-      filter: blur(10px);
-      transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-graphic.active {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
-
+    /* ===== HERO SECTION ===== */
     .hero-new {
       min-height: 100vh;
       display: flex;
@@ -89,70 +83,182 @@
       max-width: 90%;
     }
 
-    /* ===== ANIMATED LOGO GRAPHIC — JAVASCRIPT-DRIVEN ===== */
+    /* ========================================================
+       DAD'S ANIMATED LOGO GRAPHIC (Adapted)
+       ======================================================== */
     .hero-graphic {
       width: 100%;
-      height: 500px;
+      height: 600px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
     }
 
-    .logo-mark {
+    .logo {
       position: relative;
-      width: min(100%, 460px);
-      aspect-ratio: 1 / 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: min(52vw,340px,45vh);
+      aspect-ratio: 615/631;
+      perspective: 1100px;
     }
 
-    .logo-piece {
+    .tilt {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    .pc {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      opacity: 0;
+    }
+
+    .pc img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      opacity: 0;
-      z-index: 2;
-      will-change: transform, opacity;
     }
 
-    .piece-tl   { transform-origin: 27% 27%; }
-    .piece-bl   { transform-origin: 27% 73%; }
-    .piece-br   { transform-origin: 73% 73%; }
-    .piece-leaf { transform-origin: 53% 46%; z-index: 3; }
-
-    /* Burst */
-    .logo-mark .burst {
-      position: absolute;
-      left: 50%; top: 50%;
-      width: 70%; aspect-ratio: 1;
-      margin: -35% 0 0 -35%;
-      border-radius: 50%;
-      background: radial-gradient(circle,
-        rgba(255,255,255,0.95) 0%,
-        rgba(125,166,157,0.55) 30%,
-        rgba(125,166,157,0) 65%);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1;
-      transform: scale(0.1);
+    .pc.leaf {
+      transform-origin: 52.85% 43.58%;
     }
 
-    /* Ring */
-    .logo-mark .ring {
+    /* Leaf Sprout Animation */
+    .play .pc.leaf {
+      animation: sprout .95s cubic-bezier(.2,1.3,.3,1) .2s both;
+    }
+    @keyframes sprout {
+      from { opacity: 0; transform: translateZ(-260px) rotateY(110deg) scale(.05); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* 3D Warp In Animation */
+    .play .pc.tl, .play .pc.bl, .play .pc.br {
+      animation: warp 1.2s cubic-bezier(.15,.95,.25,1.04) both;
+    }
+    .play .pc.tl { animation-delay: 5.3s; }
+    .play .pc.bl { animation-delay: 5.5s; }
+    .play .pc.br { animation-delay: 5.7s; }
+
+    @keyframes warp {
+      from { opacity: 0; transform: translate3d(var(--fx),var(--fy),-1000px) rotateY(var(--ry)) rotateX(55deg); }
+      35% { opacity: 1; }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* Glass Shine */
+    .gloss {
       position: absolute;
-      left: 50%; top: 50%;
-      width: 14%; aspect-ratio: 1;
-      margin: -7% 0 0 -7%;
-      border-radius: 50%;
-      border: 3px solid var(--accent);
+      inset: 0;
+      -webkit-mask-image: var(--m);
+      -webkit-mask-size: 100% 100%;
+      mask-image: var(--m);
+      mask-size: 100% 100%;
+      transform: translateZ(2px);
       opacity: 0;
       pointer-events: none;
-      z-index: 1;
-      transform: scale(0.2);
+    }
+    .gloss.g1 {
+      background: linear-gradient(125deg,rgba(255,255,255,.5),rgba(255,255,255,.05) 38%,rgba(255,255,255,0) 55%);
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
+    }
+    .gloss.g2 {
+      background: linear-gradient(115deg,transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%);
+      background-size: 250% 100%;
+      background-position: 103% 0;
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
+    }
+
+    .play .gloss { animation: fadeo 1s ease-out 6.6s both; }
+    .play .gloss.g2 { animation: fadeo 1s ease-out 6.6s both,shine 6s ease-in-out 7.4s infinite; }
+
+    @keyframes shine {
+      0% { background-position: 103% 0; }
+      35%,100% { background-position: -3% 0; }
+    }
+    @keyframes fadeo {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Floating Animation */
+    .play .tilt {
+      animation: floaty 4.4s ease-in-out 7.6s infinite;
+    }
+    @keyframes floaty {
+      0%,100% { translate: 0 0; }
+      50% { translate: 0 -10px; }
+    }
+
+    /* Shadows */
+    .logo::after {
+      content: "";
+      position: absolute;
+      left: 8%; right: 8%; bottom: -9%; height: 9%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse,rgba(15,59,87,.34) 0,rgba(15,59,87,.16) 40%,rgba(15,59,87,0) 72%);
+      opacity: 0;
+      z-index: -1;
+    }
+    .logo::before {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: -6.6%; height: 3.4%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse,rgba(15,59,87,.55) 0,rgba(15,59,87,0) 72%);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .play .logo::after { animation: shin 1s ease-out 5.6s both,shb 4.4s ease-in-out 7.6s infinite; }
+    .play .logo::before { animation: shin 1s ease-out 5.6s both,shb2 4.4s ease-in-out 7.6s infinite; }
+
+    @keyframes shin {
+      from { opacity: 0; transform: scale(.5); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes shb {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(.86); opacity: .62; }
+    }
+    @keyframes shb2 {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(.7); opacity: .45; }
+    }
+
+    /* Burst & Ping */
+    .ping {
+      position: absolute; left: 52.85%; top: 43.58%; width: 18%; aspect-ratio: 1;
+      margin: -9% 0 0 -9%; border: 3px solid var(--green); border-radius: 50%;
+      opacity: 0; pointer-events: none;
+    }
+    .play .ping { animation: rg 1s ease-out .45s both; }
+    @keyframes rg {
+      from { opacity: .9; transform: scale(.2); }
+      to { opacity: 0; transform: scale(3.4); }
+    }
+
+    .g2b {
+      position: absolute; left: 49%; top: 49%; width: 70%; aspect-ratio: 1;
+      margin: -35% 0 0 -35%; border-radius: 50%;
+      opacity: 0; pointer-events: none;
+      background: radial-gradient(circle,rgba(255,255,255,.95) 0,rgba(110,200,245,.5) 35%,rgba(110,200,245,0) 68%);
+    }
+    .play .g2b { animation: burst 1.2s ease-out 6.5s both; }
+    @keyframes burst {
+      0% { opacity: 0; transform: scale(.1); }
+      40% { opacity: 1; transform: scale(.9); }
+      100% { opacity: 0; transform: scale(1.5); }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .play * { animation-duration: .01s!important; animation-delay: 0s!important; }
     }
 
     /* ===== BUTTONS ===== */
@@ -342,8 +448,8 @@
       animation: float-icon 6s ease-in-out infinite;
     }
     @keyframes float-icon {
-      0%   { transform: translateY(0px); }
-      50%  { transform: translateY(-15px); }
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
       100% { transform: translateY(0px); }
     }
     .edu-content .meta-tag {
@@ -420,8 +526,8 @@
       .hero-content h1 { font-size: 4rem; }
       .hero-content h2 { font-size: 2rem; }
       .hero-content p { margin: 0 auto 32px; }
-      .hero-graphic { height: 400px; }
-      .logo-mark { width: min(80%, 320px); }
+      .hero-graphic { height: 450px; }
+      .logo { width: min(80%, 280px); }
       
       .intro-grid { grid-template-columns: 1fr; gap: 40px; }
       .intro-graphic { height: 300px; }
@@ -481,15 +587,11 @@
         </a>
       </div>
 
-      <div class="hero-graphic" id="logoGraphic">
-        <div class="logo-mark" id="logoMark">
-          <img class="logo-piece piece-tl" src="assets/images/logo-tl.png" alt="" />
-          <img class="logo-piece piece-bl" src="assets/images/logo-bl.png" alt="" />
-          <img class="logo-piece piece-br" src="assets/images/logo-br.png" alt="" />
-          <img class="logo-piece piece-leaf" src="assets/images/logo-leaf.png" alt="" />
-          
-          <div class="burst" id="logoBurst"></div>
-          <div class="ring" id="logoRing"></div>
+      <div class="hero-graphic reveal-graphic" style="transition-delay: 0.2s;">
+        <div class="logo" id="logo">
+          <div class="tilt" id="tilt"></div>
+          <div class="ping"></div>
+          <div class="g2b"></div>
         </div>
       </div>
 
@@ -618,7 +720,7 @@
       </div>
       <div class="edu-content reveal">
         <h2>برق چگونه تولید می‌شود؟</h2>
-        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
+        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی اضافی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
       </div>
     </div>
   </div>
@@ -675,105 +777,63 @@
     requestAnimationFrame(autoScroll);
   }
 
-  // ===== ANIMATED LOGO — JAVASCRIPT-DRIVEN TIMELINE =====
-  const pieces = {
-    tl:   document.querySelector('.piece-tl'),
-    bl:   document.querySelector('.piece-bl'),
-    br:   document.querySelector('.piece-br'),
-    leaf: document.querySelector('.piece-leaf')
-  };
-  const logoBurst = document.getElementById('logoBurst');
-  const logoRing = document.getElementById('logoRing');
+  // ==========================================
+  // DAD'S ANIMATED LOGO (Adapted for 4 images)
+  // ==========================================
+  const tilt = document.getElementById('tilt');
+  const logo = document.getElementById('logo');
+  const main = document.getElementById('m');
 
-  function easeOutBack(t) {
-    const c1 = 1.70158;
-    const c3 = c1 + 1;
-    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
-  }
+  // We need to build the pieces dynamically to add the 3D variables
+  const pieces = [
+    { class: 'tl', src: 'assets/images/logo-tl.png', fx: '-300px', fy: '-200px', ry: '-30deg' },
+    { class: 'bl', src: 'assets/images/logo-bl.png', fx: '-300px', fy: '200px', ry: '30deg' },
+    { class: 'br', src: 'assets/images/logo-br.png', fx: '300px', fy: '200px', ry: '-30deg' },
+    { class: 'leaf', src: 'assets/images/logo-leaf.png' }
+  ];
 
-  function animatePiece(el, delayMs, duration, startTime, now) {
-    const elapsed = now - startTime - delayMs;
-    if (elapsed < 0) return; 
-    
-    const t = Math.min(elapsed / duration, 1);
-    const ease = easeOutBack(t);
-    
-    const scale = 0.4 + 0.6 * ease;
-    const opacity = Math.min(t * 3, 1);
-    
-    el.style.transform = `scale(${scale})`;
-    el.style.opacity = opacity;
-  }
+  let loadedImages = 0;
 
-  function playLogo() {
-    const startTime = performance.now();
-    const totalDuration = 3500; 
-    const pieceDuration = 800;  
+  pieces.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'pc ' + p.class;
     
-    const tlDelay = 0;
-    const blDelay = 250;
-    const brDelay = 500;
-    const leafDelay = 1000; 
-    const burstStart = 1400;
-
-    function frame(now) {
-      const elapsed = now - startTime;
-      
-      animatePiece(pieces.tl, tlDelay, pieceDuration, startTime, now);
-      animatePiece(pieces.bl, blDelay, pieceDuration, startTime, now);
-      animatePiece(pieces.br, brDelay, pieceDuration, startTime, now);
-      
-      const leafElapsed = elapsed - leafDelay;
-      if (leafElapsed >= 0) {
-        const t = Math.min(leafElapsed / pieceDuration, 1);
-        const ease = easeOutBack(t);
-        const scale = 0.4 + 0.6 * ease;
-        const rotate = (1 - t) * -20; 
-        const opacity = Math.min(t * 3, 1);
-        pieces.leaf.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
-        pieces.leaf.style.opacity = opacity;
+    // Create the image
+    const img = document.createElement('img');
+    img.src = p.src;
+    img.alt = '';
+    
+    // Add load listener to trigger animation when ready
+    img.addEventListener('load', () => {
+      loadedImages++;
+      if (loadedImages === pieces.length) {
+        // All images loaded, trigger the 5.3s assembly sequence
+        setTimeout(() => {
+          logo.classList.add('play');
+        }, 400);
       }
-      
-      const burstElapsed = elapsed - burstStart;
-      if (burstElapsed >= 0 && burstElapsed <= 1500) {
-        const bt = burstElapsed / 1500;
-        logoBurst.style.opacity = Math.sin(bt * Math.PI);
-        logoBurst.style.transform = `scale(${0.1 + bt * 1.7})`;
-        
-        logoRing.style.opacity = Math.max(0, 0.8 * (1 - bt));
-        logoRing.style.transform = `scale(${0.2 + bt * 7.8})`;
-      } else if (burstElapsed > 1500) {
-        logoBurst.style.opacity = 0;
-        logoRing.style.opacity = 0;
-      }
-      
-      if (elapsed < totalDuration) {
-        requestAnimationFrame(frame);
-      }
-    }
-    
-    requestAnimationFrame(frame);
-  }
+    });
 
-  const allImages = [pieces.tl, pieces.bl, pieces.br, pieces.leaf];
-  let loadedCount = 0;
-  let allLoaded = false;
-  
-  function checkAllLoaded() {
-    loadedCount++;
-    if (loadedCount === allImages.length && !allLoaded) {
-      allLoaded = true;
-      setTimeout(playLogo, 400);
+    div.appendChild(img);
+
+    // Add the gloss layers for the squares
+    if (p.class !== 'leaf') {
+      const g1 = document.createElement('div');
+      g1.className = 'gloss g1';
+      const g2 = document.createElement('div');
+      g2.className = 'gloss g2';
+      div.appendChild(g1);
+      div.appendChild(g2);
+      
+      // Set CSS variables for the warp animation
+      div.style.setProperty('--fx', p.fx);
+      div.style.setProperty('--fy', p.fy);
+      div.style.setProperty('--ry', p.ry);
     }
-  }
-  
-  allImages.forEach(img => {
-    if (img.complete && img.naturalWidth > 0) {
-      checkAllLoaded();
-    } else {
-      img.addEventListener('load', checkAllLoaded);
-    }
+
+    tilt.appendChild(div);
   });
+
 </script>
 
 </body>
