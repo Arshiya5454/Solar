@@ -86,7 +86,8 @@
 
     .logo {
       position: relative;
-      width: min(60vw,340px,45vh);
+      /* Increased size for desktop */
+      width: min(60vw,450px,55vh);
       aspect-ratio: 615/631;
       perspective: 1100px;
     }
@@ -245,8 +246,10 @@
     
     .logo-text-wrap h1 {
       margin: 0;
-      font-size: clamp(2rem,7vw,3.4rem);
-      font-weight: 800;
+      /* Increased size for desktop */
+      font-size: clamp(2.5rem,8vw,4.5rem);
+      /* Made it BOLD */
+      font-weight: 900;
       color: var(--ink);
       display: flex;
       gap: .3em;
@@ -273,7 +276,8 @@
     
     .logo-text-wrap p {
       margin: .6rem 0 0;
-      font-size: clamp(1rem,3.2vw,1.25rem);
+      /* Increased size for desktop */
+      font-size: clamp(1.1rem,3.5vw,1.5rem);
       font-weight: 300;
       color: var(--soft);
       opacity: 0;
@@ -563,7 +567,16 @@
     @media (max-width: 992px) {
       .hero-layout { gap: 24px; }
       .hero-graphic { height: 400px; }
-      .logo { width: min(80%, 280px); }
+      /* Reverted to original size for mobile */
+      .logo { width: min(80%, 280px); } 
+      
+      /* Reverted to original size for mobile */
+      .logo-text-wrap h1 {
+        font-size: clamp(2rem,7vw,3.4rem);
+      }
+      .logo-text-wrap p {
+        font-size: clamp(1rem,3.2vw,1.25rem);
+      }
       
       .intro-grid { grid-template-columns: 1fr; gap: 40px; }
       .intro-graphic { height: 300px; }
@@ -769,7 +782,7 @@
       </div>
       <div class="edu-content reveal">
         <h2>برق چگونه تولید می‌شود؟</h2>
-        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
+        <p>برق تولید شده توسط پنل‌ها، وارد اینورتر می‌شود. اینورتر وظیفه دارد این جریان DC را به جریان متناوب (AC) که برای مصرف لوازم خانگی و صنعتی مناسب است، تبدیل کند. در سیستم‌های مجهز به باتری، انرژی اضافی ذخیره شده تا در ساعات بدون تابش خورشید یا قطعی برق نیز برق ساختمان تأمین شود.</p>
       </div>
     </div>
   </div>
@@ -833,16 +846,15 @@
   // ==========================================
   const logo = document.getElementById('logo');
   const tilt = document.getElementById('tilt');
-  const m = document.body; // using body for the play class
+  const m = document.body; 
   
-  // Dad's variables for the math
   var PC = {
     tl: 'assets/images/logo-tl.png',
     bl: 'assets/images/logo-bl.png',
     br: 'assets/images/logo-br.png',
     leaf: 'assets/images/logo-leaf.png'
   };
-  var FULL = 'assets/images/logo.png'; // We use the full logo for the gloss mask
+  var FULL = 'assets/images/logo.png';
   var FLY = {
     tl: ["-320px", "-220px", "260px", "-130deg"],
     leaf: ["320px", "-260px", "320px", "140deg"],
@@ -850,11 +862,9 @@
     br: ["320px", "240px", "360px", "-120deg"]
   };
   
-  // Dad's math vars for the vines
   var BX = 0.45;
   var BY = 0.6;
 
-  // Build the 3D stacked images (Dad's exact code)
   function build() {
     var w = logo.offsetWidth, step = w / 85;
     tilt.innerHTML = "";
@@ -884,13 +894,11 @@
     });
   }
 
-  // Smooth step easing
   function sm(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
   function cl(x, a, b) { return Math.max(a, Math.min(b, x)); }
 
   var T0 = 0, raf = 0, px = 0, py = 0, cx0 = 0, cy0 = 0, last = 0;
   
-  // Mouse tilt
   addEventListener("pointermove", function(e) {
     py = ((e.clientX / innerWidth) - .5) * 50;
     px = -((e.clientY / innerHeight) - .5) * 30;
@@ -906,7 +914,6 @@
 
   var N = 260, NL = 30, F = 1100;
 
-  // 3D Spiral Math for the vines
   function P3(f, w, h, t) {
     var bx = (BX - .5) * w, by = (BY - .5) * h;
     var ph = .6 + f * Math.PI * 2 * 2.3;
@@ -1031,7 +1038,6 @@
     raf = requestAnimationFrame(frame);
   }
 
-  // Initialize
   play();
 </script>
 
