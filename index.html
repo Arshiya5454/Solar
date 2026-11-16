@@ -772,4 +772,107 @@
   <div class="container reveal">
     <h2>آماده شروع پروژه خورشیدی خود هستید؟</h2>
     <p>همین امروز با ما تماس بگیرید و از مشاوره رایگان بهره‌مند شوید. راهکار مناسب برای فضا، نیاز و بودجه شما طراحی می‌کنیم.</p>
-    <a href="pages/consultation.html" class="btn-minimal">شروع
+    <a href="pages/consultation.html" class="btn-minimal">شروع پروژه جدید</a>
+  </div>
+</section>
+
+<script src="script.js"></script>
+<script>
+  function reveal() {
+    var reveals = document.querySelectorAll(".reveal, .reveal-graphic");
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 100;
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add("active");
+      }
+    }
+  }
+  window.addEventListener("scroll", reveal);
+  reveal();
+
+  const scrollContainer = document.getElementById('scrollContainer');
+  const scrollRow = document.getElementById('projectScroll');
+
+  if (scrollContainer && scrollRow) {
+    const cards = scrollRow.innerHTML;
+    scrollRow.innerHTML = cards + cards;
+    let isHovered = false;
+    let isTouching = false;
+    let autoScrollSpeed = 1; 
+
+    scrollContainer.addEventListener('mouseenter', () => isHovered = true);
+    scrollContainer.addEventListener('mouseleave', () => isHovered = false);
+    scrollContainer.addEventListener('touchstart', () => isTouching = true);
+    scrollContainer.addEventListener('touchend', () => isTouching = false);
+
+    function autoScroll() {
+      if (!isHovered && !isTouching) {
+        scrollContainer.scrollLeft -= autoScrollSpeed;
+        if (Math.abs(scrollContainer.scrollLeft) >= (scrollContainer.scrollWidth / 2)) {
+          scrollContainer.scrollLeft = 0;
+        }
+      }
+      requestAnimationFrame(autoScroll);
+    }
+    requestAnimationFrame(autoScroll);
+  }
+
+  // ==========================================
+  // DAD'S ANIMATED LOGO
+  // ==========================================
+  const tilt = document.getElementById('tilt');
+  const logo = document.getElementById('logo');
+  const logoTextWrap = document.querySelector('.logo-text-wrap'); // Text wrapper
+  const heroButtons = document.querySelector('.hero-buttons'); // Buttons wrapper
+
+  const pieces = [
+    { class: 'tl', src: 'assets/images/logo-tl.png', fx: '-300px', fy: '-200px', ry: '-30deg' },
+    { class: 'bl', src: 'assets/images/logo-bl.png', fx: '-300px', fy: '200px', ry: '30deg' },
+    { class: 'br', src: 'assets/images/logo-br.png', fx: '300px', fy: '200px', ry: '-30deg' },
+    { class: 'leaf', src: 'assets/images/logo-leaf.png' }
+  ];
+
+  let loadedImages = 0;
+
+  pieces.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'pc ' + p.class;
+    
+    const img = document.createElement('img');
+    img.src = p.src;
+    img.alt = '';
+    
+    img.addEventListener('load', () => {
+      loadedImages++;
+      if (loadedImages === pieces.length) {
+        // 400ms delay to ensure paint, then trigger CSS animations
+        setTimeout(() => {
+          logo.classList.add('play');
+        }, 400);
+      }
+    });
+
+    div.appendChild(img);
+
+    if (p.class !== 'leaf') {
+      const g1 = document.createElement('div');
+      g1.className = 'gloss g1';
+      const g2 = document.createElement('div');
+      g2.className = 'gloss g2';
+      div.appendChild(g1);
+      div.appendChild(g2);
+      
+      div.style.setProperty('--fx', p.fx);
+      div.style.setProperty('--fy', p.fy);
+      div.style.setProperty('--ry', p.ry);
+    }
+
+    tilt.appendChild(div);
+  });
+
+</script>
+
+</body>
+</html>
