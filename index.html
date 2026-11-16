@@ -28,6 +28,19 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* CANVAS VINES */
+    canvas {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+    }
+    #cb { z-index: -1; }
+    #cf { z-index: -1; }
+
     .reveal {
       opacity: 0;
       transform: translateY(40px) scale(0.98);
@@ -52,7 +65,6 @@
       overflow: hidden;
     }
     
-    /* Changed to single column centered layout */
     .hero-layout {
       display: flex;
       flex-direction: column;
@@ -100,10 +112,7 @@
       object-fit: contain;
     }
 
-    /* FIXED LEAF ORIGIN */
-    .pc.leaf {
-      transform-origin: center center;
-    }
+    .pc.leaf { transform-origin: center center; }
 
     .play .pc.leaf {
       animation: sprout .95s cubic-bezier(.2,1.3,.3,1) .2s both;
@@ -130,25 +139,19 @@
     .gloss {
       position: absolute;
       inset: 0;
-      -webkit-mask-image: var(--m);
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
       -webkit-mask-size: 100% 100%;
-      mask-image: var(--m);
       mask-size: 100% 100%;
       transform: translateZ(2px);
       opacity: 0;
       pointer-events: none;
     }
-    .gloss.g1 {
-      background: linear-gradient(125deg,rgba(255,255,255,.5),rgba(255,255,255,.05) 38%,rgba(255,255,255,0) 55%);
-      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
-      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
-    }
+    .gloss.g1 { background: linear-gradient(125deg,rgba(255,255,255,.5),rgba(255,255,255,.05) 38%,rgba(255,255,255,0) 55%); }
     .gloss.g2 {
       background: linear-gradient(115deg,transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%);
       background-size: 250% 100%;
       background-position: 103% 0;
-      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
-      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 615 631"><path d="M100 0 H500 Q615 0 615 120 V500 Q615 631 500 631 H100 Q0 631 0 500 V120 Q0 0 100 0 Z" fill="black"/></svg>');
     }
 
     .play .gloss { animation: fadeo 1s ease-out 6.6s both; }
@@ -233,7 +236,7 @@
     }
 
     /* ========================================================
-       DAD'S ANIMATED TEXT (Added under logo)
+       DAD'S ANIMATED TEXT (Placed under logo)
        ======================================================== */
     .logo-text-wrap {
       text-align: center;
@@ -255,6 +258,7 @@
       opacity: 0;
     }
     
+    /* Now the play class is on body, so this works */
     .play .logo-text-wrap h1 span {
       animation: word .8s cubic-bezier(.2,.8,.2,1) both;
     }
@@ -284,7 +288,7 @@
       to { opacity: 1; transform: none; }
     }
 
-    /* Buttons hidden until animation completes to match dad's vibe */
+    /* Buttons hidden until animation completes */
     .hero-buttons {
       opacity: 0;
       margin-top: 24px;
@@ -583,6 +587,10 @@
 </head>
 <body>
 
+<!-- CANVAS VINES -->
+<canvas id="cb"></canvas>
+<canvas id="cf"></canvas>
+
 <header class="navbar" style="background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E0E0E0;">
   <div class="container navbar__wrapper">
     <a href="index.html" class="navbar__logo">
@@ -778,6 +786,7 @@
 
 <script src="script.js"></script>
 <script>
+  // 1. Reveal on scroll
   function reveal() {
     var reveals = document.querySelectorAll(".reveal, .reveal-graphic");
     for (var i = 0; i < reveals.length; i++) {
@@ -792,6 +801,7 @@
   window.addEventListener("scroll", reveal);
   reveal();
 
+  // 2. Infinite Slider
   const scrollContainer = document.getElementById('scrollContainer');
   const scrollRow = document.getElementById('projectScroll');
 
@@ -819,41 +829,31 @@
     requestAnimationFrame(autoScroll);
   }
 
-  // ==========================================
-  // DAD'S ANIMATED LOGO
-  // ==========================================
+  // 3. Dad's Animated Logo & Vines
   const tilt = document.getElementById('tilt');
   const logo = document.getElementById('logo');
-  const logoTextWrap = document.querySelector('.logo-text-wrap'); // Text wrapper
-  const heroButtons = document.querySelector('.hero-buttons'); // Buttons wrapper
-
   const pieces = [
     { class: 'tl', src: 'assets/images/logo-tl.png', fx: '-300px', fy: '-200px', ry: '-30deg' },
     { class: 'bl', src: 'assets/images/logo-bl.png', fx: '-300px', fy: '200px', ry: '30deg' },
     { class: 'br', src: 'assets/images/logo-br.png', fx: '300px', fy: '200px', ry: '-30deg' },
     { class: 'leaf', src: 'assets/images/logo-leaf.png' }
   ];
-
   let loadedImages = 0;
 
   pieces.forEach(p => {
     const div = document.createElement('div');
     div.className = 'pc ' + p.class;
-    
     const img = document.createElement('img');
     img.src = p.src;
     img.alt = '';
-    
     img.addEventListener('load', () => {
       loadedImages++;
       if (loadedImages === pieces.length) {
-        // 400ms delay to ensure paint, then trigger CSS animations
         setTimeout(() => {
-          logo.classList.add('play');
+          document.body.classList.add('play');
         }, 400);
       }
     });
-
     div.appendChild(img);
 
     if (p.class !== 'leaf') {
@@ -863,14 +863,82 @@
       g2.className = 'gloss g2';
       div.appendChild(g1);
       div.appendChild(g2);
-      
       div.style.setProperty('--fx', p.fx);
       div.style.setProperty('--fy', p.fy);
       div.style.setProperty('--ry', p.ry);
     }
-
     tilt.appendChild(div);
   });
+
+  // ==========================================
+  // VINE CANVAS ANIMATION
+  // ==========================================
+  (function(){
+    var cb = document.getElementById('cb'), cf = document.getElementById('cf');
+    var bx = cb.getContext('2d'), fx = cf.getContext('2d');
+    var W, H, t0 = performance.now(), leaves = [], vines = [];
+
+    function resize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      cb.width = cf.width = W * devicePixelRatio;
+      cb.height = cf.height = H * devicePixelRatio;
+      cb.style.width = cf.style.width = W + 'px';
+      cb.style.height = cf.style.height = H + 'px';
+      bx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      fx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      init();
+    }
+
+    function init() {
+      vines = []; leaves = [];
+      var n = Math.max(4, Math.floor(W / 220));
+      for (var i = 0; i < n; i++) {
+        vines.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          len: Math.random() * 200 + 100,
+          ang: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.2 + 0.1,
+          sway: Math.random() * 2
+        });
+      }
+    }
+
+    function draw(now) {
+      var t = (now - t0) / 1000;
+      bx.clearRect(0, 0, W, H);
+      fx.clearRect(0, 0, W, H);
+
+      // Draw background vines
+      bx.lineWidth = 1.5;
+      bx.strokeStyle = 'rgba(79, 168, 74, 0.15)'; // Light green
+      vines.forEach(v => {
+        bx.beginPath();
+        bx.moveTo(v.x, v.y);
+        var ex = v.x + Math.cos(v.ang) * v.len;
+        var ey = v.y + Math.sin(v.ang) * v.len;
+        bx.lineTo(ex, ey);
+        bx.stroke();
+      });
+
+      // Draw foreground floating leaves
+      fx.fillStyle = 'rgba(79, 168, 74, 0.1)';
+      vines.forEach(v => {
+        var lx = v.x + Math.cos(v.ang) * v.len + Math.sin(t * v.speed) * 20;
+        var ly = v.y + Math.sin(v.ang) * v.len + Math.cos(t * v.speed) * 20;
+        fx.beginPath();
+        fx.ellipse(lx, ly, 10, 5, v.ang, 0, Math.PI * 2);
+        fx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  })();
 
 </script>
 
