@@ -46,49 +46,26 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center;
       padding: 160px 0 100px;
       position: relative;
       overflow: hidden;
     }
     
+    /* Changed to single column centered layout */
     .hero-layout {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 80px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-    }
-
-    .hero-content h1 {
-      font-size: 6rem;
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -3px;
-      margin-bottom: 16px;
-      color: var(--accent);
-    }
-    
-    .hero-content h2 {
-      font-size: 2.5rem;
-      font-weight: 400;
-      line-height: 1.3;
-      margin-bottom: 32px;
-      color: var(--text-main);
-    }
-
-    .hero-content p {
-      font-size: 1.3rem;
-      color: var(--text-muted);
-      line-height: 2;
-      margin-bottom: 48px;
-      max-width: 90%;
+      text-align: center;
+      gap: 40px;
     }
 
     /* ========================================================
-       DAD'S ANIMATED LOGO GRAPHIC (Adapted)
+       DAD'S ANIMATED LOGO GRAPHIC
        ======================================================== */
     .hero-graphic {
       width: 100%;
-      height: 600px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -97,7 +74,7 @@
 
     .logo {
       position: relative;
-      width: min(52vw,340px,45vh);
+      width: min(60vw,340px,45vh);
       aspect-ratio: 615/631;
       perspective: 1100px;
     }
@@ -123,11 +100,11 @@
       object-fit: contain;
     }
 
+    /* FIXED LEAF ORIGIN */
     .pc.leaf {
-      transform-origin: 52.85% 43.58%;
+      transform-origin: center center;
     }
 
-    /* Leaf Sprout Animation */
     .play .pc.leaf {
       animation: sprout .95s cubic-bezier(.2,1.3,.3,1) .2s both;
     }
@@ -136,7 +113,6 @@
       to { opacity: 1; transform: none; }
     }
 
-    /* 3D Warp In Animation */
     .play .pc.tl, .play .pc.bl, .play .pc.br {
       animation: warp 1.2s cubic-bezier(.15,.95,.25,1.04) both;
     }
@@ -187,7 +163,6 @@
       to { opacity: 1; }
     }
 
-    /* Floating Animation */
     .play .tilt {
       animation: floaty 4.4s ease-in-out 7.6s infinite;
     }
@@ -234,7 +209,7 @@
 
     /* Burst & Ping */
     .ping {
-      position: absolute; left: 52.85%; top: 43.58%; width: 18%; aspect-ratio: 1;
+      position: absolute; left: 50%; top: 50%; width: 18%; aspect-ratio: 1;
       margin: -9% 0 0 -9%; border: 3px solid var(--green); border-radius: 50%;
       opacity: 0; pointer-events: none;
     }
@@ -255,6 +230,67 @@
       0% { opacity: 0; transform: scale(.1); }
       40% { opacity: 1; transform: scale(.9); }
       100% { opacity: 0; transform: scale(1.5); }
+    }
+
+    /* ========================================================
+       DAD'S ANIMATED TEXT (Added under logo)
+       ======================================================== */
+    .logo-text-wrap {
+      text-align: center;
+      margin-top: 10px;
+    }
+    
+    .logo-text-wrap h1 {
+      margin: 0;
+      font-size: clamp(2rem,7vw,3.4rem);
+      font-weight: 800;
+      color: var(--ink);
+      display: flex;
+      gap: .3em;
+      justify-content: center;
+    }
+    
+    .logo-text-wrap h1 span {
+      display: inline-block;
+      opacity: 0;
+    }
+    
+    .play .logo-text-wrap h1 span {
+      animation: word .8s cubic-bezier(.2,.8,.2,1) both;
+    }
+    
+    .play .logo-text-wrap h1 span:nth-child(1) { animation-delay: 7s; }
+    .play .logo-text-wrap h1 span:nth-child(2) { animation-delay: 7.25s; }
+    .play .logo-text-wrap h1 span:nth-child(3) { animation-delay: 7.5s; }
+    
+    @keyframes word {
+      from { opacity: 0; transform: translateY(22px); filter: blur(6px); }
+      to { opacity: 1; transform: none; filter: blur(0); }
+    }
+    
+    .logo-text-wrap p {
+      margin: .6rem 0 0;
+      font-size: clamp(1rem,3.2vw,1.25rem);
+      font-weight: 300;
+      color: var(--soft);
+      opacity: 0;
+    }
+    
+    .play .logo-text-wrap p {
+      animation: fade .9s ease-out 7.9s both;
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* Buttons hidden until animation completes to match dad's vibe */
+    .hero-buttons {
+      opacity: 0;
+      margin-top: 24px;
+    }
+    .play .hero-buttons {
+      animation: fade .6s ease-out 8.5s both;
     }
 
     @media (prefers-reduced-motion:reduce) {
@@ -522,11 +558,8 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
-      .hero-layout { grid-template-columns: 1fr; text-align: center; }
-      .hero-content h1 { font-size: 4rem; }
-      .hero-content h2 { font-size: 2rem; }
-      .hero-content p { margin: 0 auto 32px; }
-      .hero-graphic { height: 450px; }
+      .hero-layout { gap: 24px; }
+      .hero-graphic { height: 400px; }
       .logo { width: min(80%, 280px); }
       
       .intro-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -577,22 +610,31 @@
   <div class="container">
     <div class="hero-layout">
       
-      <div class="hero-content reveal">
-        <h1>برق‌آوران هوراد</h1>
-        <h2>انرژی خورشیدی بدون محدودیت.</h2>
-        <p>ما فقط نیروگاه خورشیدی نصب نمی‌کنیم؛ برای هر پروژه راهکار می‌سازیم. از طراحی و مهندسی تا اجرای دقیق، در کنار شما هستیم تا استقلال انرژی خود را به دست آورید.</p>
-        <a href="pages/consultation.html" class="btn-minimal">
-          شروع یک پروژه
-          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 19l-7-7 7-7"></path></svg>
-        </a>
-      </div>
-
-      <div class="hero-graphic reveal-graphic" style="transition-delay: 0.2s;">
+      <!-- Logo Graphic -->
+      <div class="hero-graphic reveal-graphic" id="logoGraphic" style="transition-delay: 0.2s;">
         <div class="logo" id="logo">
           <div class="tilt" id="tilt"></div>
           <div class="ping"></div>
           <div class="g2b"></div>
         </div>
+      </div>
+
+      <!-- Text (Dad's layout) -->
+      <div class="logo-text-wrap reveal">
+        <h1>
+          <span>برق</span>
+          <span>آوران</span>
+          <span>هوراد</span>
+        </h1>
+        <p>انرژی پاک، آینده‌ای روشن</p>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hero-buttons reveal">
+        <a href="pages/consultation.html" class="btn-minimal">
+          شروع یک پروژه
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+        </a>
       </div>
 
     </div>
@@ -730,111 +772,4 @@
   <div class="container reveal">
     <h2>آماده شروع پروژه خورشیدی خود هستید؟</h2>
     <p>همین امروز با ما تماس بگیرید و از مشاوره رایگان بهره‌مند شوید. راهکار مناسب برای فضا، نیاز و بودجه شما طراحی می‌کنیم.</p>
-    <a href="pages/consultation.html" class="btn-minimal">شروع پروژه جدید</a>
-  </div>
-</section>
-
-<script src="script.js"></script>
-<script>
-  function reveal() {
-    var reveals = document.querySelectorAll(".reveal, .reveal-graphic");
-    for (var i = 0; i < reveals.length; i++) {
-      var windowHeight = window.innerHeight;
-      var elementTop = reveals[i].getBoundingClientRect().top;
-      var elementVisible = 100;
-      if (elementTop < windowHeight - elementVisible) {
-        reveals[i].classList.add("active");
-      }
-    }
-  }
-  window.addEventListener("scroll", reveal);
-  reveal();
-
-  const scrollContainer = document.getElementById('scrollContainer');
-  const scrollRow = document.getElementById('projectScroll');
-
-  if (scrollContainer && scrollRow) {
-    const cards = scrollRow.innerHTML;
-    scrollRow.innerHTML = cards + cards;
-    let isHovered = false;
-    let isTouching = false;
-    let autoScrollSpeed = 1; 
-
-    scrollContainer.addEventListener('mouseenter', () => isHovered = true);
-    scrollContainer.addEventListener('mouseleave', () => isHovered = false);
-    scrollContainer.addEventListener('touchstart', () => isTouching = true);
-    scrollContainer.addEventListener('touchend', () => isTouching = false);
-
-    function autoScroll() {
-      if (!isHovered && !isTouching) {
-        scrollContainer.scrollLeft -= autoScrollSpeed;
-        if (Math.abs(scrollContainer.scrollLeft) >= (scrollContainer.scrollWidth / 2)) {
-          scrollContainer.scrollLeft = 0;
-        }
-      }
-      requestAnimationFrame(autoScroll);
-    }
-    requestAnimationFrame(autoScroll);
-  }
-
-  // ==========================================
-  // DAD'S ANIMATED LOGO (Adapted for 4 images)
-  // ==========================================
-  const tilt = document.getElementById('tilt');
-  const logo = document.getElementById('logo');
-  const main = document.getElementById('m');
-
-  // We need to build the pieces dynamically to add the 3D variables
-  const pieces = [
-    { class: 'tl', src: 'assets/images/logo-tl.png', fx: '-300px', fy: '-200px', ry: '-30deg' },
-    { class: 'bl', src: 'assets/images/logo-bl.png', fx: '-300px', fy: '200px', ry: '30deg' },
-    { class: 'br', src: 'assets/images/logo-br.png', fx: '300px', fy: '200px', ry: '-30deg' },
-    { class: 'leaf', src: 'assets/images/logo-leaf.png' }
-  ];
-
-  let loadedImages = 0;
-
-  pieces.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'pc ' + p.class;
-    
-    // Create the image
-    const img = document.createElement('img');
-    img.src = p.src;
-    img.alt = '';
-    
-    // Add load listener to trigger animation when ready
-    img.addEventListener('load', () => {
-      loadedImages++;
-      if (loadedImages === pieces.length) {
-        // All images loaded, trigger the 5.3s assembly sequence
-        setTimeout(() => {
-          logo.classList.add('play');
-        }, 400);
-      }
-    });
-
-    div.appendChild(img);
-
-    // Add the gloss layers for the squares
-    if (p.class !== 'leaf') {
-      const g1 = document.createElement('div');
-      g1.className = 'gloss g1';
-      const g2 = document.createElement('div');
-      g2.className = 'gloss g2';
-      div.appendChild(g1);
-      div.appendChild(g2);
-      
-      // Set CSS variables for the warp animation
-      div.style.setProperty('--fx', p.fx);
-      div.style.setProperty('--fy', p.fy);
-      div.style.setProperty('--ry', p.ry);
-    }
-
-    tilt.appendChild(div);
-  });
-
-</script>
-
-</body>
-</html>
+    <a href="pages/consultation.html" class="btn-minimal">شروع
